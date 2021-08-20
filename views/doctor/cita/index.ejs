@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <base href="Hospital" />
+    <title>Hospital</title>
+    <link rel="stylesheet" href="/css/paciente/estilos.css" />
+    <link rel="stylesheet" href="/css/cuadro_flotante.css" />
+    <link rel="stylesheet" href="/css/doctor/citas.css" />
+    <link rel="stylesheet" href="/css/cuadro_detalle.css" />
+    <link rel="stylesheet" href="/css/cuadro_info.css">
+    <link rel="stylesheet" href="/css/arreglarCuadroPrincipal.css">
+  </head>
+
+  <body>
+    <%- include('../../partials/header.ejs') %>
+
+    <article id="articulo-2">
+      <section class="principal">
+        <h2 class="titulo_seccion">CITAS PENDIENTES</h2>
+        <div class="cuadro_info">
+          <%for(let cita of citas){%>
+          <!-- <div class="cita"><%= cita.area %></div> -->
+          <div class="cuadro_item" id="<%=cita._id%>">
+            <div class="resumen">
+              <div class="datos">
+                <p><%= cita.areaMedica %></p>
+                <p><%= cita.fecha %></p>
+                <p><%= cita.hora %></p>
+              </div>
+              <img src="/imagenes/areas/<%=cita.areaMedica.substring(0,3)%>.png" alt="icono_area_medica" />
+            </div>
+            <img src="/imagenes/ojo.png" alt="icono_ojo">
+            <button
+              onclick='mostrarCita(<%-JSON.stringify(cita)%>);'
+              class="boton_mostrar "
+            >
+              Mostrar
+            </button>
+          </div>
+
+          <% }%>
+        </div>
+        <div class="cuadro_detalle">
+          <div class="tabs">
+            <h2 class="tab_1">DATOS</h2>
+            <h2 class="tab_2">PACIENTE</h2>
+          </div>
+          <div class="contenedor">
+            <div class="contenido">
+              <p>Id:</p>
+              <span id="dato_id_cita"></span>
+              <p>Area Medica :</p>
+              <span id="dato_area"></span>
+              <p>Fecha :</p>
+              <span id="dato_fecha"></span>
+              <p>Descripcion</p>
+              <span class="cuadro_texto" id="dato_descripcion"></span>
+            </div>
+            <div class="contenido">
+              <p>Nombre :</p>
+              <span id="dato_nombre_paciente"></span>
+              <p>DNI :</p>
+              <span id="dato_dni_paciente"></span>
+            </div>
+          </div>
+          <a
+              href=""
+              class="boton_historia"
+              >Historia medica</a
+            >
+        </div>
+      </section>
+    </article>
+
+    <%- include('../../partials/aside_doctor.ejs') %>
+
+    <script src="/javascript/cuadro_flotante.js"></script>
+    <script src="/javascript/cuadro_info.js"></script>
+  <script src="/javascript/cuadro_detalle.js"></script>
+  <script>
+    
+
+    <%if(citas.length!==0){%> 
+      mostrarCita(<%-JSON.stringify(citas[0])%>);
+    <%}%>
+
+    async function mostrarCita(cita) {
+     
+      const dato_id_cita = document.getElementById("dato_id_cita");
+      const dato_area = document.getElementById("dato_area");
+      const dato_fecha = document.getElementById("dato_fecha");
+      const dato_descripcion = document.getElementById("dato_descripcion");
+      const dato_nombre_paciente = document.getElementById(
+        "dato_nombre_paciente"
+      );
+      const dato_apellido_paciente = document.getElementById(
+        "dato_apellido_paciente"
+      );
+      const dato_dni_paciente = document.getElementById("dato_dni_paciente");
+      const boton_historia = document.querySelector(".boton_historia");
+      dato_id_cita.innerHTML = cita._id;
+      dato_area.innerHTML = cita.areaMedica;
+      dato_fecha.innerHTML = cita.fecha;
+      dato_descripcion.innerHTML = cita.descripcion;
+      dato_nombre_paciente.innerHTML = cita.paciente.nombreCompleto;
+      dato_dni_paciente.innerHTML = cita.paciente.dni;
+
+      boton_historia.setAttribute(
+        "href",
+        "/doctor/historia/" + cita.paciente._id
+      );
+    }
+  </script>
+  </body>
+  
+</html>

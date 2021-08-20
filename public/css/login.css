@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .p{
+    align-items: center;
+    justify-content: center;
+  }
+
+  form{
+      width: 370px;
+      height: 470px;
+      margin-top:5%;
+      margin-left:auto;
+      margin-right:auto;
+      border: solid #96D9BF 2px;
+      border-radius: 20PX; 
+      background-color: #2C99A0;
+      list-style: none;
+  }
+  form button{
+      background-color: #195F64;
+      align-items: center;
+  }
+  #ini{
+    margin-top: 30px; /*arriba*/
+    margin-bottom: 30px ;/*abajo*/
+    margin-left: 90px; /*izquierda*/
+    font-size: 22px; /*tamaño del titulo*/
+    width: 190px;
+    height: 20px;
+    align-items: center;
+  }
+  #med {
+    margin-left: 30px; /*izquierda*/
+    font-size: 18px;
+    width:300px;
+    height:320px;
+  }
+  .tip{
+    font-size: 15px;
+  }
+  #med label{
+  width: 50%;
+  height: 1em; 
+  margin-top: 10px; /*arriba*/
+    margin-bottom: 0px ;/*abajo*/
+    margin-left: 0px; /*izquierda*/
+    margin-right: 0px; /*derecha*/
+    font-size: 14px;
+    font-family: arial;
+    /*Rhodium Libre*/
+  }
+
+  #med select{
+    width: 140px;
+    height: 30px;
+    margin-top: 5px;
+    float: right;
+    background-color:#96D9BF ;
+    border-radius: 8px;
+    border: none; 
+    list-style: none;
+  }
+
+  .boton{
+    display: flex;
+    justify-content: center;
+    
+  }
+  button{
+    margin-top: 50px; /*arriba*/
+    width: 250px;
+    height: 30px;
+    font-size: 12px;
+    border: #2C99A0; 
+    color: #96D9BF ;
+    border: none; 
+    border-radius: 10px; 
+  }
+  .input1{
+    width: 300px;
+    height: 29px;
+    border-radius: 10px;
+    border: #96D9BF; 
+
+  }
+  .input2{
+    width: 300px;
+    height: 29px;
+    border-radius: 10px; 
+    border: #96D9BF; 
+  }
+  .li a{
+    color: #000;
+  }
+.li{
+  float: right;
+}

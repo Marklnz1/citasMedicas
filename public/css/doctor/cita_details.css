@@ -1,0 +1,20 @@
+.principal{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-around;
+    padding: 40px;
+}
+
+.cita{
+    font-size: 17px;
+    display: block;
+}
+.paciente{
+    font-size: 17px;
+}
+.cuadro_historia{
+    border: 2px solid #96D9BF;
+    height: 100%;
+    width: 550px;
+}

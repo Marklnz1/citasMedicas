@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hospital</title>
+    <link rel="stylesheet" href="/css/paciente/estilos.css" />
+    <link rel="stylesheet" href="/css/cuadro_flotante.css" />
+    <link rel="stylesheet" href="/css/cuadro_detalle.css" />
+    <link rel="stylesheet" href="/css/cuadro_info.css" />
+    <link rel="stylesheet" href="/css/arreglarCuadroPrincipal.css">
+
+
+    <link rel="stylesheet" href="/css/paciente/citas.css" />
+    <link rel="stylesheet" href="/css/boton.css" />
+  </head>
+
+  <body>
+    <%- include('../../partials/header.ejs') %>
+   
+    <article id="articulo-2">
+      <section class="principal">
+        <div class="cuadro_titulo">
+          <h2 class="titulo_seccion">CITAS PENDIENTES</h2>
+        </div>
+        <a
+        class="boton_agregar"
+        href="/paciente/cita/create/<%=user._id%>"
+        ><img src="/imagenes/agregar.png" alt="icono_agregar"></a>
+        <div class="cuadro_info">
+          <%for(let cita of citas){%>
+          <!-- <div class="cita"><%= cita.area %></div> -->
+          <div class="cuadro_item" id="<%=cita._id%>">
+            <div class="resumen">
+              <div class="datos">
+                <p><%= cita.areaMedica %></p>
+                <p><%= cita.fecha %></p>
+                <p><%= cita.hora %></p>
+              </div>
+              <img src="/imagenes/areas/<%=cita.areaMedica.substring(0,3)%>.png" alt="icono_area_medica" />
+            </div>
+            <img src="/imagenes/ojo.png" alt="icono_ojo">
+            <button
+              onclick='mostrarCita(<%-JSON.stringify(cita)%>);'
+              class="boton_mostrar "
+            >
+              Mostrar
+            </button>
+          </div>
+
+          <% }%>
+        </div>
+        <div class="cuadro_detalle">
+          <div class="tabs">
+            <h2 class="tab_1">DATOS</h2>
+          </div>
+          <div class="contenedor">
+            <div class="contenido">
+              <p>Id:</p>
+              <span id="dato_id_cita"></span>
+              <p>Area Medica :</p>
+              <span id="dato_area"></span>
+              <p>Doctor :</p>
+              <span id="dato_nombre_doctor"></span>
+              <p>Fecha :</p>
+              <span id="dato_fecha"></span>
+              <p>Hora :</p>
+              <span id="dato_hora"></span>
+              <p>Descripcion</p>
+              <span class="cuadro_texto" id="dato_descripcion"></span>
+            </div>
+          </div>
+         <div class="cuadro_botones">
+          <a class="boton boton_cancelar" >Eliminar</a>    
+         </div>   
+        </div>
+        
+      </section>
+    </article>
+
+    <%- include('../../partials/aside_paciente.ejs') %>
+    <script src="/javascript/cuadro_flotante.js"></script>
+    <script src="/javascript/cuadro_detalle.js"></script>
+    <script src="/javascript/cuadro_info.js"></script>
+  <script>
+          const boton_cancelar = document.querySelector(".boton_cancelar");
+
+          let cancelarPresionado = false;
+     <%if(citas.length!==0){%> 
+      mostrarCita(<%-JSON.stringify(citas[0])%>);
+    <%}%>
+
+    async function mostrarCita(cita) {
+     
+      const dato_id_cita = document.getElementById("dato_id_cita");
+      const dato_area = document.getElementById("dato_area");
+      const dato_fecha = document.getElementById("dato_fecha");
+      const dato_hora = document.getElementById("dato_hora");
+
+      const dato_descripcion = document.getElementById("dato_descripcion");
+      const dato_nombre_doctor = document.getElementById(
+        "dato_nombre_doctor"
+      );
+      dato_id_cita.innerHTML = cita._id;
+      dato_area.innerHTML = cita.areaMedica;
+      dato_fecha.innerHTML = cita.fecha;
+      dato_hora.innerHTML = cita.hora;
+
+      dato_nombre_doctor.innerHTML = cita.doctor.nombreCompleto;
+      dato_descripcion.innerHTML = cita.descripcion;
+      boton_cancelar.id = cita._id;
+    }
+
+    
+    boton_cancelar.addEventListener('click',async(e)=>{
+      if(e.target.id.trim()===""||cancelarPresionado){
+        return;
+      }
+      cancelarPresionado = true;
+      const res = await fetch("/paciente/cita/"+e.target.id, {
+        method: "DELETE",
+      });
+      location.assign("/paciente/cita");
+    });
+  </script>
+  </body>
+  
+</html>

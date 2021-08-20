@@ -1,0 +1,89 @@
+.principal{
+    /* background-color: red; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin-right: 110px;    
+    padding: 0 30px;
+}
+
+.principal h2{
+    width: 100%;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 70px;
+    font-size: 35px;
+}
+.principal form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.principal form label{
+    font-size: 23px;
+    font-weight: bold;
+}
+.principal form input{
+    height: 64px;
+    width: 500px;
+    font-size: 24px;
+    padding: 20px;
+}
+.principal .cuadro_resultado{
+    margin: auto;
+    border: 5px solid #2C99A0;
+}
+.cuadro_detalle{
+    padding: 30px !important;
+    width: 350px !important;
+    height: 300px !important;
+}
+
+.cuadro_detalle .boton_historia{
+    font-weight: bold;
+    background-color: #31afb8;
+    width: 120px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 5px;
+   border: 2px solid #23767c;
+
+   /* margin: auto; */
+   color: black;
+   /* margin-top: 150px; */
+}
+
+
+.cuadro_detalle .boton_historia:active{
+    background-color: #279097;
+
+}
+.busqueda button{
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+}
+.busqueda img{
+    margin: auto;
+    height: 30px;
+    
+}
+.principal .mensaje{
+    /* background-color: red; */
+    width: 564px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    visibility: hidden;
+    color: #e00707;
+    
+    
+}
+.principal .error{
+    visibility: visible;
+}

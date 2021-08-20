@@ -1,0 +1,71 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background: url("/imagenes/Portada.png") center 0px;
+    background-repeat: no-repeat;
+    background-size: 130%;
+    background-color: #F6F6F6;
+
+}
+
+header{
+    background-color: #2C99A0;
+    padding: 10px;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-start;
+}
+
+.btn{
+    width: 130px;
+    height: 30px;
+    background-color: #96D9BF;
+    border-radius: 10px;
+    border: white;
+    margin-left: 10px; /*izquierda*/
+    margin-right: 10px; /*derecha*/
+    font-size: 15px;
+    cursor: pointer;
+
+}
+nav img{
+    margin-right: 10px; /*derecha*/
+    margin-left: 10px; /*izquierda*/
+}
+nav a{
+    margin: 0px;
+    margin-right: 40px; /*derecha*/
+    text-decoration: none;
+    color:#96D9BF;/*color de la letras*/
+    font-size: 17px;
+}
+
+article section img{
+width: auto;
+height: auto;
+background-color: #96D9BF;
+border: red;
+margin-top: 40px; /*arriba*/
+    margin-bottom: 40px ;/*abajo*/
+    margin-left: 40px; /*izquierda*/
+    margin-right: 40px; /*derecha*/
+}
+article{
+    width: auto;
+    height: auto;
+    background-color: #96D9BF;
+}
+#a1{
+    margin-top: 0px; /*arriba*/
+    margin-bottom: 50px ;/*abajo*/
+
+}
+img{
+    left: 50%;
+    top: 50%;
+}
+

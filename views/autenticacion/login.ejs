@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body class = "l">
+    <form action="/login" method="POST">
+      
+      <div id = "ini">
+        <label for="iniciosesion">INICIO DE SESION</label>
+        <br>
+      </div>
+        
+      <div id = "med"> 
+        <div>
+          <label class="tip" for="tipoUsuario" style="display: inline-block;">Tipo de Usuario: </label>
+          <select name="tipoUsuario" id="tipoUsuario" style="width: 120px; margin-left: 30px;">
+            <option value="paciente"> Paciente</option>
+            <option value="doctor"> Doctor</option>
+          </select>
+        </div>
+
+        <br>
+        <br>
+        <div>
+          <label class="labeldni" for="dni">DNI: </label>
+          <br>
+          <input class ="input1" id="dni" type="text" name="dni" />
+        </div>
+        <br>
+        <div>
+          <label class="labelcontraseña" for="password">Contraseña: </label>
+          <br>
+          <input class="input2" id="password" type="password" name="password" />
+        </div>
+        <br>
+        <div class="li">
+          <li>
+            <a href="/reset_password">¿Has olvidado la contraseña?</a>
+          </li>
+        </div>
+        
+        
+        <br>
+        <div class="boton"><button>INICIAR SESIÓN</button></div>
+
+      </div>    
+    </form>
+
+
+      <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit',enviarDatos);
+        async function enviarDatos(e){
+          e.preventDefault();
+          const dni = form.dni.value;
+          const password = form.password.value;
+          const tipoUsuario = form.tipoUsuario.value;
+          const res = await fetch('/login', {
+            method: 'POST',
+            body: JSON.stringify({dni,password,tipoUsuario}),
+            headers: {'Content-Type': 'application/json'}
+          });
+  
+          const data = await res.json();
+          if(data.mensaje="Te has logeado correctamente"){
+            location.assign('/');
+          }else{
+            console.log(data);
+          }
+          
+        }
+      </script>
+</body>
+</html>
