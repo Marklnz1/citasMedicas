@@ -16,18 +16,14 @@ module.exports.login_post = async (req, res) => {
 
   let mensaje;
   if (usuario) {
-    console.log("El paciente existe");
     if (usuario.password == password) {
-      console.log("Las contraseñas coinciden");
       mensaje = "Te has logeado correctamente";
       const token = crearToken(usuario.dni, tipoUsuario);
       res.cookie("jwt", token, { httpOnly: true, maxAge: tiempoMaximo * 1000 });
     } else {
-      console.log("Las contraseñas no coinciden");
       mensaje = "contraseña incorrecta";
     }
   } else {
-    console.log("el usuario no existe", dni);
     mensaje = "El dni ingresado no esta regitrado :(";
   }
 
@@ -35,11 +31,8 @@ module.exports.login_post = async (req, res) => {
 };
 
 module.exports.login_get = (req, res, next) => {
-  if (!res.locals.user.tipoUsuario) {
     res.render("autenticacion/login");
-  } else {
-    next();
-  }
+
 };
 module.exports.logout_get = (req, res,next) => {
   if (res.locals.user.tipoUsuario) {

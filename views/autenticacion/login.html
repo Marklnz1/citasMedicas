@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital</title>
+  <link rel="stylesheet" href="/css/login.css">
+<body>
+  <form action="/login" method="POST">
+    <div class="div_logo">
+      <img src="/imagenes/logo_login.png" alt="">
+    </div>
+    <div class="div_tipo_usuario">
+      <label for="tipo_usuario">Tipo de Usuario:</label>
+        <select name="tipoUsuario" id="tipo_usuario">
+          <option value="paciente">Paciente</option>
+          <option value="doctor">Doctor</option>
+        </select>
+    </div>
+    <label for="dni">DNI:</label>
+    <input type="number" name="dni" id="dni" >
+    <label for="password">Contraseña:</label>
+    <div class="input_ojo">
+      <input type="password" name="password" id="password">
+      <img id="ojo_imagen"src="/imagenes/ojo.png" alt="">
+    </div>
+    <div class="iniciar_sesion">INICIAR SESION</div>
+    <div class="div_recuperar_contraseña">
+      <img src="/imagenes/candado.png" alt="candado">
+      <p>¿Has olvidado tu contraseña?</p>
+    </div>
+    <p class="crear_cuenta_texto">¿Aún no tienes una cuenta?</p>
+    <a class="crear_cuenta_link" href="#">Regístrate Ahora</a>
+   
+  </form>
+
+  <script>
+    const ojo_imagen  = document.getElementById("ojo_imagen");
+    const input_password = document.getElementById("password");
+    ojo_imagen.addEventListener('click',()=>{
+      if(input_password.getAttribute("type")=="password"){
+        input_password.setAttribute("type","text");
+        input_password.style.letterSpacing = "normal";
+
+      }else{
+        input_password.setAttribute("type","password");
+        input_password.style.letterSpacing = "3px";
+      }
+      
+    })
+  </script>
+  <!-- <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit',enviarDatos);
+    async function enviarDatos(e){
+      e.preventDefault();
+      const dni = form.dni.value;
+      const password = form.password.value;
+      const tipoUsuario = form.tipoUsuario.value;
+      const res = await fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify({dni,password,tipoUsuario}),
+        headers: {'Content-Type': 'application/json'}
+      });
+
+      const data = await res.json();
+      if(data.mensaje="Te has logeado correctamente"){
+        location.assign('/');
+      }else{
+        console.log(data);
+      }
+      
+    }
+  </script> -->
+</body>
+
+</html>

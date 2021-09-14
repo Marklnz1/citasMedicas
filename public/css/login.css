@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+* {
+  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    image-rendering: crisp-edges;
+  }
+body{
+  background-image: url(/imagenes/fondo_login.jpg);
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+.div_logo{
+  width: 100%;
+  display: flex;
+  margin-bottom: 40px;
+}
+.div_recuperar_contraseña img{
+  width: 17px;
+  margin-right: 5px;
+}
+.div_recuperar_contraseña{
+  display: flex;
+  text-decoration: underline;
+  align-items: center;
+}
+.div_tipo_usuario{
+  width: 100%;
+}
+label,input{
+  width: 100%;
+}
+input{
+  height: 37px;
+  background-color: #E5E5E5;
+  border: none;
+  padding: 10px;
+}
+
+select{
+  background-color: #E5E5E5;
+}
+img{
+  width: 50%;
+  margin: auto;
+
+}
+form{
+  display: flex;
+  background-color: #f5f5f594;
+
+  width: 500px;
+  height: 550px;
+  align-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 30px 75px;
+  padding-bottom: 40px;
+}
+.iniciar_sesion{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1EE1DE;
+  width: 100%;
+  height: 30px;
+  font-size: 12px;
+  margin-top: 30px;
+  cursor:pointer;
+}
+.input_ojo{
+  display: flex;
+  background-color: #E5E5E5;
+
+}
+.input_ojo input{
+  background-color: #ffffff00;
+  letter-spacing: 3px;
+
+}
+select{
+  width: 120px;
+  font-weight: normal;
+  padding-left: 20px;
+}
+input:focus-within{
+  outline: none;
+  outline: 2px solid black;
+  
+}
+.input_ojo img{
+  width: 10%;
+  margin-right: 5px;
+  cursor:pointer;
+}
+.input_ojo:focus-within{
+  outline: 2px solid black;
+}
+.input_ojo input:focus{
+  outline: none;
+}
+form p{
+  font-size: 13px;
+}
+.crear_cuenta_texto{
+  text-decoration: underline;
+  margin-right: 5px;
+}
+.crear_cuenta_link{
+  color: #0b0ba5;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+p{
+  cursor:pointer;
+}
