@@ -2,50 +2,38 @@ const Paciente = require("../models/Paciente");
 const Doctor = require("../models/Doctor");
 const jwt = require("jsonwebtoken");
 
+
 module.exports.login_post = async (req, res) => {
-  const data = req.body;
-  const dni = data.dni;
-  const password = data.password;
-  const tipoUsuario = data.tipoUsuario;
-  let usuario = null;
-  if (tipoUsuario == "paciente") {
-    usuario = await Paciente.findOne({ dni });
-  } else {
-    usuario = await Doctor.findOne({ dni });
-  }
+  const dni = req.body.dni;
+  const password = req.body.password;
+  const tipoUsuario = req.body.tipoUsuario;
 
-  let mensaje;
-  if (usuario) {
-    if (usuario.password == password) {
-      mensaje = "Te has logeado correctamente";
-      const token = crearToken(usuario.dni, tipoUsuario);
-      res.cookie("jwt", token, { httpOnly: true, maxAge: tiempoMaximo * 1000 });
-    } else {
-      mensaje = "contraseña incorrecta";
+  const passwordBD = getPasswordBD(tipoUsuario,dni);
+  let mensaje ="DNI no registrado o contraseña incorrecta";
+
+  if(passwordBD){
+    if(password == passwordBD){
+      const token = crearToken(dni, tipoUsuario);
+      res.cookie("jwt", token, { httpOnly: true, maxAge: tiempoMaximo * 1000 }); 
+      mensaje= "";
     }
-  } else {
-    mensaje = "El dni ingresado no esta regitrado :(";
   }
-
   res.status(201).json({ mensaje });
 };
 
 module.exports.login_get = (req, res, next) => {
     res.render("autenticacion/login");
-
 };
-module.exports.logout_get = (req, res,next) => {
-  if (res.locals.user.tipoUsuario) {
-    res.cookie("jwt", "", { maxAge: 1 });
-    res.redirect("/login");
-  } else {
-    next();
-  }
-};
+//======================================================================
 const tiempoMaximo = 30000; //segundos
 
 const crearToken = (id, tipoUsuario) => {
-  return jwt.sign({ id, tipoUsuario }, "palabra secreta", {
+  return jwt.sign({ id, tipoUsuario }, "efe", {
     expiresIn: tiempoMaximo,
   });
 };
+
+function getPasswordBD(tipo,dni){
+  if(dni=="12345678") return "1234";
+  return null;
+}

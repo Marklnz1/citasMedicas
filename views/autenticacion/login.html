@@ -26,7 +26,10 @@
       <input type="password" name="password" id="password">
       <img id="ojo_imagen"src="/imagenes/ojo.png" alt="">
     </div>
-    <div class="iniciar_sesion">INICIAR SESION</div>
+    <p class="mensaje" >DNI no registrado o contraseña incorrecta</p>
+    <div class="div_iniciar_sesion">
+      <div class="iniciar_sesion">INICIAR SESION</div>
+    </div>
     <div class="div_recuperar_contraseña">
       <img src="/imagenes/candado.png" alt="candado">
       <p>¿Has olvidado tu contraseña?</p>
@@ -37,6 +40,8 @@
   </form>
 
   <script>
+
+    const password = document.getElementById('password');
     const ojo_imagen  = document.getElementById("ojo_imagen");
     const input_password = document.getElementById("password");
     ojo_imagen.addEventListener('click',()=>{
@@ -51,11 +56,14 @@
       
     })
   </script>
-  <!-- <script>
+  <script>
+    const iniciar_sesion = document.querySelector('.iniciar_sesion');
     const form = document.querySelector('form');
-    form.addEventListener('submit',enviarDatos);
-    async function enviarDatos(e){
-      e.preventDefault();
+    form.addEventListener('change',()=>{
+      console.log("cambio");
+    })
+    const mensaje = document.querySelector('.mensaje');
+    iniciar_sesion.addEventListener('click',async ()=>{
       const dni = form.dni.value;
       const password = form.password.value;
       const tipoUsuario = form.tipoUsuario.value;
@@ -66,14 +74,19 @@
       });
 
       const data = await res.json();
-      if(data.mensaje="Te has logeado correctamente"){
-        location.assign('/');
+      if(data.mensaje){
+        mensaje.style.visibility = "visible";
       }else{
-        console.log(data);
+        location.assign('/');
       }
-      
-    }
-  </script> -->
+      console.log(data);
+      // if(data.mensaje="Te has logeado correctamente"){
+      //   location.assign('/');
+      // }else{
+      //   console.log(data);
+      // }
+    });
+  </script>
 </body>
 
 </html>

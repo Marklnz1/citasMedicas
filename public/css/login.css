@@ -64,16 +64,32 @@ form{
   padding: 30px 75px;
   padding-bottom: 40px;
 }
+.div_iniciar_sesion{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;
+  height: 30px;
+  
+  margin-top: 10px;
+  
+}
 .iniciar_sesion{
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #1EE1DE;
-  width: 100%;
-  height: 30px;
   font-size: 12px;
-  margin-top: 30px;
   cursor:pointer;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+}
+.iniciar_sesion:active{
+  width: 97%;
+  height: 97%;
+  font-size:11px;
 }
 .input_ojo{
   display: flex;
@@ -98,6 +114,11 @@ input:focus-within{
 .input_ojo img{
   width: 10%;
   margin-right: 5px;
+  cursor:pointer;
+}
+.input_ojo img:active{
+  width: 9%;
+  margin-right: 6px;
   cursor:pointer;
 }
 .input_ojo:focus-within{
@@ -130,4 +151,10 @@ input[type=number] {
 
 p{
   cursor:pointer;
+}
+.mensaje{
+  color:#c70000;
+  font-weight: bolder;
+  visibility:hidden;
+  cursor: default;
 }
