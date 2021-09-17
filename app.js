@@ -11,7 +11,7 @@ async function iniciar() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  app.listen(3000);
+  app.listen(4000);
   console.log("Servidor encendido");
 
 }
@@ -36,4 +36,8 @@ app.get("/",(req, res, next)=>{
 });
 app.post("/login",authController.login_post);
 app.get("/login",authController.login_get);
+app.post("/informacion",authController.info_post);
+app.get("/informacion",authController.info_get);
+app.post("/informacionpaciente",authController.infopaciente_post);
+app.get("/informacionpaciente",authController.infopaciente_get);
 
