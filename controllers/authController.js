@@ -37,3 +37,13 @@ function getPasswordBD(tipo,dni){
   if(dni=="12345678") return "1234";
   return null;
 }
+
+module.exports.info_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.info_get = (req, res, next) => {
+  
+    res.render("doctor/informacion");
+};
