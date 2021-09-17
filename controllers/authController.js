@@ -47,6 +47,7 @@ module.exports.info_get = (req, res, next) => {
   
     res.render("doctor/informacion");
 };
+<<<<<<< HEAD
 module.exports.infopaciente_post = async (req, res) => {
  
  
@@ -57,3 +58,5 @@ module.exports.infopaciente_get = (req, res, next) => {
     res.render("paciente/informacionpaciente");
 };
 
+=======
+>>>>>>> 320272fff6517a03f34ed55e34dbf4951ea0206d

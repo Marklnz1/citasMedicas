@@ -4,6 +4,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const authController = require('./controllers/authController');
 const extraerUsuario = require('./middleware/extraerUsuario');
+const adminController = require('./controllers/adminController');
+
 let dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
 iniciar();
 async function iniciar() {
@@ -27,7 +29,11 @@ app.use("*",extraerUsuario);
 app.get("/",(req, res, next)=>{
   let user = res.locals.user;
   if(user){
-    res.send(user.tipoUsuario+" DNI: "+user.id+" LOGEADO")
+    if(user.tipoUsuario=="doctor"){
+      res.render("doctor/informacion");
+    }else{
+      res.send(user.tipoUsuario+" DNI: "+user.id+" LOGEADO")
+    }
   }else{
     res.render('home');
   }
@@ -38,6 +44,10 @@ app.post("/login",authController.login_post);
 app.get("/login",authController.login_get);
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
+<<<<<<< HEAD
 app.post("/informacionpaciente",authController.infopaciente_post);
 app.get("/informacionpaciente",authController.infopaciente_get);
+=======
+app.get("/registro",adminController.registro_get);
+>>>>>>> 320272fff6517a03f34ed55e34dbf4951ea0206d
 
