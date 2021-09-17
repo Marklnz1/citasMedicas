@@ -90,5 +90,7 @@ margin-bottom: 48px;
     width: 16px;
     height: 16px;
 }
-
+.p_doctor{
+    display: none;
+}
 

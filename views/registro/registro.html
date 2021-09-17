@@ -42,21 +42,23 @@
                 </div>
                 <div class="separador"></div>
                 <div class="input-container">
-                    <label for="phone-family">Celular de Pariente</label>
-                    <input type="tel" name="" id="phone-family" required>
-                    <!-- 
-                    <label for="year-xp">Años de Experiencia</label>
-                    <input type="number" name="" id="year-xp" required> -->
+                    <label class="p_paciente" for="phone-family">Celular de Pariente</label>
+                    <input class="p_paciente" type="tel" name="" id="phone-family" required>
+                    
+                    <label class="p_doctor" for="year-xp">Años de Experiencia</label>
+                    <input class="p_doctor" type="number" name="" id="year-xp" required>
 
                 </div>
             </div>
             <div class="separador"></div>
             <div class="input-container">
-                <label for="address">Dirección</label>
-                <input type="text" name="" id="address" required>
+                <label class="p_paciente" for="address">Dirección</label>
+                <input class="p_paciente" type="text" name="" id="address" required>
 
-                <!-- <label for="specialty">Especialidad</label>
-                <input type="number" name="" id="specialty" required> -->
+                <label class="p_doctor" for="specialty">Especialidad</label>
+                <input class="p_doctor type="number" name="" id="specialty" required>
+
+
             </div>
             <div class="separador"></div>
             <div class="inputs-row">
@@ -88,6 +90,28 @@
         <img src="../../public/imagenes/LogoTingo.png">
     </div>
  </div>
-  
+ <script>
+    const type_user = document.getElementById("type-user");
+    const p_paciente = document.getElementsByClassName("p_paciente");
+    const p_doctor = document.getElementsByClassName("p_doctor");
+    type_user.addEventListener("change",()=>{
+        console.log(type_user.value);
+        if(type_user.value=="paciente"){
+           for(let p_p of p_paciente){
+               p_p.style.display = "block";
+           }
+           for(let p_d of p_doctor){
+               p_d.style.display = "none";
+           }
+        }else if(type_user.value=="doctor"){
+           for(let p_d of p_doctor){
+               p_d.style.display = "block";
+           }
+           for(let p_p of p_paciente){
+               p_p.style.display = "none";
+           }
+        }
+    })
+</script>
 </body>
 </html>
