@@ -17,14 +17,14 @@ async function iniciar() {
   console.log("Servidor encendido");
 
 }
-//==============================================
+
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
 app.set('view engine', 'html');
 app.engine('html',require('ejs').renderFile);
-//==============================================
+
 app.use("*",extraerUsuario);
 app.get("/",(req, res, next)=>{
   let user = res.locals.user;
@@ -44,10 +44,10 @@ app.post("/login",authController.login_post);
 app.get("/login",authController.login_get);
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
-<<<<<<< HEAD
+
 app.post("/informacionpaciente",authController.infopaciente_post);
 app.get("/informacionpaciente",authController.infopaciente_get);
-=======
+
 app.get("/registro",adminController.registro_get);
->>>>>>> 320272fff6517a03f34ed55e34dbf4951ea0206d
+
 
