@@ -45,4 +45,3 @@ app.get("/login",authController.login_get);
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
 app.get("/registro",adminController.registro_get);
-
