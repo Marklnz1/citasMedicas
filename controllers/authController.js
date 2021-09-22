@@ -24,7 +24,7 @@ module.exports.login_post = async (req, res) => {
 module.exports.login_get = (req, res, next) => {
     res.render("autenticacion/login");
 };
-//======================================================================
+
 const tiempoMaximo = 30000; //segundos
 
 const crearToken = (id, tipoUsuario) => {
@@ -47,3 +47,15 @@ module.exports.info_get = (req, res, next) => {
   
     res.render("doctor/informacion");
 };
+
+module.exports.infopaciente_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.infopaciente_get = (req, res, next) => {
+  
+    res.render("paciente/informacionpaciente");
+};
+
+

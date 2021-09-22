@@ -30,6 +30,18 @@ background-color: #8d8bf3;
   
 }
 .sombra{
+
+box-shadow: 3px 3px 5px 3px #008B8B;
+
+}
+.segunda-columna{
+  padding-left: 20px;
+  background-color:hsla(180, 100%, 27%, 0.57);
+  /*opacity: .5;*/
+  padding-top: 15px;
+}
+.columna{
+  height: 400px;
 box-shadow: 3px 3px 5px 3px #6696DF;
 
 }
@@ -38,6 +50,7 @@ box-shadow: 3px 3px 5px 3px #6696DF;
 }
 .columna{
   height: 500px;
+
   margin: auto auto;
   /*margin-top: 200px;*/
   width: 1000px;
@@ -91,12 +104,63 @@ box-shadow: 3px 3px 5px 3px #6696DF;
 }
 
 .cod{
+
+  
+  position: relative;
+  top: 30px;
+ 
+  padding-left: 7px;
+  height: 6px;
+  
+  
+  
+
+
+ 
+}
+.tex{
+  /*box-shadow: 3px 3px 5px 3px #87898b;
+*/
+}
+.botom{
+  border-bottom: solid blue;
+  margin-left: 119px;
+  width: 250px;
+  margin-top: 15px;
+}
+
+.p{
+
+  animation-duration: 3s;
+  animation-name: slidein;
+
+}
+.opacidad{
+  opacity: .5;
+  background-color: rgb(0,0,0);
+  color: #fff;
+  
+
+}
+@keyframes slidein{
+  from{
+    margin-left: 100%;
+    width: 300%
+
+  }
+to{
+  margin-left: 0%;
+  width: 100%;
+}
+}
+
   text-align: left;
  
 }
 .tex{
   box-shadow: 3px 3px 5px 3px #87898b;
 }
+
 
 
 
