@@ -28,7 +28,9 @@ body {
    background-image: url("imagenes/foto_paciente.jpeg");
    background-size: cover;
    border: blue solid 0px;
-   
+   background-size: cover;
+   background-position: center;
+  
  }
  .sombra{
  box-shadow: 0px 0px 1px 3px #6696dff1;
