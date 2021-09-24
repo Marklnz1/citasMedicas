@@ -13,10 +13,15 @@ const extraerUsuario = async (res, token) => {
   res.locals.user = null;
   if (token) {
     const decodedToken = await jwt.verify(token, "efe");
-    let usuario = null;
     let tipoUsuario = decodedToken.tipoUsuario;
     let id = decodedToken.id;
-    res.locals.user = {tipoUsuario,id};
+    let usuario = null;
+  if(tipoUsuario=="doctor"){
+    usuario = await Doctor.findOne({dni:id});
+  }else if(tipoUsuario == "paciente"){
+    usuario = await Paciente.findOne({dni:id});
+  }
+    res.locals.user = usuario;
   }
 };
 

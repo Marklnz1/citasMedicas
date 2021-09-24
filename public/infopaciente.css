@@ -1,8 +1,11 @@
+*{
+  margin: 0px;
+}
 body { 
   
-    background: url(../imagenes/fondopaciente.png) no-repeat center center fixed;
+    background: url(../imagenes/fondopaciente2.png) no-repeat center center fixed;
      background-size: cover;
-
+    overflow-x: hidden;
  
    }
    
@@ -22,20 +25,22 @@ body {
  
  
  .user-img{
-   background-image: url("imagenes/paciente.jpg");
+   background-image: url("imagenes/foto_paciente.jpeg");
    background-size: cover;
    border: blue solid 0px;
    
  }
  .sombra{
- box-shadow: 3px 3px 5px 3px #008B8B;
+ box-shadow: 0px 0px 1px 3px #6696dff1;
  
  }
  .segunda-columna{
    padding-left: 15px;
    /*background-color:hsla(180, 100%, 27%, 0.57);*/
    /*opacity: .5;*/
-   padding-top: 15px;
+   /* padding-top: 15px; */
+   margin-left: 20px;
+   max-width: 55%;
  }
  .columna{
    height: 400px;
@@ -96,18 +101,18 @@ body {
 
   /*color:transparent;*/ 
    position: relative;
-   top: 30px;
+   top: 26px;
   
    padding-left: 5px;
-   height: 6px;
+   height: 0px;
    
    font-family:verdana;
    font-size:17px;
    color:white;
-   text-shadow: 2px  0px 0px black,
+   /* text-shadow: 2px  0px 0px black,
                 0px  2px 0px black,
                -1px  0px 0px black,
-                0px -1px 0px black;
+                0px -1px 0px black; */
 
 
 
@@ -122,15 +127,16 @@ body {
  */
  }
  .botom{
-   border-bottom: solid blue;
-   margin-left: 166px;
-   width: 250px;
-   margin-top: 15px;
+   border: solid #6696dff1;
+   /* margin-left: 166px; */
+   height: 58px;
+   width: 550px;
+   /* margin-top: 7px; */
  }
  
  .p{
  
-   animation-duration: 3s;
+   animation-duration: 1.2s;
    animation-name: slidein;
  
  }
@@ -144,15 +150,28 @@ body {
  @keyframes slidein{
    from{
      margin-left: 100%;
-     width: 300%
+     width: 800px;
  
    }
  to{
    margin-left: 0%;
-   width: 100%;
+   width: 550px;
  }
  }
  
+ .cod span{
+  color: #e9f6f7;
+  text-shadow:
+  -1px -1px 0 #375e5f,  
+   1px -1px 0 #375e5f,
+   -1px 1px 0 #375e5f,
+    1px 1px 0 #375e5f;
+    font-size: 25px;
+    padding-left: 7px;
+ }
  
- 
- 
+ .form-control:disabled, .form-control[readonly] {
+   
+  background-color: #375e5fa8;
+  opacity: 1;
+}

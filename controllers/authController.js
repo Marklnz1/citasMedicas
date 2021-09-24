@@ -8,7 +8,7 @@ module.exports.login_post = async (req, res) => {
   const password = req.body.password;
   const tipoUsuario = req.body.tipoUsuario;
 
-  const passwordBD = getPasswordBD(tipoUsuario,dni);
+  const passwordBD = await getPasswordBD(tipoUsuario,dni);
   let mensaje ="DNI no registrado o contraseña incorrecta";
 
   if(passwordBD){
@@ -33,9 +33,16 @@ const crearToken = (id, tipoUsuario) => {
   });
 };
 
-function getPasswordBD(tipo,dni){
-  if(dni=="12345678") return "1234";
-  return null;
+async function getPasswordBD(tipo,dni){
+  let usuario = null;
+  if(tipo=="doctor"){
+    usuario = await Doctor.findOne({dni});
+  }else if(tipo == "paciente"){
+    usuario = await Paciente.findOne({dni});
+  }
+  if(usuario==null) return null;
+
+  return usuario.password;
 }
 
 module.exports.info_post = async (req, res) => {

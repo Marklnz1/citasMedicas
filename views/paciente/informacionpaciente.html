@@ -1,46 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-         <title>INFORMACION DEL PACIENTE</title>
-   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-        <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        
-        <!-- Los iconos tipo Solid de Fontawesome-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-        <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    
-        <!-- Nuestro css style="background-color: transparent;  border-primary -->
-        <link rel="stylesheet" type="text/css" href="infopaciente.css" >
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row columna " >
-                <div class="col-5 user-img sombra">
-                   
 
-                </div> 
-                <div class="col-2  ">
-                   
+<head>
+    <title>INFORMACION DEL PACIENTE</title>
 
-                </div> 
-                 <div class="col-5 segunda-columna " >
-                    <label class="cod p">codigo:</label><input type="text" value="" disabled class ="form-control  botom   p border-primary " >
-                    <p class="cod p">ID Historia Clinica:</p>
-                    <input type="text" value="" disabled class ="form-control tex p botom  border-primary"  >
-                    <p class="cod p" >Citas:</p>
-                    <input type="text" value="" disabled class ="form-control  tex p botom border-primary "  >
-                    <p class="cod p">Estado:</p><input type="text" value="" disabled class ="form-control  tex p botom  border-primary" >
-                    <p class="cod p">Tipo de Usuario:</p>
-                    <input type="text" value="" disabled class ="form-control  tex p botom border-primary" >
-                  
-                </div> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" />
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css style="background-color: transparent;  border-primary -->
+    <link rel="stylesheet" type="text/css" href="infopaciente.css" />
+</head>
+
+<body>
+    <%- include('../partials/menu.html') %>
+    <div class="container-fluid">
+        <div class="row columna">
+            <div class="col-5 user-img sombra"></div>
+            <!-- <div class="col-2"></div> -->
+            <div class="col-5 segunda-columna">
+                <p class="cod p"><span>Codigo: <%= user._id %></span></p>
+                <input type="text" value="" disabled class="form-control botom p" />
+                <p class="cod p"><span>ID Historia: 123123123</span></p>
+                <input type="text" value="" disabled class="form-control tex p botom" />
+                <p class="cod p"><span>Nombre: <%=user.nombreCompleto%></span></p>
+                <input type="text" value="" disabled class="form-control tex p botom" />
+                <p class="cod p"><span>Estado: <%=user.estado%></span></p>
+                <input type="text" value="" disabled class="form-control tex p botom" />
+                <p class="cod p"><span>Tipo de Usuario: <%=user.tipoUsuario%></span></p>
+                <input type="text" value="" disabled class="form-control tex p botom" />
             </div>
         </div>
-        
-        
-       
-    </body>
+    </div>
+</body>
+
+</html>

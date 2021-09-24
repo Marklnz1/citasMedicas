@@ -1,11 +1,12 @@
 
 body { 
   
-   background: url(../imagenes/fondo-info-doc.jpg) no-repeat center center fixed;
+   background: url(../imagenes/fondo-info-doc2.png) no-repeat center center fixed;
     background-size: cover;
 /*
 background-color: #8d8bf3;
 */
+overflow-x: hidden;
   }
   
 .main-section{
@@ -24,29 +25,32 @@ background-color: #8d8bf3;
 
 
 .user-img{
-  background-image: url("imagenes/doctor.jpeg");
+  background-image: url("imagenes/doctor2.png");
   background-size: cover;
   border: blue solid 0px;
   
 }
 .sombra{
 
-box-shadow: 3px 3px 5px 3px #008B8B;
-
+/* box-shadow: 3px 3px 5px 3px #008B8B; */
+box-shadow: 3px 3px 2px 3px #6696DF;
 }
 .segunda-columna{
   padding-left: 20px;
-  background-color:hsla(180, 100%, 27%, 0.57);
+  /* background-color: #6696df6c ; */
+  /* background-color:hsla(180, 100%, 27%, 0.57); */
   /*opacity: .5;*/
-  padding-top: 15px;
+  /* padding-top: 15px; */
+  /* box-shadow: 3px 3px 5px 3px #6696DF; */
 }
 .columna{
   height: 400px;
-box-shadow: 3px 3px 5px 3px #6696DF;
+
 
 }
 .segunda-columna{
-  padding-left: 150px;
+  padding-bottom: 15px;
+  padding-left: 20px;
 }
 .columna{
   height: 500px;
@@ -107,15 +111,19 @@ box-shadow: 3px 3px 5px 3px #6696DF;
 
   
   position: relative;
-  top: 30px;
- 
+  top: 34px;
+  /* left:-125px; */
   padding-left: 7px;
   height: 6px;
+  color: #353f58;
   
-  
-  
-
-
+  font-size: 18px;  
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-shadow:
+  -1px -1px 0 #353f580a,  
+   1px -1px 0 #353f580a,
+   -1px 1px 0 #353f580a,
+    1px 1px 0 #353f580a;
  
 }
 .tex{
@@ -123,15 +131,15 @@ box-shadow: 3px 3px 5px 3px #6696DF;
 */
 }
 .botom{
-  border-bottom: solid blue;
-  margin-left: 119px;
-  width: 250px;
-  margin-top: 15px;
+  border: solid 2px #6696DF;
+  height: 52px;
+  width: 415px;
+  /* margin-top: 15px; */
 }
 
 .p{
-
-  animation-duration: 3s;
+  /* margin-left: 119px; */
+  animation-duration: 1.2s;
   animation-name: slidein;
 
 }
@@ -145,23 +153,29 @@ box-shadow: 3px 3px 5px 3px #6696DF;
 @keyframes slidein{
   from{
     margin-left: 100%;
-    width: 300%
+    width: 800px
 
   }
-to{
-  margin-left: 0%;
-  width: 100%;
+  to{
+    margin-left: 0;
+    width: 415px;
+  }
 }
-}
-
+/* 
   text-align: left;
  
-}
+} */
 .tex{
-  box-shadow: 3px 3px 5px 3px #87898b;
+  /* box-shadow: 3px 3px 5px 3px #87898b; */
 }
+.col-2{
+  flex: 0 0 4%;
 
-
+}
+.form-control:disabled, .form-control[readonly] {
+  background-color: #f7f2f2e0;
+  opacity: 1;
+}
 
 
 

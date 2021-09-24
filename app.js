@@ -32,7 +32,7 @@ app.get("/",(req, res, next)=>{
     if(user.tipoUsuario=="doctor"){
       res.render("doctor/informacion");
     }else{
-      res.send(user.tipoUsuario+" DNI: "+user.id+" LOGEADO")
+      res.render("paciente/informacionpaciente");
     }
   }else{
     res.render('home');
@@ -49,5 +49,5 @@ app.post("/informacionpaciente",authController.infopaciente_post);
 app.get("/informacionpaciente",authController.infopaciente_get);
 
 app.get("/registro",adminController.registro_get);
-
+app.post("/registro",adminController.registro_post);
 

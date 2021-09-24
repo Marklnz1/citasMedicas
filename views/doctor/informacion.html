@@ -21,6 +21,7 @@
         <link rel="stylesheet" type="text/css" href="info.css" >
     </head>
     <body>
+        <%- include('../partials/menu.html') %>
         <div class="container-fluid">
             <div class="row columna " >
 
@@ -33,17 +34,17 @@
 
                 </div> 
                  <div class="col-5 segunda-columna " >
-                    <label class="cod p">codigo:</label><input type="text" value="" disabled class ="form-control  botom   p " >
-                    <p class="cod p">especialidad:</p>
+                    <p class="cod p">Codigo: <%=user._id%></p><input type="text" value="" disabled class ="form-control  botom   p " >
+                    <p class="cod p">Especialidad: <%=user.especialidad%></p>
                     <input type="text" value="" disabled class ="form-control tex p botom "  >
-                    <p class="cod p" >ID Area Medica:</p>
+                    <p class="cod p" >Area Medica: N.A</p>
                     <input type="text" value="" disabled class ="form-control  tex p botom "  >
-                    <p class="cod p">Citas:</p><input type="text" value="" disabled class ="form-control  tex p botom " >
-                    <p class="cod p">Tipo de Usuario:</p>
+                    <p class="cod p">Nombre: <%=user.nombreCompleto%></p><input type="text" value="" disabled class ="form-control  tex p botom " >
+                    <p class="cod p">Tipo de Usuario: <%=user.tipoUsuario%></p>
                     <input type="text" value="" disabled class ="form-control  tex p botom "  >
-                    <p class="cod p">Password:</p>
-                    <input type="text" value="" disabled class ="form-control  tex p botom "  >
-                    <p class="cod p">Estados:</p>
+                    <!-- <p class="cod p">Password:</p>
+                    <input type="text" value="" disabled class ="form-control  tex p botom "  > -->
+                    <p class="cod p">Estado: <%=user.estado%></p>
                     <input type="text" value="" disabled class ="form-control tex p botom " >
 
                
