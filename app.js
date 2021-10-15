@@ -51,6 +51,9 @@ app.get("/informacionpaciente",authController.info_get);
 app.post("/citapaciente",authController.citapaciente_post);
 app.get("/citapaciente",authController.citapaciente_get);
 
+app.post("/vercitaspendientespaciente",authController.citapendientepaciente_post);
+app.get("/vercitaspendientespaciente",authController.citapendientepaciente_get);
+
 
 
 app.get("/registro",adminController.registro_get);
