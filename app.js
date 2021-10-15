@@ -43,7 +43,7 @@ app.get("/",(req, res, next)=>{
 app.post("/login",authController.login_post);
 app.get("/login",authController.login_get);
 
-app.get("/historia",doctorController.historia_create_get);
+app.get("/historia/create/:dniPaciente",doctorController.historia_create_get);
 app.post("/historia",doctorController.historia_create_post);
 
 app.post("/informacion",authController.info_post);

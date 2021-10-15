@@ -24,9 +24,11 @@ module.exports.registro_post = async (req, res, next) => {
 
   let nuevoUsuario = null;
   if (tipoUsuario == "paciente") {
+    const historiaClinica = new HistoriaClinica();
+    await historiaClinica.save();
     datosUsuario.telefonoFamiliar = body.telefonoFamiliar;
     datosUsuario.direccion = body.direccion;
-
+    datosUsuario.historiaClinica = historiaClinica._id,
     nuevoUsuario = new Paciente(datosUsuario);
 
   } else if (tipoUsuario == "doctor") {
