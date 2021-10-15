@@ -121,45 +121,103 @@ body{
 }
 .cuadro_1 p{
     padding: 12px;
-    padding-left: 20px;
+    padding-left: 0px;
     color: #0BB288;
 }
 .cuadro_1 span{
     color: #838383;
 }
-.titulo_info{
+.info_persona .titulo_info{
     border-bottom: 2px solid #BDBCBC;
     width: 120px;
     font-weight: bold;
+    margin-left: 0px;
 }
 .info_persona{
     width: 300px;
 }
+.info_persona p{
+    margin-left: 10px;
+}
+
 .titulo_descripcion{
     width: 100%;
 }
 .descripcion{
     width: 100%;
     height: 105px;
-    padding: 7px;
-    margin: 0 20px;
-    color: #838383;
+   
+    /* margin: 0 20px; */
+    
+
 }
 .titulo_area{
     margin-left: auto;
     margin-right: 7px;
 }
 #area_medica{
-    margin-right: 80px;
+    margin-right: 102px;
 }
 .boton_siguiente{
     
     margin: auto;
     margin-top: 20px;
+
+    width: 250px;
+    height: 35px;
+    background-color: #0BB288;
+    border: 1px solid #0BB288;
+    color: white;
+    border-radius: 5px;
 }
 label{
     color: #0BB288;
 }
 select{
     color: #838383;
+}
+textarea{
+    border: 2px solid #BDBCBC;
+    border-radius: 5px;
+    resize: none;
+    color: #838383;
+    padding: 7px;
+}
+textarea:focus{
+    outline: 1px solid #838383;
+}
+.cuadro_2 p,.cuadro_2 textarea{
+    width: 42%;
+}
+.cuadro_2 textarea{
+    height: 71.5%;
+}
+.cuadro_2 p{
+    color: #0BB288;
+    font-weight: bold;
+    padding: 12px 0;
+}
+.cuadro_2 .contenedor_botones{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.boton_finalizar{
+    margin-left: 20px;
+
+    width: 250px;
+    height: 35px;
+    background-color: #0BB288;
+    border: 1px solid #0BB288;
+    color: white;
+    border-radius: 5px;
+}
+.boton_regresar{
+    width: 250px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #0BB288;
+    color: #0BB288;
+    border-radius: 5px;
 }

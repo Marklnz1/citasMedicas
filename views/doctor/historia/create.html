@@ -43,17 +43,23 @@
                 </div>
                 <p>Fecha: 01/07/2021</p>
                 <label for="area_medica" class="titulo_area">Area Medica</label>
-                <select name="" id="area_medica">
-                    <option value="">Odontologia</option>
+                <select name="area_medica" id="area_medica">
+                    <option value="Odontologia">Odontologia</option>
                 </select>
                 <p class="titulo_descripcion">Descripcion:</p>
-                <textarea name="" id="" cols="30" rows="10" class="descripcion"></textarea>
+                <textarea name="descripcion" id="" cols="30" rows="10" class="descripcion"></textarea>
                 <button class="boton_siguiente boton">Siguiente</button>
             </div>
     
-            <div class="cuadro_2 cuadro">
-                RECETA
-                <button class="boton_regresar boton">Regresar</button>
+            <div class="cuadro_2 cuadro ">
+                <p>Medicamentos</p>
+                <p>Indicaciones</p>
+                <textarea name="medicamentos" id="" cols="30" rows="10"></textarea>
+                <textarea name="indicaciones" id="" cols="30" rows="10"></textarea>
+                <div class="contenedor_botones">
+                    <button class="boton_regresar boton">Regresar</button>
+                    <button class="boton_finalizar">Finalizar</button>
+                </div>
             </div>
         </div>
     </form>
@@ -81,6 +87,30 @@
         cuadro_2.classList.remove('cuadro_activo');
         cuadro_1.classList.add('cuadro_activo');
       });
+    </script>
+    <script>
+
+        const form = document.querySelector(".hoja_clinica");
+        
+        
+        const boton_finalizar = document.querySelector(".boton_finalizar");
+        boton_finalizar.addEventListener("click",async (e)=>{
+            e.preventDefault();
+            const datos = {};
+            datos.idPaciente = "0239IHG82309J";
+            datos.area_medica = form.area_medica.value;
+            datos.descripcion = form.descripcion.value;
+            datos.medicamentos = form.medicamentos.value;
+            datos.indicaciones = form.indicaciones.value;
+            const res = await fetch("/historia", {
+                    method: "POST",
+                    body: JSON.stringify(datos),
+                    headers: { "Content-Type": "application/json" }
+                })
+            const data = await res.json();
+            console.log(data);
+        });
+
     </script>
 </body>
 </html>
