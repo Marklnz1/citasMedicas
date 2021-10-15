@@ -1,5 +1,6 @@
 const Paciente = require("../models/Paciente");
 const Doctor = require("../models/Doctor");
+const Cita = require("../models/Cita");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -81,8 +82,24 @@ module.exports.citadoctor_post = async (req, res) => {
  
 };
 
+
+module.exports.citapendientepaciente_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.citapendientepaciente_get = (req, res, next) => {
+  
+    res.render("paciente/vercitaspendientespaciente");
+};
+
 module.exports.citadoctor_get = (req, res, next) => {
   
     res.render("doctor/citadoctor");
+
+};
+module.exports.citadoctor_post = async (req, res) => {
+ 
+ 
 };
 

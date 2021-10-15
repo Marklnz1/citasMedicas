@@ -13,7 +13,7 @@ async function iniciar() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  app.listen(4000);
+  app.listen(3000);
   console.log("Servidor encendido");
 
 }
@@ -55,8 +55,14 @@ app.get("/informacionpaciente",authController.info_get);
 app.post("/citapaciente",authController.citapaciente_post);
 app.get("/citapaciente",authController.citapaciente_get);
 
+
+app.post("/vercitaspendientespaciente",authController.citapendientepaciente_post);
+app.get("/vercitaspendientespaciente",authController.citapendientepaciente_get);
+
+
 app.post("/citadoctor",authController.citadoctor_post);
 app.get("/citadoctor",authController.citadoctor_get);
+
 
 
 app.get("/registro",adminController.registro_get);
