@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const authController = require('./controllers/authController');
 const extraerUsuario = require('./middleware/extraerUsuario');
 const adminController = require('./controllers/adminController');
-
+const doctorController = require("./controllers/doctorController");
 let dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
 iniciar();
 async function iniciar() {
@@ -42,6 +42,8 @@ app.get("/",(req, res, next)=>{
 });
 app.post("/login",authController.login_post);
 app.get("/login",authController.login_get);
+
+app.get("/historia",doctorController.historia_create_get);
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
 
