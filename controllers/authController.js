@@ -110,4 +110,18 @@ module.exports.citapendientedoctor_post = async (req, res) => {
 module.exports.citapendientedoctor_get = (req, res, next) => {
   
     res.render("doctor/vercitaspendientesdoctor");
+<<<<<<< HEAD
 }; 
+=======
+};
+
+module.exports.citapendientedoctor_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.citapendientedoctor_get = (req, res, next) => {
+  
+    res.render("doctor/vercitaspendientesdoctor");
+};
+>>>>>>> d47fdd32ef912f4d373f27e6a3db5df920bf70aa
