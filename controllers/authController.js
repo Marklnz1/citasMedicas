@@ -1,7 +1,7 @@
 const Paciente = require("../models/Paciente");
 const Doctor = require("../models/Doctor");
 const jwt = require("jsonwebtoken");
-
+const bcrypt = require("bcrypt");
 
 module.exports.login_post = async (req, res) => {
   const dni = req.body.dni;
@@ -12,7 +12,9 @@ module.exports.login_post = async (req, res) => {
   let mensaje ="DNI no registrado o contraseña incorrecta";
 
   if(passwordBD){
-    if(password == passwordBD){
+    const logeado = await bcrypt.compare(password,passwordBD);
+
+    if(logeado){
       const token = crearToken(dni, tipoUsuario);
       res.cookie("jwt", token, { httpOnly: true, maxAge: tiempoMaximo * 1000 }); 
       mensaje= "";
