@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const authController = require('./controllers/authController');
 const extraerUsuario = require('./middleware/extraerUsuario');
 const adminController = require('./controllers/adminController');
-
+const doctorController = require("./controllers/doctorController");
 let dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
 iniciar();
 async function iniciar() {
@@ -13,7 +13,7 @@ async function iniciar() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  app.listen(4000);
+  app.listen(3000);
   console.log("Servidor encendido");
 
 }
@@ -42,6 +42,10 @@ app.get("/",(req, res, next)=>{
 });
 app.post("/login",authController.login_post);
 app.get("/login",authController.login_get);
+
+app.get("/historia",doctorController.historia_create_get);
+app.post("/historia",doctorController.historia_create_post);
+
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
 
@@ -51,8 +55,13 @@ app.get("/informacionpaciente",authController.info_get);
 app.post("/citapaciente",authController.citapaciente_post);
 app.get("/citapaciente",authController.citapaciente_get);
 
+
 app.post("/vercitaspendientespaciente",authController.citapendientepaciente_post);
 app.get("/vercitaspendientespaciente",authController.citapendientepaciente_get);
+
+
+app.post("/citadoctor",authController.citadoctor_post);
+app.get("/citadoctor",authController.citadoctor_get);
 
 
 
