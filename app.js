@@ -47,8 +47,13 @@ app.get("/historia",doctorController.historia_create_get);
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
 
-app.post("/informacionpaciente",authController.infopaciente_post);
-app.get("/informacionpaciente",authController.infopaciente_get);
+app.post("/informacionpaciente",authController.info_post);
+app.get("/informacionpaciente",authController.info_get);
+
+app.post("/citapaciente",authController.citapaciente_post);
+app.get("/citapaciente",authController.citapaciente_get);
+
+
 
 app.get("/registro",adminController.registro_get);
 app.post("/registro",adminController.registro_post);
