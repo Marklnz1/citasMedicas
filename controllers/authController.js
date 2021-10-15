@@ -76,5 +76,13 @@ module.exports.citapaciente_get = (req, res, next) => {
   
     res.render("paciente/citapaciente");
 };
+module.exports.citadoctor_post = async (req, res) => {
+ 
+ 
+};
 
+module.exports.citadoctor_get = (req, res, next) => {
+  
+    res.render("doctor/citadoctor");
+};
 
