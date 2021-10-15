@@ -67,4 +67,14 @@ module.exports.infopaciente_get = (req, res, next) => {
     res.render("paciente/informacionpaciente");
 };
 
+module.exports.citapaciente_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.citapaciente_get = (req, res, next) => {
+  
+    res.render("paciente/citapaciente");
+};
+
 
