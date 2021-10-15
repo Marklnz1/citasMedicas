@@ -60,6 +60,9 @@ app.post("/vercitaspendientespaciente",authController.citapendientepaciente_post
 app.get("/vercitaspendientespaciente",authController.citapendientepaciente_get);
 
 
+
+
+
 app.post("/citadoctor",authController.citadoctor_post);
 app.get("/citadoctor",authController.citadoctor_get);
 
