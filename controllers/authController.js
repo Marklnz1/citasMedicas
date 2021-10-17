@@ -1,7 +1,8 @@
 const Paciente = require("../models/Paciente");
 const Doctor = require("../models/Doctor");
+const Cita = require("../models/Cita");
 const jwt = require("jsonwebtoken");
-
+const bcrypt = require("bcrypt");
 
 module.exports.login_post = async (req, res) => {
   const dni = req.body.dni;
@@ -12,7 +13,9 @@ module.exports.login_post = async (req, res) => {
   let mensaje ="DNI no registrado o contraseña incorrecta";
 
   if(passwordBD){
-    if(password == passwordBD){
+    const logeado = await bcrypt.compare(password,passwordBD);
+
+    if(logeado){
       const token = crearToken(dni, tipoUsuario);
       res.cookie("jwt", token, { httpOnly: true, maxAge: tiempoMaximo * 1000 }); 
       mensaje= "";
@@ -65,4 +68,51 @@ module.exports.infopaciente_get = (req, res, next) => {
     res.render("paciente/informacionpaciente");
 };
 
+module.exports.citapaciente_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.citapaciente_get = (req, res, next) => {
+  
+    res.render("paciente/citapaciente");
+};
+module.exports.citadoctor_post = async (req, res) => {
+ 
+ 
+};
+
+
+module.exports.citapendientepaciente_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.citapendientepaciente_get = (req, res, next) => {
+  
+    res.render("paciente/vercitaspendientespaciente");
+};
+
+module.exports.citadoctor_get = (req, res, next) => {
+  
+    res.render("doctor/citadoctor");
+
+};
+module.exports.citadoctor_post = async (req, res) => {
+ 
+ 
+};
+
+
+
+
+module.exports.citapendientedoctor_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.citapendientedoctor_get = (req, res, next) => {
+  
+    res.render("doctor/vercitaspendientesdoctor");
+};
 

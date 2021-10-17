@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/doctor/historia_create.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu"></div>
+    <form class="hoja_clinica" action="">
+        
+        <div class="contenedor_avance">
+            <div class="linea_avance">
+                <div class="titulo_circulo titulo_1">
+                    <span>Información</span> <span>basica</span>
+                </div>
+                <div class="titulo_circulo titulo_2">
+                    Receta
+                </div>
+                <div class="circulo_1 circulo circulo_activo">
+                    1
+                </div>
+                <div class="circulo_2 circulo ">
+                    2
+                </div>
+            </div>
+        </div>
+        <div class="contenedor_cuadros">
+            <div class="cuadro_1 cuadro cuadro_activo">
+                <div class="cuadro_info_personas">
+                    <div class="info_persona info_paciente">
+                        <p class="titulo_info">Paciente</p>
+                        <p>Nombre: <span>ALBERTO GONZALES</span></p>
+                        <p>DNI: <span>82912345</span></p>
+                        <p>ID: <span>0239IHG82309J</span></p>
+                    </div>
+                    <div class="info_persona info_doctor">
+                        <p class="titulo_info">Doctor</p>
+                        <p>Nombre: <span>LUCAS GOMEZ</span></p>
+                        <p>ID: <span>4983H19JI31T</span></p>
+                    </div>
+                </div>
+                <p>Fecha: 01/07/2021</p>
+                <label for="area_medica" class="titulo_area">Area Medica</label>
+                <select name="area_medica" id="area_medica">
+                    <option value="Odontologia">Odontologia</option>
+                </select>
+                <p class="titulo_descripcion">Descripcion:</p>
+                <textarea name="descripcion" id="" cols="30" rows="10" class="descripcion"></textarea>
+                <button class="boton_siguiente boton">Siguiente</button>
+            </div>
+    
+            <div class="cuadro_2 cuadro ">
+                <p>Medicamentos</p>
+                <p>Indicaciones</p>
+                <textarea name="medicamentos" id="" cols="30" rows="10"></textarea>
+                <textarea name="indicaciones" id="" cols="30" rows="10"></textarea>
+                <div class="contenedor_botones">
+                    <button class="boton_regresar boton">Regresar</button>
+                    <button class="boton_finalizar">Finalizar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+
+      const boton_siguiente = document.querySelector(".boton_siguiente");
+      const boton_regresar = document.querySelector(".boton_regresar");
+      const circulo_1 = document.querySelector(".circulo_1");
+      const circulo_2 = document.querySelector(".circulo_2");
+      const cuadro_1 = document.querySelector(".cuadro_1");
+      const cuadro_2 = document.querySelector(".cuadro_2");
+
+      boton_siguiente.addEventListener("click",(e)=>{
+          e.preventDefault();
+          circulo_1.classList.remove('circulo_activo');
+          circulo_2.classList.add('circulo_activo');
+          cuadro_1.classList.remove('cuadro_activo');
+          cuadro_2.classList.add('cuadro_activo');
+
+      });
+      boton_regresar.addEventListener("click",(e)=>{
+        e.preventDefault();
+        circulo_2.classList.remove('circulo_activo');
+        circulo_1.classList.add('circulo_activo');
+        cuadro_2.classList.remove('cuadro_activo');
+        cuadro_1.classList.add('cuadro_activo');
+      });
+    </script>
+    <script>
+
+        const form = document.querySelector(".hoja_clinica");
+        
+        
+        const boton_finalizar = document.querySelector(".boton_finalizar");
+        boton_finalizar.addEventListener("click",async (e)=>{
+            e.preventDefault();
+            const datos = {};
+            datos.idPaciente = "0239IHG82309J";
+            datos.area_medica = form.area_medica.value;
+            datos.descripcion = form.descripcion.value;
+            datos.medicamentos = form.medicamentos.value;
+            datos.indicaciones = form.indicaciones.value;
+            const res = await fetch("/historia", {
+                    method: "POST",
+                    body: JSON.stringify(datos),
+                    headers: { "Content-Type": "application/json" }
+                })
+            const data = await res.json();
+            console.log(data);
+        });
+
+    </script>
+</body>
+</html>

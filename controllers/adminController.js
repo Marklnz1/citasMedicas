@@ -1,49 +1,47 @@
 const Paciente = require("../models/Paciente");
 const Doctor = require("../models/Doctor");
-module.exports.registro_get = (req,res,next)=>{
-    res.render("registro/registro");
-}
+const bcrypt = require("bcrypt");
 
-module.exports.registro_post = async (req,res,next)=>{
-    const nombre = req.body.nombre;
-    const apellido = req.body.apellido;
-    const dni = req.body.dni;
-    const email = req.body.email;
-    const tipoUsuario = req.body.tipoUsuario;
-    const telefono = req.body.telefono;
-    const password = req.body.password;
- 
-    let nuevoUsuario = null;
-    if(tipoUsuario == "paciente"){
-        nuevoUsuario = new Paciente({
-            nombre,
-            apellido,
-            dni,
-            email,
-            telefono,
-            password,
-            tipoUsuario,
-            estado: "activo",
-            telefonoFamiliar:req.body.telefonoFamiliar,
-            direccion:req.body.direccion
-          });
-         
-    }else if(tipoUsuario == "doctor"){
-        nuevoUsuario = new Doctor({
-            nombre,
-            apellido,
-            dni,
-            email,
-            telefono,
-            password,
-            tipoUsuario,
-            estado: "activo",
-            yearXp:req.body.yearXp,
-            especialidad:req.body.especialidad
-          });
-    }
-   
-    await nuevoUsuario.save();
-      console.log(req.body);
-      res.status(201).json({ data: req.body });
+module.exports.registro_get = (req, res, next) => {
+  res.render("registro/registro");
+};
+
+module.exports.registro_post = async (req, res, next) => {
+  const body = req.body;
+  const tipoUsuario = body.tipoUsuario;
+  let datosUsuario = {
+    nombre: body.nombre,
+    apellido: body.apellido,
+    dni: body.dni,
+    email: body.email,
+    telefono: body.telefono,
+    password: body.password,
+    tipoUsuario: body.tipoUsuario,
+    estado: "activo",
+  };
+
+  datosUsuario.password = await getPasswordBcrypt(datosUsuario.password);
+
+  let nuevoUsuario = null;
+  if (tipoUsuario == "paciente") {
+    datosUsuario.telefonoFamiliar = body.telefonoFamiliar;
+    datosUsuario.direccion = body.direccion;
+
+    nuevoUsuario = new Paciente(datosUsuario);
+
+  } else if (tipoUsuario == "doctor") {
+    datosUsuario.yearXp = body.yearXp;
+    datosUsuario.especialidad = body.especialidad;
+
+    nuevoUsuario = new Doctor(datosUsuario);
+  }
+
+  await nuevoUsuario.save();
+  console.log(datosUsuario);
+  res.status(201).json({ data: req.body });
+};
+
+async function getPasswordBcrypt(password){
+    const salt = await bcrypt.genSalt();
+    return await bcrypt.hash(password,salt);
 }
