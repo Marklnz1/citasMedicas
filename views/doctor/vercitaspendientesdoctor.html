@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>LISTA CITAS PENDIENTES PACIENTE</title>
+    <title>LISTA CITAS PENDIENTES DOCTOR</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -15,43 +15,38 @@
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <!-- Nuestro css style="background-color: transparent;  border-primary -->
-    <link rel="stylesheet" type="text/css" href="vercitapendientepaciente.css" />
+    <link rel="stylesheet" type="text/css" href="citapaciente.css" />
 </head>
 
 <body>
     <%- include('../partials/menu.html') %>
-    <div class="row ">
+    <div class="row">
         <div class="col-12">
-                <div class="">
-                    <table class="table table-bordered t">
-                        <thead class="table-dark cabecera ">
+                <div class="table-responsive">
+                    <table class="table table-bordered  t">
+                        <thead class="table-dark">
                                         <tr>
                                             <th>Codigo</th>
-
-                                            <th>Area Medica</th>
-                                            <th>Doctor</th>
-                                            <th>Paciente</th>
+                                            <th>Nombre Area Medica</th>
+                                            <th>Nombre Doctor</th>
+                                            <th>Nombre Paciente</th>
                                             <th>Fecha</th>
                                             <th>Horas</th>
                                             <th>Descripcion</th>
-                                            <th>Estado</th>
-                                            
-
+                                           
                                         </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                              <!-- @foreach($Paciente as $paciente)-->
                                 <tr>
                                     <td>001</td>
-                                    <td>Psicologia</td>
-                                    <td>Juan Carlos Lopez</td>
-                                    <td>Miguel flores perez</td>
+                                    <td>002</td>
+                                    <td>doct01</td>
+                                    <td>p001</td>
                                     <td>05/10/21</td>
                                     <td>2 pm</td>
                                     <td>prueba de sangre</td>
-                                    <td>pendiente</td>
-
-                                   
+                                
                                    <!-- 
                                     <td>{{$}}</td>
                                     <td>{{$paciente->}}</td>

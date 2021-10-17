@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Citas</title>
+    <link rel="stylesheet" href=../../public/css/registro/registroCita.css>
+</head>
+<body>
+    <div class="banner">
+      <div class="logo">
+          <img src="../../public/imagenes/LogoTingo.png" />
+        </div>
+        <div class="formulario">
+          <div class="titulo" style="display: flex; justify-content: center">
+            <span style="font-size: 24px; color: white">Formulario de Reservación de Citas </span>
+          </div>
+          <div class="campos">
+            <form id="form-register">
+              <div class="separador"></div>
+              <div class="input-container">
+                <label for="name_area">Área Médica</label>
+                <select name="nombreArea" id="name_area">
+                 
+                </select>
+              </div>
+              <div class="separador"></div>
+              <div class="input-container">
+                <label for="id_doctor">Médico</label>
+                <select name="idMedico" id="id_doctor">
+                 
+                </select>
+              </div>
+
+              <div class="separador"></div>
+
+              <div class="inputs-row">
+                <div class="input-container">
+                  <label for="date">Fechas Disponibles</label>
+                  <select name="fechasDisponibles" id="date">
+                    
+                  </select>
+                </div>
+                <div class="separador"></div>
+                <div class="input-container">
+                  <label for="hours">Horas Disponibles</label>
+                  <select name="horasDisponibles" id="hours">
+                    
+                  </select>
+                </div>
+              </div>
+              <div class="separador"></div>
+              <div class="input-container">
+                <label for="description">Descripción de la Cita</label>
+                <textarea style="resize:none; height: auto;" name="" rows="3" id="description" required></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="acciones">
+            <button class="b-outline btn-flex">Cancelar</button>
+            <div class="separador"></div>
+            <button
+              class="b-solid btn-flex"
+              type="submit"
+              form="form-register"
+              id="submit"
+            >
+              Registrar Cita
+            </button>
+          </div>
+        </div>
+        
+      </div>
+</body>
+</html>
