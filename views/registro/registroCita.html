@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Citas</title>
-    <link rel="stylesheet" href=../../public/css/registro/registroCita.css>
+    <link rel="stylesheet" href=/css/registro/registroCita.css>
 </head>
 <body>
     <div class="banner">
       <div class="logo">
-          <img src="../../public/imagenes/LogoTingo.png" />
+          <img src="/imagenes/LogoTingo.png" />
         </div>
         <div class="formulario">
           <div class="titulo" style="display: flex; justify-content: center">
@@ -22,7 +22,9 @@
               <div class="input-container">
                 <label for="name_area">Área Médica</label>
                 <select name="nombreArea" id="name_area">
-                 
+                    <% for(area of areasMedicas){ %>
+                      <option value="<%=area._id%>"><%=area.nombre%></option>  
+                    <%}%>
                 </select>
               </div>
               <div class="separador"></div>
@@ -72,5 +74,103 @@
         </div>
         
       </div>
+      <script>
+         const comboArea   = document.getElementById("name_area");
+         const comboDoctor = document.getElementById("id_doctor");
+         const comboFecha  = document.getElementById("date");
+         const comboHora   = document.getElementById("hours");
+         const areas = <%-JSON.stringify(areasMedicas)%>;
+         actualizarDoctores();
+
+          comboArea.addEventListener("change",()=>{
+            actualizarDoctores();
+            
+          });
+          comboDoctor.addEventListener("change",()=>{
+            actualizarFechas();
+          });
+          comboFecha.addEventListener("change",()=>{
+            actualizarHoras();
+          })
+         function actualizarDoctores(){
+           const doctores = getAreaActual().doctores;
+           comboDoctor.innerHTML="";
+           for(doctor of doctores){
+            comboDoctor.innerHTML+=`<option value="${doctor._id}">${doctor.nombreCompleto}</option>`;
+           }
+           actualizarFechas();
+          
+         }
+         function actualizarFechas(){
+           const horarios = getAreaAtencionActual().horarios;
+           comboFecha.innerHTML = "";
+           
+            for(horario of horarios){
+              comboFecha.innerHTML+=`<option value="${horario._id}">${horario.fecha}</option>`;
+            }
+            actualizarHoras();
+         }
+         function actualizarHoras(){
+           const horas = getHorarioActual().horas;
+           comboHora.innerHTML = "";
+           for(hora of horas){
+             comboHora.innerHTML+=`<option value="${hora}">${hora}</option>`;
+           }
+         }
+         function getAreaActual(){
+           return getArea(comboArea.value);
+         }
+         function getDoctorActual(){
+           return getDoctor(getAreaActual(),comboDoctor.value);
+         }
+         function getAreaAtencionActual(){
+           return getAreaAtencionDoctor(getDoctorActual(),comboArea.value);
+         }
+         function getHorarioActual(){
+           return getHorario(getAreaAtencionActual(),comboFecha.value);
+         }
+         function getArea(idArea){
+           for(area of areas){
+             if(area._id == idArea) return area;
+           }
+         }
+         function getAreaAtencionDoctor(doctor,idArea){
+          for(areaAtencion of doctor.areasAtencion){
+             if(areaAtencion.areaMedica == idArea) return areaAtencion;
+           }
+         }
+         function getDoctor(area,idDoctor){
+          for(doctor of area.doctores){
+             if(doctor._id == idDoctor) return doctor;
+           }
+         }
+         function getHorario(areaAtencion,idHorario){
+           for(horario of areaAtencion.horarios){
+              if(horario._id == idHorario) return horario;
+           }
+         }
+      </script>
+      <script>
+        
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit",enviarDatos);
+        async function enviarDatos(e){
+            e.preventDefault();
+            const idPaciente = "<%=user._id%>";
+            const idAreaMedica = form.name_area.value;
+            const idDoctor = form.id_doctor.value;
+            const fecha = getHorarioActual().fecha;
+            const hora = comboHora.value;
+            
+            const descripcion = form.description.value;
+            const datosCita = {idPaciente,idAreaMedica,fecha,hora,idDoctor,descripcion};
+            const res = await fetch("/cita/create", {
+            method: "POST",
+            body: JSON.stringify(datosCita),
+            headers: { "Content-Type": "application/json" },
+                  });
+        }
+      </script>
 </body>
 </html>

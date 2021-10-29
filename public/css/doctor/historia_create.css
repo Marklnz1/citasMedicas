@@ -106,6 +106,13 @@ body{
 .boton{
     cursor: pointer;
 }
+.boton:hover{
+    background-color: #098E6C;
+    color:white;
+}
+.boton_regresar:hover{
+    background-color: #0BB288;
+}
 .contenedor_cuadros{
 
     width: 80%;
@@ -130,14 +137,25 @@ body{
 .info_persona .titulo_info{
     border-bottom: 2px solid #BDBCBC;
     width: 120px;
+    margin-right: 100%;
     font-weight: bold;
-    margin-left: 0px;
+    padding-left: 0px;
 }
 .info_persona{
     width: 300px;
+    min-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: flex-start;
 }
 .info_persona p{
-    margin-left: 10px;
+    /* margin-left: 10px; */
+    padding-left:10px;
+    width: 25%;
+}
+.info_persona span{
+    width: 75%;
 }
 
 .titulo_descripcion{

@@ -1,6 +1,7 @@
 const Paciente = require("../models/Paciente");
 const Doctor = require("../models/Doctor");
 const bcrypt = require("bcrypt");
+const HistoriaClinica = require("../models/HistoriaClinica");
 
 module.exports.registro_get = (req, res, next) => {
   res.render("registro/registro");
@@ -28,7 +29,7 @@ module.exports.registro_post = async (req, res, next) => {
     await historiaClinica.save();
     datosUsuario.telefonoFamiliar = body.telefonoFamiliar;
     datosUsuario.direccion = body.direccion;
-    datosUsuario.historiaClinica = historiaClinica._id,
+    datosUsuario.idHistoriaClinica = historiaClinica._id,
     nuevoUsuario = new Paciente(datosUsuario);
 
   } else if (tipoUsuario == "doctor") {
