@@ -29,7 +29,7 @@ module.exports.registro_post = async (req, res, next) => {
     await historiaClinica.save();
     datosUsuario.telefonoFamiliar = body.telefonoFamiliar;
     datosUsuario.direccion = body.direccion;
-    datosUsuario.idHistoriaClinica = historiaClinica._id,
+    datosUsuario.idHistoriaClinica = historiaClinica._id;
     nuevoUsuario = new Paciente(datosUsuario);
 
   } else if (tipoUsuario == "doctor") {
@@ -46,5 +46,5 @@ module.exports.registro_post = async (req, res, next) => {
 
 async function getPasswordBcrypt(password){
     const salt = await bcrypt.genSalt();
-    return await bcrypt.hash(password,salt);
+    return bcrypt.hash(password,salt);
 }

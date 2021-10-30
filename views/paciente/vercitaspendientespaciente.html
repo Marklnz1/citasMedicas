@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>LISTA CITAS PENDIENTES PACIENTE</title>
@@ -34,6 +34,7 @@
                                             <th>Hora</th>
                                             <th>Descripcion</th>
                                             <th>parcial</th>
+                                            <th>Opciones</th>
 
                                         </tr>
                         </thead>
@@ -47,7 +48,64 @@
                                     <td><%=cita.fecha%></td>
                                     <td><%=cita.hora%></td>
                                     <td><%=cita.descripcion%></td>
-                                   
+                                    <td><%=cita.parcial%></td>
+                                    <td>
+                                        <div style="display:flex; flex-direction: row;">
+                                            <button type="button" class="btn btn-danger" style="margin-right: 8px" data-toggle="modal" data-target="#exampleModal">
+                                                Cancelar Cita
+                                              </button>
+                                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Cancelar Cita</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="" id="form-cancel-cita">
+                                                            ¿Desea realmente cancelar la cita?
+                                                            <div class="form-group">
+                                                              <label for="exampleFormControlTextarea1">Escriba un motivo</label>
+                                                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                      <button form="form-cancel-cita" type="submit" class="btn btn-primary">Sí</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+    
+                                              <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong2">
+                                                    Historial Médico
+                                                </button>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle2" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle2">Historial Médico del Paciente</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             <%}%>
                            <!--  @endforeach-->
