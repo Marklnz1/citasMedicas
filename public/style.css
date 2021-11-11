@@ -1,0 +1,140 @@
+
+body { 
+  
+    background: url(../img/background.jpg) no-repeat center center fixed;
+    background-size: cover;
+
+  }
+.main-section{
+  margin:0 auto;
+  margin-top:25%;
+  padding: 0;
+}
+.modal-content{
+  background-color: #687481;
+  opacity: .85;
+  padding: 0 20px;
+  box-shadow: 0px 0px 3px #fffcfc;
+  border-radius: 10%;
+}
+.user-img{
+  margin-top: -20px;
+  margin-bottom: 6px;
+  margin: -1px 1 6px;
+
+}
+
+.user-img img{
+  width: 100xp;
+  height: 100px;
+  box-shadow: 0px 0px 3px #faf6f6;
+  border-radius: 50%;
+}
+.form-group input{
+  height: 42px;
+  font-size: 18px;
+  border:0;
+  padding-left: 54px;
+  border-radius: 5px;
+}
+.form-group::before{
+  font-family: "Font Awesome\ 5 Free";
+  position: absolute;
+  left: 50px;
+  font-size: 29px;
+  padding-top:2px;
+}
+
+.form-group#user-group::before{
+  content: "\f007";
+  
+  
+}
+
+.form-group#contrasena-group::before{
+  content: "\f023";
+}
+button{
+  width: 60%;
+  margin: 16px 0 5px;
+}
+.sesion{
+  font-size: 20px;
+  padding: 6px 0;
+  margin: 2px  0 8px;
+  font-style: italic;
+  color: rgb(17, 209, 209);
+  text-shadow: 0px 0 3px #ecf1f1;
+  
+  /*color: rgb(33, 180, 180);*/
+}
+.forgot{
+  padding: 5px 0;
+  margin: 8px 0 10px;
+}
+
+.forgot a{
+  color: white;
+}
+
+
+/* ...........*/
+
+.wel-content{
+  
+  font-size: 50px;
+  padding: 5px 0;
+  margin: 8px 0 3px;
+  font-style:inherit;
+  color: rgb(168, 100, 10);
+  text-shadow: 0px 0 3px #ecf1f1;
+  
+  
+   
+}
+.a-content{
+  font-size: 20px;
+  padding: 6px 0;
+  margin: -30px  0px -30px;
+  font-style:inherit;
+  color: rgb(14, 107, 63);
+  text-shadow: 0px 0 3px #ecf1f1;
+}
+.electro-content{
+  font-size: 40px;
+  padding: 6px 0;
+  margin: 22px  22px 50px;
+  font-style:italic;
+  color: rgb(168, 100, 10);
+  text-shadow: 0px 0 3px #ecf1f1;
+}
+
+.gerente-content{
+  position: absolute;
+  top: 250%;
+  left: 130%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+}
+.contactos-content{
+  position: absolute;
+  top: 230%;
+  left: -60%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+}
+.b-content{
+  top: 140%;
+  left: 40%;
+  height: 30%;
+  width: 30%;
+  
+}
+.btn1,.btn2{
+ 
+  color: rgb(184, 28, 28);
+  cursor:pointer;
+}
+

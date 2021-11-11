@@ -116,3 +116,14 @@ module.exports.citapendientedoctor_get = (req, res, next) => {
     res.render("doctor/vercitaspendientesdoctor");
 };
 
+//BUSQUEDA PACIENTE
+module.exports.busquedahistoriaclinicapaciente_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.busquedahistoriaclinicapaciente_get = (req, res, next) => {
+  
+    res.render("paciente/busquedahistoriaclinica");
+};
+
