@@ -47,7 +47,7 @@
                     <tbody>
                         <tr v-for="" :key="">
                             <td>
-                                <button type="button" @click="abrirModal('','',)" class="btn btn-warning btn-sm">
+                                <button type="button" @click="abrirModal('','',)" class="btn btn-primary btn-sm">
                                 <i class="icon-pencil"></i>
                                 </button> &nbsp;
                                 
@@ -62,7 +62,7 @@
                         </tr>                                
                     </tbody>
                 </table>
-                <nav>
+               <!-- <nav>
                     <ul class="pagination">
                         <li class="page-item" v-if="pagination.current_page > 1">
                             <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
@@ -73,8 +73,19 @@
                         <li class="page-item" v-if="pagination.current_page < pagination.last_page">
                             <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
                         </li>
+                       
                     </ul>
-                </nav>
+
+                </nav> -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                 </nav>
             </div>
         </div>
         <!-- Fin ejemplo de tabla Listado -->
