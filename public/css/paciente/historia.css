@@ -1,0 +1,131 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 14px;
+    /* font-weight: bold; */
+    color: #313131;
+    image-rendering: crisp-edges;
+}
+body{
+    background-color: #E9F2F1;
+}
+.contenedor{
+    display: flex;
+    width: 900px;
+    margin: auto;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    background-color: white;
+    /* height: 500px; */
+    align-content: flex-start;
+}
+.contenedor .cabecera{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        font-weight: bold;
+
+}
+.cabecera .item{
+    padding-top: 0px;
+}
+.contenedor .fila:nth-of-type(even){
+    background-color: #E9F2F1;
+    
+
+}
+.contenedor .fila:nth-child(odd){
+    background-color: white;
+}
+
+.item{
+    text-align: center;
+    width: 22%;
+    padding-top: 10px;
+}
+.fila div:nth-last-child(1){
+    /* background-color: red; */
+    padding-top: 5px;
+    text-align: left;
+    width: 11%;
+}
+ .fila div:nth-child(1){
+width: 30%;
+}
+ .fila div:nth-child(2){
+    width: 25%;
+}
+.contenedor .cuadro_titulo .titulo{
+    display: flex;
+    align-items: center;
+   
+    font-size: 18px;
+    width: 100%;
+    margin-top: 15px;
+}
+.contenedor .cuadro_titulo{
+    display: flex;
+    flex-wrap: wrap;
+    height: 90px;
+    padding-left: 24px;
+    align-items: flex-start;
+    width: 100%;
+    background-color: white;
+    border-bottom: 2px solid #A0BEBA;
+}
+
+.contenedor  .navegacion{
+    margin-top: auto;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+}
+.navegacion a{
+    border: 2px solid #A0BEBA;
+    width: 24px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.navegacion .siguiente{
+    width: 85px;
+}
+.navegacion .anterior{
+    width: 65px;
+}
+.navegacion a:hover{
+    cursor: pointer;
+    background-color: #d0dddc;
+}
+.item img:hover{
+    content:url("../../imagenes/ojo_2.png");
+    width: 26px;
+    cursor: pointer;
+}
+.navegacion .activo{
+    background-color: #E9F2F1;
+}
+.fila{
+    width: 100%;
+   
+    display: flex;
+    border-bottom: 2px solid #A0BEBA;
+    height: 50px;
+}
+/* .contenedor .fila:nth-last-child(1){
+    border-bottom: none;
+} */
+a{
+    text-decoration: none;
+}
+/* .contenedor div:nth-of-type(n){
+    background-color: #F4F8FB;
+} */

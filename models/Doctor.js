@@ -29,7 +29,8 @@ const doctorSchema = new Schema({
     citas:[String],
     tipoUsuario:String,
     password:String,
-    estado:String
+    estado:String,
+    email:String
 });
 
 doctorSchema.pre("save", function(next) {

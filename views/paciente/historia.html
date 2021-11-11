@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/paciente/historia.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cuadro_titulo">
+            <div class="titulo">Historial Medico</div>
+            <div class="navegacion">Pagina <%=actualPag%> de <%=numPag%> &nbsp; 
+                <%
+                    let numActualPag = parseInt(actualPag);
+                    let numTotalPag = parseInt(numPag);
+                    let indiceIni = numActualPag-2;
+                    if(numActualPag >numTotalPag-3){
+                        indiceIni -=(numActualPag-(numTotalPag-3));
+                    }
+                    if(indiceIni<1)indiceIni = 1;
+                    let indiceFin = numActualPag + 2;
+                    if(numActualPag<4){
+                        indiceFin+=4-numActualPag;
+                    }
+                    if(indiceFin>numPag) indiceFin = numPag;
+                    
+                %>
+                <%if(numActualPag!=1){%>
+                    <a class="anterior" href="/historia?pag=<%=numActualPag-1%>" >Anterior </a>&nbsp;
+                <%}%>
+                <a href="/historia?pag=1" id="1">1</a>&nbsp;<%if(numActualPag>=5&&numTotalPag>7){%>...&nbsp;<%}%>
+                
+                <%for(let i = indiceIni; i <= indiceFin;i++){
+                    if(i==1 || i==numPag)continue;%>
+                    
+                    <a href="/historia?pag=<%=i%>" id="<%=i%>" ><%=i%></a>&nbsp;<%}%><%if(numActualPag<=numTotalPag-4&&numTotalPag>7){%>...&nbsp;<%}%>
+                
+                <a href="/historia?pag=<%=numTotalPag%>"id="<%=numTotalPag%>"><%=numTotalPag%></a>&nbsp;
+                <%if(numActualPag!=numTotalPag){%>
+                    <a class="siguiente" href="/historia?pag=<%=numActualPag+1%>" >Siguiente ></a>
+                <%}%>
+            </div>
+        </div>
+       <div class="fila cabecera">
+        <div class="item">
+            Doctor
+        </div>
+        <div class="item">
+            Email del doctor
+        </div>
+        <div class="item">
+            Fecha
+        </div>
+        <div class="item">
+            Area Medica
+        </div>
+        <div class="item">
+           
+        </div>
+       </div>
+        <!-- ==================================== -->
+        <%for(hoja of hojasClinicas){%>
+        <div class="fila">
+            <div class="item">
+                <%=hoja.doctor.nombreCompleto%>
+            </div>
+            <div class="item">
+                <%=hoja.doctor.email%>
+            </div>
+            <div class="item">
+                <%=hoja.fecha%>
+            </div>
+            <div class="item">
+                <%=hoja.area.nombre%>
+            </div>
+            <div class="item">
+                <img src="imagenes/ojo_1.png" width="25px"alt="">
+            </div>
+           
+        </div>
+        <%}%>
+        
+        
+        
+    </div>
+    <script>
+       const navItemSeleccionado = document.getElementById("<%=actualPag%>");
+       navItemSeleccionado.classList.add("activo");
+    </script>
+</body>
+</html>
