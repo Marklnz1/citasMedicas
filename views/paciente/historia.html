@@ -5,12 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/paciente/historia.css">
+    <link rel="stylesheet" href="/css/paciente/historia_ventana.css">
+    <link rel="stylesheet" href="/css/navegacion.css">
     <title>Document</title>
 </head>
 <body>
+    <style>
+        :root{
+        --fondo-claro:#0BB288;
+        --fondo-oscuro:#098E6C;
+        }
+    </style>
+    <%- include('../partials/menu.html') %>
+   
+    
     <div class="contenedor">
         <div class="cuadro_titulo">
-            <div class="titulo">Historial Medico</div>
+            <div class="titulo">HISTORIAL MEDICO</div>
             <div class="navegacion">Pagina <%=actualPag%> de <%=numPag%> &nbsp; 
                 <%
                     let numActualPag = parseInt(actualPag);
@@ -45,6 +56,9 @@
         </div>
        <div class="fila cabecera">
         <div class="item">
+            #
+        </div>
+        <div class="item">
             Doctor
         </div>
         <div class="item">
@@ -63,6 +77,7 @@
         <!-- ==================================== -->
         <%for(hoja of hojasClinicas){%>
         <div class="fila">
+            <div class="item"> <%=hoja.numero%></div>
             <div class="item">
                 <%=hoja.doctor.nombreCompleto%>
             </div>
@@ -75,7 +90,7 @@
             <div class="item">
                 <%=hoja.area.nombre%>
             </div>
-            <div class="item">
+            <div onclick='mostrarHojaClinica(<%-JSON.stringify(hoja.descripcion)%>,<%-JSON.stringify(hoja.receta.medicamentos)%>, <%-JSON.stringify(hoja.receta.indicaciones)%>,"<%=hoja.numero%>")' class="item">
                 <img src="imagenes/ojo_1.png" width="25px"alt="">
             </div>
            
@@ -85,9 +100,69 @@
         
         
     </div>
+    <div class="contenedor_ventana ocultar_inicial">
+        <div class="ventana">
+            <div class="barra">
+                <span></span>
+                <div class="cerrar">X</div>
+            </div>
+            <div class="contenido">
+                <p>Descripcion</p>
+                <div class="descripcion cuadro">
+
+                </div>
+                <p class="titulo_receta">Receta</p>
+                <p>Medicamentos</p>
+                <p>Indicaciones</p>
+                <div class="receta medicamentos cuadro">
+                </div>
+                
+                <div class="receta indicaciones cuadro">
+                </div>
+            </div>    
+        </div>
+        
+    </div>
     <script>
        const navItemSeleccionado = document.getElementById("<%=actualPag%>");
        navItemSeleccionado.classList.add("activo");
+    </script>
+    <script>
+        const cuadro_cerrar = document.querySelector(".cerrar");
+        const contenedor_ventana = document.querySelector(".contenedor_ventana");
+        const ventana = document.querySelector(".ventana");
+        cuadro_cerrar.addEventListener("click",()=>{
+            ocultarContenedor();
+        }); 
+        contenedor_ventana.addEventListener("click",()=>{
+            ocultarContenedor();
+        })
+        ventana.addEventListener("click",(e)=>{
+            e.stopPropagation();
+        });
+        function ocultarContenedor(){
+            contenedor_ventana.classList.add("ocultar");
+            contenedor_ventana.classList.remove("mostrar");
+        }
+    </script>
+
+    <script>
+        const cuadro_descripcion = document.querySelector(".descripcion");
+        const cuadro_medicamentos = document.querySelector(".medicamentos");
+        const cuadro_indicaciones = document.querySelector(".indicaciones");
+        const titulo = document.querySelector(".barra span");
+        function mostrarHojaClinica(descripcion,medicamentos,indicaciones,numero){
+            contenedor_ventana.classList.remove("ocultar");
+            contenedor_ventana.classList.remove("ocultar_inicial");
+            contenedor_ventana.classList.add("mostrar");
+            cuadro_descripcion.innerHTML = descripcion;
+            cuadro_medicamentos.innerHTML = medicamentos;
+            cuadro_indicaciones.innerHTML = indicaciones;
+            titulo.innerHTML = "Hoja clinica #"+numero;
+        }    
+    </script>
+    <script> 
+      document.querySelector(".historia").classList.add("enlace_activo");
     </script>
 </body>
 </html>

@@ -6,35 +6,36 @@
     font-family: sans-serif;
     font-size: 14px;
     /* font-weight: bold; */
-    color: #313131;
+    color: #5e5e5e;
     image-rendering: crisp-edges;
 }
 body{
-    background-color: #E9F2F1;
+    background-color: #f0f0f0;
 }
 .contenedor{
     display: flex;
-    width: 900px;
+    width: 950px;
     margin: auto;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     flex-wrap: wrap;
     background-color: white;
     /* height: 500px; */
     align-content: flex-start;
+    padding: 20px 40px;
 }
 .contenedor .cabecera{
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-        font-weight: bold;
+    font-weight: bold;
 
 }
 .cabecera .item{
     padding-top: 0px;
 }
-.contenedor .fila:nth-of-type(even){
-    background-color: #E9F2F1;
+.contenedor .fila:nth-of-type(2){
+    background-color: #f0f0f0;
     
 
 }
@@ -53,10 +54,13 @@ body{
     text-align: left;
     width: 11%;
 }
- .fila div:nth-child(1){
-width: 30%;
+.fila div:nth-child(1){
+    width: 10%;
 }
  .fila div:nth-child(2){
+width: 30%;
+}
+ .fila div:nth-child(3){
     width: 25%;
 }
 .contenedor .cuadro_titulo .titulo{
@@ -66,6 +70,8 @@ width: 30%;
     font-size: 18px;
     width: 100%;
     margin-top: 15px;
+    font-weight: bold;
+    margin-bottom: 0px;
 }
 .contenedor .cuadro_titulo{
     display: flex;
@@ -75,7 +81,7 @@ width: 30%;
     align-items: flex-start;
     width: 100%;
     background-color: white;
-    border-bottom: 2px solid #A0BEBA;
+    border-bottom: 2px solid #BDBCBC;
 }
 
 .contenedor  .navegacion{
@@ -87,7 +93,9 @@ width: 30%;
     
 }
 .navegacion a{
-    border: 2px solid #A0BEBA;
+    /* border: 2px solid #A0BEBA; */
+    background-color: #0bb288f3;
+    color: white;
     width: 24px;
     height: 30px;
     display: flex;
@@ -103,7 +111,7 @@ width: 30%;
 }
 .navegacion a:hover{
     cursor: pointer;
-    background-color: #d0dddc;
+    background-color: #098E6C;
 }
 .item img:hover{
     content:url("../../imagenes/ojo_2.png");
@@ -111,13 +119,13 @@ width: 30%;
     cursor: pointer;
 }
 .navegacion .activo{
-    background-color: #E9F2F1;
+    background-color: #098E6C;
 }
 .fila{
     width: 100%;
    
     display: flex;
-    border-bottom: 2px solid #A0BEBA;
+    border-bottom: 2px solid #BDBCBC;
     height: 50px;
 }
 /* .contenedor .fila:nth-last-child(1){

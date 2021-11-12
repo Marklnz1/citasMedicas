@@ -70,10 +70,17 @@ module.exports.historia_get = async(req, res)=>{
     res.render("paciente/historia");
 };
 
+module.exports.cita_cancel_post = async(req, res)=>{
+    const cita = await Cita.findById(req.body.idCita);
+    cita.estado = "cancelado";
+    cita.motivoCancelacion = "req.body.motivo";
+    await cita.save();
+    console.log(req.body,"asdasd")
+}
 
 async function cargarHojasClinicas(pagina,res){
     const historiaClinica = await HistoriaClinica.findById(res.locals.user.idHistoriaClinica);
-    let hojasClinicasBD =  historiaClinica.hojasClinicas;
+    let hojasClinicasBD =  historiaClinica.hojasClinicas.reverse();
 
     // res.locals.hojasClinicas =;
     let hojasClinicasPag = [];
@@ -111,6 +118,7 @@ async function cargarHojasClinicas(pagina,res){
             let hoja = hojasClinicasBD[i].toObject();
             hoja.doctor = await getDoctor(hoja.idDoctor);
             hoja.area = await getArea(hoja.idArea);
+            hoja.numero = i+1;
             hojasClinicasPag.push(hoja);
         }
     }
