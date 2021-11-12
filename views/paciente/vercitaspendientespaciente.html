@@ -16,11 +16,21 @@
 
     <!-- Nuestro css style="background-color: transparent;  border-primary -->
     <link rel="stylesheet" type="text/css" href="vercitapendientepaciente.css" />
+    <link rel="stylesheet" href="/css/navegacion.css">
+    <link rel="stylesheet" href="/css/navegacion.css">
 </head>
 
 <body>
+  <style>
+    :root{
+    --fondo-claro:#239089;
+    --fondo-oscuro:#195c57;
+    }
+</style>
     <%- include('../partials/menu.html') %>
-    <div class="row ">
+    
+    
+    <div class="row tbl">
         <div class="col-12">
                 <div class="">
                     <table class="table table-bordered t">
@@ -33,7 +43,7 @@
                                             <th>Fecha</th>
                                             <th>Hora</th>
                                             <th>Descripcion</th>
-                                            <th>parcial</th>
+                                            <th>estado</th>
                                             <th>Opciones</th>
 
                                         </tr>
@@ -48,9 +58,10 @@
                                     <td><%=cita.fecha%></td>
                                     <td><%=cita.hora%></td>
                                     <td><%=cita.descripcion%></td>
-                                    <td><%=cita.parcial%></td>
+                                    <td><%=cita.estado%></td>
                                     <td>
-                                        <div style="display:flex; flex-direction: row;">
+                                        <% if(cita.estado!="cancelado"){%>
+                                          <div style="display:flex; flex-direction: row;">
                                             <button type="button" class="btn btn-danger" style="margin-right: 8px" data-toggle="modal" data-target="#exampleModal">
                                                 Cancelar Cita
                                               </button>
@@ -68,22 +79,22 @@
                                                             ¿Desea realmente cancelar la cita?
                                                             <div class="form-group">
                                                               <label for="exampleFormControlTextarea1">Escriba un motivo</label>
-                                                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                              <textarea class="form-control motivo_cancelacion" id="exampleFormControlTextarea1"  rows="3"></textarea>
                                                             </div>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
                                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                      <button form="form-cancel-cita" type="submit" class="btn btn-primary">Sí</button>
+                                                      <button onclick="cancelarCita('<%=cita._id%>')" form="form-cancel-cita" type="button" class="btn btn-primary cancelar_cita">Sí</button>
                                                     </div>
                                                   </div>
                                                 </div>
                                               </div>
     
                                               <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong2">
+                                                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong2">
                                                     Historial Médico
-                                                </button>
+                                                </button> -->
                                                 
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle2" aria-hidden="true">
@@ -105,6 +116,7 @@
                                                     </div>
                                                 </div>
                                         </div>
+                                        <%}%>
                                     </td>
                                 </tr>
                             <%}%>
@@ -116,6 +128,21 @@
             
         </div>
     </div>
+    <script>
+      const motivo_cancelacion = document.querySelector(".motivo_cancelacion");
+      async function cancelarCita(idCita){
+        const motivo = motivo_cancelacion.value;
+        const res = await fetch("/cita/cancel", {
+            method: "POST",
+            body: JSON.stringify({idCita,motivo}),
+            headers: { "Content-Type": "application/json" },
+                  });
+                  location.reload();
+      };
+    </script>
+    <script> 
+      document.querySelector(".ver_citas").classList.add("enlace_activo");
+    </script>
 </body>
 
 </html>

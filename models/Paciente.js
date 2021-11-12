@@ -20,6 +20,7 @@ const pacienteSchema = new Schema({
     citas:[String],
     estado:String,
     tipoUsuario:String,
+    email:String
 });
 pacienteSchema.pre("save", function(next) {
     this.nombre = arreglarString(this.nombre);

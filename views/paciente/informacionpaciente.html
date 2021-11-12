@@ -16,9 +16,16 @@
 
     <!-- Nuestro css style="background-color: transparent;  border-primary -->
     <link rel="stylesheet" type="text/css" href="infopaciente.css" />
+    <link rel="stylesheet" href="/css/navegacion.css">
 </head>
 
 <body>
+    <style>
+        :root{
+        --fondo-claro:#468385ef;
+        --fondo-oscuro:#375e5fa8;
+        }
+    </style>
     <%- include('../partials/menu.html') %>
     <div class="container-fluid">
         <div class="row columna">
@@ -42,6 +49,9 @@
             </div>
         </div>
     </div>
+    <script> 
+        document.querySelector(".inicio").classList.add("enlace_activo");
+      </script>
 </body>
 
 </html>

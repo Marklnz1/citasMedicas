@@ -14,7 +14,8 @@ const citaSchema = new Schema({
   fecha: String,
   hora:String,
   descripcion: String,
-  estado:String
+  estado:String,
+  motivoCancelacion:String
 });
 
 

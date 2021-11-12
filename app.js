@@ -64,9 +64,10 @@ app.post("/historia",doctorController.historia_create_post);
 //PACIENTE
 app.get("/cita/create",pacienteController.cita_create_get);
 app.post("/cita/create",pacienteController.cita_create_post);
+app.post("/cita/cancel",pacienteController.cita_cancel_post);
 app.get("/cita",pacienteController.cita_get);
 
-
+app.get("/historia",pacienteController.historia_get)
 
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
