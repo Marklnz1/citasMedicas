@@ -80,6 +80,9 @@ app.get("/citapaciente",authController.citapaciente_get);
 app.post("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_post);
 app.get("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_get); 
 
+app.post("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_post);
+app.get("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_get);
+ 
 
 app.get("/vercitaspendientesdoctor",authController.citapendientedoctor_get); 
 

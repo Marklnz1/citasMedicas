@@ -126,4 +126,12 @@ module.exports.busquedahistoriaclinicapaciente_get = (req, res, next) => {
   
     res.render("paciente/busquedahistoriaclinica");
 };
+module.exports.busquedahistoriaclinicadoctor_post = async (req, res) => {
+ 
+ 
+};
 
+module.exports.busquedahistoriaclinicadoctor_get = (req, res, next) => {
+  
+    res.render("doctor/busquedahistoriaclinica");
+};
