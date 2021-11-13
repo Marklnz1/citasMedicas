@@ -27,7 +27,14 @@ module.exports.login_post = async (req, res) => {
 module.exports.login_get = (req, res, next) => {
     res.render("autenticacion/login");
 };
-
+module.exports.logout_get = (req, res,next) => {
+  if (res.locals.user) {
+    res.cookie("jwt", "", { maxAge: 1 });
+    res.redirect("/");
+  } else {
+    res.redirect("/");
+  }
+};
 const tiempoMaximo = 30000; //segundos
 
 const crearToken = (id, tipoUsuario) => {

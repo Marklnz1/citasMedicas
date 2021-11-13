@@ -73,7 +73,7 @@ module.exports.historia_get = async(req, res)=>{
 module.exports.cita_cancel_post = async(req, res)=>{
     const cita = await Cita.findById(req.body.idCita);
     cita.estado = "cancelado";
-    cita.motivoCancelacion = "req.body.motivo";
+    cita.motivoCancelacion = req.body.motivo;
     await cita.save();
     console.log(req.body,"asdasd")
 }

@@ -50,11 +50,9 @@ app.get("/",(req, res, next)=>{
 
 });
 
-
-app.post("/login",authController.login_post);
-
-
 app.get("/login",authController.login_get);
+app.post("/login",authController.login_post);
+app.get("/logout",authController.logout_get);
 
 //DOCTOR
 app.get("/historia/create/:dniPaciente",doctorController.historia_create_get);

@@ -5,6 +5,23 @@
     display: flex;
     position: relative;
     background-color: var(--fondo-claro);
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    
+}
+.navegacion_principal .cerrar_sesion{
+    background-color: white;
+    color: var(--fondo-claro) !important;
+    width: 120px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    margin-right: 40px;
+    text-decoration: none;
+    cursor: pointer;
 }
 .navegacion_principal .contenedor_logo{
     width: 200px;
@@ -19,6 +36,7 @@
     align-items: center;
     justify-content: center;
     position: absolute;
+    z-index: 20;
 }
 .navegacion_principal .contenedor_enlaces .enlace{
     text-decoration: none;
@@ -37,7 +55,9 @@
 .navegacion_principal .logo{
     height: 40px;
 }
-
+.cerrar_sesion{
+    z-index: 30;
+}
 .enlace_activo{
     background-color: var(--fondo-oscuro);
 }
