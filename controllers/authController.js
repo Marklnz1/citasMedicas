@@ -135,3 +135,13 @@ module.exports.busquedahistoriaclinicadoctor_get = (req, res, next) => {
   
     res.render("doctor/busquedahistoriaclinica");
 };
+
+module.exports.loginadministrador_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.loginadministrador_get = (req, res, next) => {
+  
+    res.render("Administrador/loginadmin");
+};
