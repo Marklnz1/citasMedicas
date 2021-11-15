@@ -44,6 +44,16 @@ module.exports.registro_post = async (req, res, next) => {
   res.status(201).json({ data: req.body });
 };
 
+module.exports.login_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.login_get = (req, res, next) => {
+  
+    res.render("Administrador/loginadmin");
+};
+
 async function getPasswordBcrypt(password){
     const salt = await bcrypt.genSalt();
     return bcrypt.hash(password,salt);

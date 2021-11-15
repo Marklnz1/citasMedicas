@@ -14,8 +14,8 @@
       <img src="/imagenes/avatar2.png" alt="">
     </div>
     
-    <label for="dni">DNI:</label>
-    <input type="number" name="dni" id="dni" >
+    <label for="dni">Usuario:</label>
+    <input type="text" name="dni" id="dni" >
     <label for="password">Contraseña:</label>
     <div class="input_ojo">
       <input type="password" name="password" id="password">
@@ -34,7 +34,23 @@
    
   </form>
 
- 
+  <script>
+
+    const password = document.getElementById('password');
+    const ojo_imagen  = document.getElementById("ojo_imagen");
+    const input_password = document.getElementById("password");
+    ojo_imagen.addEventListener('click',()=>{
+      if(input_password.getAttribute("type")=="password"){
+        input_password.setAttribute("type","text");
+        input_password.style.letterSpacing = "normal";
+
+      }else{
+        input_password.setAttribute("type","password");
+        input_password.style.letterSpacing = "3px";
+      }
+      
+    })
+  </script>
 </body>
 
 </html>

@@ -57,6 +57,7 @@ app.get("/logout",authController.logout_get);
 //DOCTOR
 app.get("/historia/create/:dniPaciente",doctorController.historia_create_get);
 app.get("/cita",doctorController.cita_get);
+app.get("/historia",doctorController.historia_all_get);
 
 app.post("/historia",doctorController.historia_create_post);
 //PACIENTE
@@ -65,8 +66,9 @@ app.post("/cita/create",pacienteController.cita_create_post);
 app.post("/cita/cancel",pacienteController.cita_cancel_post);
 app.get("/cita",pacienteController.cita_get);
 
-app.get("/historia",pacienteController.historia_get)
-
+app.get("/historia",pacienteController.historia_get);
+//ADMIN
+app.get("/admin",adminController.login_get);
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
 
@@ -96,5 +98,7 @@ app.get("/citadoctor",authController.citadoctor_get);
 
 app.get("/registro",adminController.registro_get);
 app.post("/registro",adminController.registro_post);
+
+
 
 

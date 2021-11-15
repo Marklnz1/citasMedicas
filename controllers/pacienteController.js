@@ -63,11 +63,14 @@ module.exports.cita_create_post =async (req,res)=>{
     res.status(200).end();
 }
 
-module.exports.historia_get = async(req, res)=>{
-
+module.exports.historia_get = async(req, res,next)=>{
+    if (res.locals.user.tipoUsuario === "paciente") {
     let pag = req.query.pag;
     await cargarHojasClinicas(pag,res);
     res.render("paciente/historia");
+    }else{
+        next();
+    }
 };
 
 module.exports.cita_cancel_post = async(req, res)=>{
@@ -75,7 +78,7 @@ module.exports.cita_cancel_post = async(req, res)=>{
     cita.estado = "cancelado";
     cita.motivoCancelacion = req.body.motivo;
     await cita.save();
-    console.log(req.body,"asdasd")
+    res.status(200).end();
 }
 
 async function cargarHojasClinicas(pagina,res){
@@ -88,6 +91,9 @@ async function cargarHojasClinicas(pagina,res){
     let numTotalPag = Math.ceil(hojasClinicasBD.length/numHojasXpagina);
     let doctores = [];
     let areas = [];
+    if(pagina==null || isNaN(pagina) ||pagina<0 || pagina>numTotalPag){
+        pagina = 1;
+    }
     const getDoctor=async (idDoctor)=>{
         for(d of doctores){
             if(d._id==idDoctor){
@@ -104,14 +110,11 @@ async function cargarHojasClinicas(pagina,res){
                 return a;
             }
         }
-        console.log("retorno area");
         let area = (await AreaMedica.findById(idArea)).toObject({virtuals:true});
         areas.push(area)
         return area;
     }
-    if(pagina==null || isNaN(pagina) ||pagina<0 || pagina>numTotalPag){
-        pagina = 1;
-    }
+    
     let indiceIni = numHojasXpagina*(pagina-1);
     for(let i = 0; i < hojasClinicasBD.length; i++){
         if(i>=indiceIni&&i<indiceIni+numHojasXpagina){
