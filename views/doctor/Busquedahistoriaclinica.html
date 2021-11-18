@@ -5,12 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>BUSQUEDA HISTORIA CLINICA DOCTOR</title>
-   
+    <title>BUSQUEDA HISTORIA CLINICA PACIENTE</title>
+    <link rel="stylesheet" href="/css/navegacion.css">
    <link href="css/plantilla.css" rel="stylesheet">
 
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+    <style>
+        :root{
+        --fondo-claro:#20a8d8;
+        --fondo-oscuro:#2088ad;
+        }
+    </style>
+    <%- include('../partials/menu_doctor.html') %>
     <div id="app">
       
     <div class="container-fluid">
@@ -21,12 +28,12 @@
                 <div class="form-group row">
                     <div class="col-md-6">
                         <div class="input-group">
-                            <select class="form-control col-md-3" v-model="criterio">
-                            <option value="">AREA</option>
-                            <option value="">NOMBRE</option>
+                            <select class="form-control col-md-3 tipoBusqueda" v-model="criterio">
+                            <option value="dni" <%if(tipoBusqueda=="dni"){%>selected<%}%>>DNI</option>
+                            <option value="nombre" <%if(tipoBusqueda=="nombre"){%>selected<%}%>>NOMBRE</option>
                             </select>
-                            <input type="text" v-model="buscar" @keyup.enter="listarhistoriaclinicapaciente(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                            <button type="submit" @click="listarHistoriaclinicapaciente(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                            <input type="text" v-model="buscar" value="<%=datoBusqueda%>"@keyup.enter="listarhistoriaclinicapaciente(1,buscar,criterio)" class="form-control datoBusqueda" placeholder="Texto a buscar">
+                            <button type="submit" onclick="listarHistoriaclinicapaciente()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -35,48 +42,71 @@
                         <tr>
                             <th>Opciones</th>
                             <th>nombre</th>
-                            <th>Correo</th>
-                            <th>AREA</th>
-                         
+                            <th>DNI</th>
+                            <th>correo</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="" :key="">
-                            <td>
-                                <button type="button" @click="abrirModal('','',)" class="btn btn-primary btn-sm">
-                                <i class="icon-pencil"></i>
-                                </button> &nbsp;
+                        <%for(p of pacientes){%>
+                            <tr v-for="" :key="">
+                            
+                                <td>
+                                    <button type="button" @click="abrirModal('','',)" class="btn btn-primary btn-sm">
+                                    <i class="icon-pencil"></i>
+                                    </button> &nbsp;
+                                    
+                                </td>
                                 
-                            </td>
-                            <td >Esteban</td>
-                            <td >esteban.maik@gmail.com</td>
-                            <td >Medicina</td>
-                         
-                        </tr>                                
+                                <td><%=p.nombreCompleto%></td>
+                                <td><%=p.dni%></td>
+                                <td><%=p.email%></td>
+                            </tr>       
+                           
+                        
+                        <%}%>
+                        
+                                                 
                     </tbody>
                 </table>
-               <!-- <nav>
-                    <ul class="pagination">
-                        <li class="page-item" v-if="pagination.current_page > 1">
-                            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
-                        </li>
-                        <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                            <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                        </li>
-                        <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
-                        </li>
-                       
-                    </ul>
 
-                </nav> -->
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+                        <%
+                        let numActualPag = parseInt(actualPag);
+                        let numTotalPag = parseInt(numPag);
+                        let indiceIni = numActualPag-2;
+                        if(numActualPag >numTotalPag-3){
+                            indiceIni -=(numActualPag-(numTotalPag-3));
+                        }
+                        if(indiceIni<1)indiceIni = 1;
+                        let indiceFin = numActualPag + 2;
+                        if(numActualPag<4){
+                            indiceFin+=4-numActualPag;
+                        }
+                        if(indiceFin>numPag) indiceFin = numPag;
+                        console.log(numActualPag,numTotalPag,indiceIni,indiceFin);
+                        %>
+                        <%if(numActualPag!=1){%>
+                            <li class="page-item"><a class="anterior page-link" href="/historia?pag=<%=numActualPag-1%>&tipoBusqueda=<%=tipoBusqueda%>&datoBusqueda=<%=datoBusqueda%>" >Anterior </a></li>&nbsp;
+                        <%}else{%>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <%}%>
+                        <li class="page-item"></li><a href="/historia?pag=1&tipoBusqueda=<%=tipoBusqueda%>&datoBusqueda=<%=datoBusqueda%>" class="page-link" id="1">1</a></li>&nbsp;<%if(numActualPag>=5&&numTotalPag>7){%>...&nbsp;<%}%>
+                        
+                        <%for(let i = indiceIni; i <= indiceFin;i++){
+                            if(i==1 || i==numPag)continue;%>
+                            
+                            <li class="page-item"><a href="/historia?pag=<%=i%>&tipoBusqueda=<%=tipoBusqueda%>&datoBusqueda=<%=datoBusqueda%>" class="page-link" id="<%=i%>" ><%=i%></a></li>&nbsp;<%}%><%if(numActualPag<=numTotalPag-4&&numTotalPag>7){%>...&nbsp;<%}%>
+                        
+                            <%if(numTotalPag>=2){%>
+                                <li class="page-item"><a href="/historia?pag=<%=numTotalPag%>&tipoBusqueda=<%=tipoBusqueda%>&datoBusqueda=<%=datoBusqueda%>" class="page-link" id="<%=numTotalPag%>"><%=numTotalPag%></a></li>&nbsp;
+                                <%}%>
+                        
+                        <%if(numActualPag!=numTotalPag){%>
+                            <li class="page-item"><a class="siguiente page-link" href="/historia?pag=<%=numActualPag+1%>&tipoBusqueda=<%=tipoBusqueda%>&datoBusqueda=<%=datoBusqueda%>" >Siguiente ></a></li>
+                        <%}%>
                     </ul>
                  </nav>
             </div>
@@ -89,9 +119,23 @@
    
   </template>
     
+  <script>
+       const navItemSeleccionado = document.getElementById("<%=actualPag%>");
+       navItemSeleccionado.classList.add("activo");
+    </script>
     
-    
-    
-        
+    <script>
+        const tipoBusqueda = document.querySelector(".tipoBusqueda");
+        const datoBusqueda = document.querySelector(".datoBusqueda");
+
+        async function listarHistoriaclinicapaciente(){
+            let url = "/historia?pag=1"+"&tipoBusqueda="+tipoBusqueda.value+"&datoBusqueda="+datoBusqueda.value;
+           location.href=url;
+            
+        }
+    </script>
+    <script> 
+      document.querySelector(".buscar_historia").classList.add("enlace_activo");
+    </script>
 </body>
 </html>
