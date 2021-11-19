@@ -28,21 +28,28 @@ h1{
 
 .container{
   position: relative;
-  top: 5px;
+  top: 0px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 30px;
   
 }
+.boton{
+  position: relative;
+  top: -109px;
+  border-bottom: 5px solid var(white);
+
+}
 
 button{
-  padding: 13px 30px;
+  color:white ;
+  padding: 8px 35px;
   border-radius: 15px;
-  border: none;
-  background: rgb(5, 129, 245);
-  color: white;
-  margin-left: 640px;
+font-size: 20px;
+  background-color: transparent;
+  opacity: 1;
+  margin-left: 605px;
 }
 
 @media screen and (max-width:60px){
@@ -53,7 +60,7 @@ button{
 }
 .imagen {
   position: relative;
-  top: -85px;
+  top: -166px;
   font-size: 0;
   
   text-align: center;
@@ -94,7 +101,29 @@ button{
   width: 100%;
   
 }
+/*..........*/
+.mg {
+  position: relative;
+  top: -110px;
+  
+  font-size: 0;
+  margin-left: 696px;
+  margin-right: 200px;
+ 
+}
+.mg .lagrima {
+  
+  display: inline-block;
+  font-size: inherit;
+}
+.imag .lagrima {width: 25%; max-width: 40px;}
 
+.lagrima img {
+  
+  height: auto;
+  width: 11%;
+  
+}
 
 .circle {
   position: absolute;
