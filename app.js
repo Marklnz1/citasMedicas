@@ -82,7 +82,8 @@ app.get("/citapaciente",authController.citapaciente_get);
 app.post("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_post);
 app.get("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_get);
 
-
+app.post("/index",authController.paginanoencontrada_post);
+app.get("/index",authController.paginanoencontrada_get);
 
 
 app.post("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_post);
