@@ -81,7 +81,6 @@ app.post("/historia", doctorController.historia_create_post); //PACIENTE
 
 app.get("/cita/create", pacienteController.cita_create_get);
 app.post("/cita/create", pacienteController.cita_create_post);
-app.post("/cita/cancel", pacienteController.cita_cancel_post);
 app.get("/cita", pacienteController.cita_get);
 app.get("/historia", pacienteController.historia_get); //ADMIN
 
@@ -95,6 +94,8 @@ app.post("/citapaciente", authController.citapaciente_post);
 app.get("/citapaciente", authController.citapaciente_get);
 app.post("/busquedahistoriaclinica", authController.busquedahistoriaclinicapaciente_post);
 app.get("/busquedahistoriaclinica", authController.busquedahistoriaclinicapaciente_get);
+app.post("/index", authController.paginanoencontrada_post);
+app.get("/index", authController.paginanoencontrada_get);
 app.post("/busquedahistoriaclinicadoctor", authController.busquedahistoriaclinicadoctor_post);
 app.get("/busquedahistoriaclinicadoctor", authController.busquedahistoriaclinicadoctor_get);
 app.post("/loginadmin", authController.loginadministrador_post);
@@ -106,3 +107,6 @@ app.post("/registro", adminController.registro_post); //============GENERADOR===
 
 app.get("/generar/areas", generadorController.genAreasMedicas);
 app.get("/generar/paciente", generadorController.genDatosPaciente);
+app.use("*", function (req, res) {
+  res.render("404/index");
+});

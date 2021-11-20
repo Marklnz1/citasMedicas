@@ -114,4 +114,6 @@ app.post("/registro",adminController.registro_post);
 app.get("/generar/areas",generadorController.genAreasMedicas);
 app.get("/generar/paciente",generadorController.genDatosPaciente);
 
-
+app.use("*",(req,res)=>{
+  res.render("404/index");
+});
