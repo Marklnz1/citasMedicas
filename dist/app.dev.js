@@ -18,11 +18,13 @@ var doctorController = require("./controllers/doctorController");
 
 var pacienteController = require("./controllers/pacienteController");
 
+var generadorController = require("./tools/generadorController");
+
 var _require = require("ejs"),
     render = _require.render;
 
 var dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
-iniciar();
+iniciar(); // const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 function iniciar() {
   return regeneratorRuntime.async(function iniciar$(_context) {
@@ -37,7 +39,7 @@ function iniciar() {
 
         case 2:
           app.listen(3000);
-          console.log("Servidor encendido");
+          console.log("Servidor encendido"); // console.log(await (await fetch("https://frozen-hollows-68632.herokuapp.com/api/v1/dni/48004836?token=abcxyz")).json());
 
         case 4:
         case "end":
@@ -86,6 +88,7 @@ app.get("/historia", pacienteController.historia_get); //ADMIN
 app.get("/admin", adminController.login_get);
 app.post("/informacion", authController.info_post);
 app.get("/informacion", authController.info_get);
+app.post("/verificardni", adminController.dni_valido_post);
 app.post("/informacionpaciente", authController.info_post);
 app.get("/informacionpaciente", authController.info_get);
 app.post("/citapaciente", authController.citapaciente_post);
@@ -99,4 +102,7 @@ app.get("/loginadmin", authController.loginadministrador_get);
 app.get("/vercitaspendientesdoctor", authController.citapendientedoctor_get);
 app.get("/citadoctor", authController.citadoctor_get);
 app.get("/registro", adminController.registro_get);
-app.post("/registro", adminController.registro_post);
+app.post("/registro", adminController.registro_post); //============GENERADOR================
+
+app.get("/generar/areas", generadorController.genAreasMedicas);
+app.get("/generar/paciente", generadorController.genDatosPaciente);

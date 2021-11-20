@@ -54,13 +54,13 @@
                                 <tr>
                                     
                                     <td><%=cita.areaMedica.nombre%></td>
-                                    <td><%=cita.doctor.nombreCompleto%></td>
+                                    <td><%=cita.doctor.nombre+" "+cita.doctor.apellido%></td>
                                     <td><%=cita.fecha%></td>
                                     <td><%=cita.hora%></td>
                                     <td><%=cita.descripcion%></td>
                                     <td><%=cita.estado%></td>
                                     <td>
-                                        <% if(cita.estado!="cancelado"){%>
+                                        <% if(cita.estado!="Cancelado"){%>
                                           <div style="display:flex; flex-direction: row;">
                                             <button type="button" class="btn btn-danger" style="margin-right: 8px" data-toggle="modal" data-target="#exampleModal">
                                                 Cancelar Cita

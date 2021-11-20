@@ -16,7 +16,7 @@ const pacienteSchema = new Schema({
     telefono:Number, 
     telefonoFamiliar:Number,
     direccion:String,
-    idHistoriaClinica:String,
+    historiaClinica:String,
     citas:[String],
     estado:String,
     tipoUsuario:String,

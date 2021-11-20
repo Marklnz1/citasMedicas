@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Citas</title>
     <link rel="stylesheet" href=/css/registro/registroCita.css>
+    <link rel="stylesheet" href=/css/registro_cita_ventana.css>
+
     <link rel="stylesheet" href="/css/navegacion.css">
 </head>
 <body>
@@ -69,7 +71,7 @@
             </form>
           </div>
           <div class="acciones">
-            <button class="b-outline btn-flex">Cancelar</button>
+            
             <div class="separador"></div>
             <button
               class="b-solid btn-flex"
@@ -83,6 +85,22 @@
         </div>
         
       </div>
+      <div class="contenedor_ventana ocultar_inicial">
+        <div class="ventana">
+            <div class="barra">
+                <span>Mensaje</span>
+                <div class="cerrar">X</div>
+            </div>
+            <div class="contenido">
+              <div class="mensaje"> La cita ha sido creada correctamente</div>
+              
+              <div class="contenedor_botones"><div class="confirmar boton">Aceptar</div></div>
+            </div>    
+        </div>
+        
+      
+      </div>
+      
       <script>
          const comboArea   = document.getElementById("name_area");
          const comboDoctor = document.getElementById("id_doctor");
@@ -105,7 +123,7 @@
            const doctores = getAreaActual().doctores;
            comboDoctor.innerHTML="";
            for(doctor of doctores){
-            comboDoctor.innerHTML+=`<option value="${doctor._id}">${doctor.nombreCompleto}</option>`;
+            comboDoctor.innerHTML+=`<option value="${doctor._id}">${doctor.nombre+" "+doctor.apellido}</option>`;
            }
            actualizarFechas();
           
@@ -166,19 +184,42 @@
         form.addEventListener("submit",enviarDatos);
         async function enviarDatos(e){
             e.preventDefault();
-            const idPaciente = "<%=user._id%>";
-            const idAreaMedica = form.name_area.value;
-            const idDoctor = form.id_doctor.value;
+            const paciente = "<%=user._id%>";
+            const areaMedica = form.name_area.value;
+            const doctor = form.id_doctor.value;
             const fecha = getHorarioActual().fecha;
             const hora = comboHora.value;
-            
             const descripcion = form.description.value;
-            const datosCita = {idPaciente,idAreaMedica,fecha,hora,idDoctor,descripcion};
-            const res = await fetch("/cita/create", {
+            const datosCita = {paciente,areaMedica,fecha,hora,doctor,descripcion};
+            const res = fetch("/cita/create", {
             method: "POST",
             body: JSON.stringify(datosCita),
             headers: { "Content-Type": "application/json" },
                   });
+              contenedor_ventana.classList.remove("ocultar");
+            contenedor_ventana.classList.remove("ocultar_inicial");
+            contenedor_ventana.classList.add("mostrar");
+        }
+      </script>
+      <script>
+         const cuadro_cerrar = document.querySelector(".cerrar");
+         const contenedor_ventana = document.querySelector(".contenedor_ventana");
+
+          const ventana = document.querySelector(".ventana");
+        const aceptar = document.querySelector(".contenedor_botones .confirmar");
+         aceptar.addEventListener("click",()=>{
+          window.location.href = window.location.href;
+        // ocultarContenedor();
+       
+
+      })
+        cuadro_cerrar.addEventListener("click",()=>{
+          ocultarContenedor();
+      }); 
+        function ocultarContenedor(){
+            contenedor_ventana.classList.add("ocultar");
+            contenedor_ventana.classList.remove("mostrar");
+          
         }
       </script>
       <script> 

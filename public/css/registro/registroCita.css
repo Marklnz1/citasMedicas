@@ -20,7 +20,7 @@ body{
 }
 
 .formulario{
-    background: rgba(8, 68, 68, 0.8);
+    background: #084444cc;
     backdrop-filter: blur(40px);
     border-radius: 8px;
     padding: 48px;
@@ -90,4 +90,10 @@ margin-bottom: 48px;
 .separador{
     width: 16px;
     height: 16px;
+}
+#submit{
+    cursor: pointer;
+}
+#submit:active{
+    border: 2px solid #084444cc;
 }

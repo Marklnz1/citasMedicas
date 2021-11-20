@@ -23,7 +23,7 @@ body{
 
 }
 .formulario{
-    background: rgba(8, 68, 68, 0.8);
+    background: #084444cc;
     backdrop-filter: blur(40px);
     border-radius: 8px;
     padding: 48px;
@@ -94,3 +94,65 @@ margin-bottom: 48px;
     display: none;
 }
 
+
+.mensaje_error{
+    color:WHITE;
+    font-weight: bold;
+    font-size: 17.5px;
+    /* margin-left: 10px; */
+    font-weight: bold;
+    margin-right: 127px;
+    width: 260px;
+}
+
+.error{
+    outline: 3.5px solid #f50000;
+    
+}
+
+#submit,.cancelar{
+    cursor: pointer;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.carga{
+    border: 4px solid #ccc;
+    border-top-color: #0e4242cc;
+    border-top-style: solid;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+
+    animation: girar 0.8s linear infinite;
+    margin-left: 10px;
+  }
+
+  @keyframes  girar {
+      from{transform: rotate(0deg);}
+      to{transform: rotate(360deg);}
+      
+  }
+
+  .contenedor_mensaje{
+      
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 30px;
+  }
+  
+  .advertencia{
+    background-image: url("../../imagenes/advertencia.png");
+    /* background-size: cover; */
+    border: blue solid 0px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 30px;
+    margin-left: 5px;
+  }

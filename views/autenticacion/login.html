@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hospital</title>
   <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/login_ventana.css">
+
 </head> 
 <body>
   <form action="/login" method="POST">
@@ -33,13 +35,37 @@
     </div>
     <div class="div_recuperar_contraseña">
       <img src="/imagenes/candado.png" alt="candado">
-      <p>¿Has olvidado tu contraseña?</p>
+      <p onclick="mostrarMensajePassword()">¿Has olvidado tu contraseña?</p>
     </div>
-    <p class="crear_cuenta_texto">¿Aún no tienes una cuenta?</p>
-    <a class="crear_cuenta_link" href="#">Regístrate Ahora</a>
-   
+    <p class="crear_cuenta_texto" style="cursor: initial;">¿Aún no tienes una cuenta?</p>
+    <a onclick="mostrarMensajeRegistro()" class="crear_cuenta_link" href="#">Regístrate Ahora</a>
   </form>
-
+    <div class="contenedor_ventana ocultar_inicial contenedor_mensaje_registro">
+      <div class="ventana">
+          <div class="barra">
+              <span>Mensaje</span>
+              <div class="cerrar">X</div>
+          </div>
+          <div class="contenido">
+            Acuda a nuestra clínica más cercana y solicite el registro de una cuenta de usuario en el módulo de atención al cliente, para poder tener acceso a los servicios que ofrecemos
+          </div>    
+      </div>
+      
+    
+    </div>
+    <div class="contenedor_ventana ocultar_inicial contenedor_mensaje_password">
+      <div class="ventana">
+          <div class="barra">
+              <span>Mensaje</span>
+              <div class="cerrar">X</div>
+          </div>
+          <div class="contenido">
+            Acuda a nuestra clínica más cercana y solicite la recuperación de su contraseña en el módulo de atención al cliente
+          </div>    
+      </div>
+      
+    
+    </div>
   <script>
 
     const password = document.getElementById('password');
@@ -60,9 +86,7 @@
   <script>
     const iniciar_sesion = document.querySelector('.iniciar_sesion');
     const form = document.querySelector('form');
-    form.addEventListener('change',()=>{
-      console.log("cambio");
-    })
+
     const mensaje = document.querySelector('.mensaje');
     iniciar_sesion.addEventListener('click',async ()=>{
       const dni = form.dni.value;
@@ -88,6 +112,51 @@
       // }
     });
   </script>
+  <script>
+    const cuadros_cerrar = document.querySelectorAll(".cerrar");
+    const contenedores_ventana = document.querySelectorAll(".contenedor_ventana");
+
+    const ventanas = document.querySelectorAll(".ventana");
+
+    for(let cuadro_cerrar of cuadros_cerrar){
+      cuadro_cerrar.addEventListener("click",()=>{
+        ocultarContenedores();
+    }); 
+    }
+    for(let contenedor_ventana of contenedores_ventana){
+      contenedor_ventana.addEventListener("click",()=>{
+        ocultarContenedores();
+    })
+    }
+   for(let ventana of ventanas){
+    ventana.addEventListener("click",(e)=>{
+        e.stopPropagation();
+    });
+   }
+   
+    function ocultarContenedores(){
+        for(let contenedor_ventana of contenedores_ventana){
+          contenedor_ventana.classList.add("ocultar");
+          contenedor_ventana.classList.remove("mostrar");
+        }
+    }
+</script>
+<script>
+      const contenedor_mensaje_registro = document.querySelector(".contenedor_mensaje_registro");
+
+  function mostrarMensajeRegistro(){
+    contenedor_mensaje_registro.classList.remove("ocultar");
+    contenedor_mensaje_registro.classList.remove("ocultar_inicial");
+    contenedor_mensaje_registro.classList.add("mostrar");
+  }    
+  const contenedor_mensaje_password = document.querySelector(".contenedor_mensaje_password");
+
+  function mostrarMensajePassword(){
+    contenedor_mensaje_password.classList.remove("ocultar");
+    contenedor_mensaje_password.classList.remove("ocultar_inicial");
+    contenedor_mensaje_password.classList.add("mostrar");
+  }
+</script>
 </body>
 
 </html>

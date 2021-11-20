@@ -7,9 +7,9 @@ const recetaSchema = new Schema({
 });
 const hojaClinicaSchema = new Schema({
   fecha: String,
-  idArea: String,
+  areaMedica:{type:String,ref:'areasmedicas'},
   descripcion: String,
-  idDoctor: String,
+  doctor: {type:String,ref:'doctores'},
   receta: recetaSchema,
 });
 

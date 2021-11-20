@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Cuenta</title>
     <link rel="stylesheet" href=/css/registro/registro.css>
+    <link rel="stylesheet" href=/css/registro_ventana.css>
+
   </head>
   <body>
     <div class="banner">
@@ -18,7 +20,9 @@
             <div class="inputs-row">
               <div class="input-container">
                 <label for="dni">Número de DNI</label>
-                <input type="number" name="dni" id="dni" required />
+                <input type="number" name="dni" id="dni" required  min="1" 
+                step="1"
+                onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57" />
               </div>
               <div class="separador"></div>
               <div class="input-container">
@@ -38,7 +42,10 @@
             <div class="inputs-row">
               <div class="input-container">
                 <label for="phone">Número de Celular</label>
-                <input type="tel" name="phone" id="phone" required />
+                <input  type="number" name="phone" id="phone" required min="1" 
+                step="1"
+                onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
+                
               </div>
               <div class="separador"></div>
               <div class="input-container">
@@ -47,10 +54,13 @@
                 >
                 <input
                   class="p_paciente"
-                  type="tel"
+                  type="number"
                   name="phoneFamily"
-                  id="phonefamily2"
+                  id="phonefamily"
                   required
+                  min="1" 
+                  step="1"
+                  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
                 />
 
                 <label class="p_doctor" for="year-xp"
@@ -62,6 +72,9 @@
                   name="yearXp"
                   id="year-xp"
                   required
+                  min="1" 
+                  step="1"
+                  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
                 />
               </div>
             </div>
@@ -104,10 +117,14 @@
                 >Acepto los Términos de uso y Políticas de Privacidad</label
               >
             </div>
+            <div class="contenedor_mensaje">
+              <div class="" id="icono_mensaje"></div><div class="mensaje_error"></div>
+            </div>
+
           </form>
         </div>
         <div class="acciones">
-          <button class="b-outline btn-flex">Cancelar</button>
+          <button class="cancelar b-outline btn-flex">Cancelar</button>
           <div class="separador"></div>
           <button
             class="b-solid btn-flex"
@@ -123,12 +140,28 @@
         <img src="/imagenes/LogoTingo.png" />
       </div>
     </div>
+    <div class="contenedor_ventana ocultar_inicial">
+      <div class="ventana">
+          <div class="barra">
+              <span>Mensaje</span>
+              <div class="cerrar">X</div>
+          </div>
+          <div class="contenido">
+            <div class="mensaje"> El DNI a sido encontrado correctamente</div>
+            <div class="titulo_dato">Nombre:</div><div class="nombre dato"></div>
+            <div class="titulo_dato">Apellido:</div><div class="apellido dato"></div>
+            <div class="pregunta">¿Crear cuenta?</div>
+            <div class="contenedor_botones"><div class="confirmar boton">Confirmar</div><div class="cancelar boton">Cancelar</div></div>
+          </div>    
+      </div>
+      
+    
+    </div>
     <script>
       const type_user = document.getElementById("type-user");
       const p_paciente = document.getElementsByClassName("p_paciente");
       const p_doctor = document.getElementsByClassName("p_doctor");
       type_user.addEventListener("change", () => {
-        console.log(type_user.value);
         if (type_user.value == "paciente") {
           for (let p_p of p_paciente) {
             p_p.style.display = "block";
@@ -136,6 +169,7 @@
           for (let p_d of p_doctor) {
             p_d.style.display = "none";
           }
+
         } else if (type_user.value == "doctor") {
           for (let p_d of p_doctor) {
             p_d.style.display = "block";
@@ -147,28 +181,47 @@
       });
     </script>
     <script>
+      let todoCorrecto = false;
       const form = document.querySelector("form");
 
       const submit = document.getElementById("submit");
-      submit.addEventListener("click", enviarDatos);
-
+      const nombre = document.querySelector(".nombre");
+      const apellido = document.querySelector(".apellido");
+      var registro_solicitado = false;
       async function enviarDatos(e) {
         e.preventDefault();
-        let datosUsuario = null;
-        if(form.tipoUsuario.value=="paciente"){
-            datosUsuario = getDatosPaciente();
-        }else if(form.tipoUsuario.value=="doctor"){
-            datosUsuario = getDatosDoctor();
-        }
         
-        const res = await fetch("/registro", {
+
+        let datosUsuario = null;
+        if(todoCorrecto){
+          if(registro_solicitado) return;
+        registro_solicitado = true;
+          sendError("Solicitando registro",5555,"carga");
+          const res = await fetch("/verificardni", {
           method: "POST",
-          body: JSON.stringify(datosUsuario),
+          body: JSON.stringify({dni:dni.value.trim(),tipoUsuario:form.tipoUsuario.value}),
           headers: { "Content-Type": "application/json" },
-        });
-        const data = await res.json();
-        console.log(data);
+          });
+          const respuesta = await res.json();
+          if(respuesta.error!=null){
+            configError(dni,true,respuesta.error,9999,"advertencia");
+            registro_solicitado = false;
+          }else{
+            sendError("",999999);
+            nombre.innerHTML = respuesta.nombre;
+            apellido.innerHTML = respuesta.apellido;
+            contenedor_ventana.classList.remove("ocultar");
+            contenedor_ventana.classList.remove("ocultar_inicial");
+            contenedor_ventana.classList.add("mostrar");
+            registro_solicitado = false;
+
+            // window.location.href=window.location.href;
+          }
+
+        }
       }
+      const contenedor_ventana = document.querySelector(".contenedor_ventana");
+
 
       function getDatosComunes() {
         const datos = {};
@@ -194,6 +247,160 @@
         datos.direccion = form.address.value;
         return datos;
       }
+      //==============================================================================
+      
+      const phone = document.getElementById("phone");
+      const dni = document.getElementById("dni");
+      const email = document.getElementById("email");
+      const direccion = document.getElementById("address");
+      const phone_family = document.getElementById("phonefamily");
+      const year_xp = document.getElementById("year-xp");
+      const specialty = document.getElementById("specialty");
+      const password = document.getElementById("password");
+      const re_password = document.getElementById("re-password");
+      const confirm = document.getElementById("confirm");
+      const mensaje_error = document.querySelector(".mensaje_error");
+      const icono_mensaje = document.getElementById("icono_mensaje");
+      let nivelError = 0;
+      type_user.addEventListener("change", () => {
+        phone_family.classList.remove("error");
+        year_xp.classList.remove("error");
+        direccion.classList.remove("error");
+        specialty.classList.remove("error");
+        nivelError = 0;
+        mensaje_error.innerHTML = "";
+        icono_mensaje.className ="";
+      });
+      submit.addEventListener("click",()=>{
+        if(registro_solicitado) return;
+        nivelError = 0;
+        mensaje_error.innerHTML = "";
+        verificarNumeroLength(phone,9,"Telefono personal invalido",90);
+        verificarNumeroLength(dni,8,"Ingrese un DNI valido",100);
+        verificarEmail(email);
+        verificarPassword();
+
+        if(form.tipoUsuario.value=="paciente"){
+          verificarNumeroLength(phone_family,9,"Telefono de pariente invalido",90);
+          verificarInputVacio(direccion);
+
+        }else{
+          verificarInputVacio(year_xp);
+          verificarInputVacio(specialty);
+
+        }
+        verificarTerminosAceptados()
+        if(nivelError == 0){
+          todoCorrecto = true;
+         
+        } else{
+          todoCorrecto =false;
+        }
+        
+      });
+      function verificarTerminosAceptados(){
+        if(confirm.checked) return;
+        sendError("Acepta los terminos y politicas",1,"advertencia");
+        
+      }
+      function verificarPassword(){
+        if(verificarInputVacio(re_password)&&verificarInputVacio(password))return;      
+        configError(re_password,password.value!=re_password.value,"Las contraseñas no coinciden",70,"advertencia")
+        configError(password,password.value!=re_password.value,"Las contraseñas no coinciden",70,"advertencia")
+      }
+      function verificarInputVacio(input){
+
+        return configError(input,esTextoVacio(input.value),"Existen campos vacios",10,"advertencia");
+      }
+      function verificarEmail(input){
+        if(verificarInputVacio(input)) return;
+        emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        configError(input,!emailRegex.test(input.value),"Ingrese un email valido",80,"advertencia");
+      }
+      function verificarNumeroLength(input,cantidad,mensaje,nivel){
+        if(verificarInputVacio(input)) return;
+        configError(input,input.value.length!=cantidad,mensaje,nivel,"advertencia")
+        
+      }
+      function configError(input,b,mensaje,nivel,icono){
+        if(b){
+          input.classList.add("error");
+          sendError(mensaje,nivel,icono);
+        }else{
+          input.classList.remove("error");
+        }
+        return b;
+      }
+      
+      function esTextoVacio(texto){
+        return texto==null||texto.trim()=="";
+      }
+      function sendError(mensaje, nivel,icono){
+        if(nivel>nivelError){
+          mensaje_error.innerHTML = mensaje;
+          nivelError = nivel;
+          icono_mensaje.className = icono;
+          
+        }
+      }
     </script>
+    <script>
+      
+      submit.addEventListener("click", enviarDatos);
+    </script>
+    <script>
+      const cuadro_cerrar = document.querySelector(".cerrar");
+  
+      const ventana = document.querySelector(".ventana");
+      const confirmar = document.querySelector(".contenedor_botones .confirmar");
+      const cancelar = document.querySelector(".contenedor_botones .cancelar");
+      var registro_aceptado = false;
+
+      confirmar.addEventListener("click",async ()=>{
+        if(registro_aceptado) return;
+        registro_aceptado = true;
+        let datosUsuario = null;
+        if(form.tipoUsuario.value=="paciente"){
+            datosUsuario = getDatosPaciente();
+        }else if(form.tipoUsuario.value=="doctor"){
+            datosUsuario = getDatosDoctor();
+        }
+        const res = fetch("/registro", {
+            method: "POST",
+            body: JSON.stringify(datosUsuario),
+            headers: { "Content-Type": "application/json" },
+        });
+          // const respuesta = await res.json();
+          // ocultarContenedor();
+        window.location.href=window.location.href;
+        
+      });
+      cancelar.addEventListener("click",()=>{
+        ocultarContenedor();
+        registro_solicitado = false;
+        
+      })
+        cuadro_cerrar.addEventListener("click",()=>{
+          ocultarContenedor();
+          registro_solicitado = false;
+      }); 
+      
+      // for(let contenedor_ventana of contenedores_ventana){
+      //   contenedor_ventana.addEventListener("click",()=>{
+      //     ocultarContenedores();
+      // })
+      // }
+      ventana.addEventListener("click",(e)=>{
+          e.stopPropagation();
+      });
+     
+     
+      function ocultarContenedor(){
+            contenedor_ventana.classList.add("ocultar");
+            contenedor_ventana.classList.remove("mostrar");
+          
+      }
+  </script>
+
   </body>
 </html>
