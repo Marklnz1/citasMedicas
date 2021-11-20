@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap");
+body{
+  background: rgb(8,28,34);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+
+
+  width: 100vw;
+ 
+  overflow: hidden;
+  
+}
+h1{
+  margin-top: 100px;
+  color: rgb(233, 238, 245);
+  font-size: 30px;
+  padding: 2px;
+  text-align-last: center;
+  justify-content: center;
+  font-family: "Homer Simpson UI";
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+}
+
+
+.container{
+  position: relative;
+  top: 0px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  
+}
+.boton{
+  position: relative;
+  top: -109px;
+  border-bottom: 5px solid var(white);
+
+}
+
+button{
+  color:white ;
+  padding: 8px 35px;
+  border-radius: 15px;
+font-size: 20px;
+  background-color: transparent;
+  opacity: 1;
+  margin-left: 605px;
+}
+
+@media screen and (max-width:60px){
+  h1{        
+    font-family: "Homer Simpson UI";
+      font-size: 16px;        
+  }
+}
+.imagen {
+  position: relative;
+  top: -166px;
+  font-size: 0;
+  
+  text-align: center;
+}
+
+.imagen .imgResponsiva {
+  display: inline-block;
+  font-size: inherit;
+}
+.imagen .imgResponsiva {width: 25%; max-width: 120px;}
+
+
+.imgResponsiva img {
+  height: auto;
+  width: 100%;
+}
+
+.imag {
+  position: relative;
+  top: 25px;
+  
+  font-size: 0;
+ margin-left: 609px;
+ margin-right: 200px;
+}
+
+.imag .enf {
+  
+  display: inline-block;
+  font-size: inherit;
+}
+.imag .enf {width: 25%; max-width: 140px;}
+
+
+.enf img {
+  
+  height: auto;
+  width: 100%;
+  
+}
+/*..........*/
+.mg {
+  position: relative;
+  top: -110px;
+  
+  font-size: 0;
+  margin-left: 696px;
+  margin-right: 200px;
+ 
+}
+.mg .lagrima {
+  
+  display: inline-block;
+  font-size: inherit;
+}
+.imag .lagrima {width: 25%; max-width: 40px;}
+
+.lagrima img {
+  
+  height: auto;
+  width: 11%;
+  
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1; }
+  .circle, .circle::before {
+    border-radius: 50%; }
+  .circle::before {
+    content: '';
+    position: absolute;
+    -webkit-animation: borderCircles 6s ease-in-out infinite;
+    animation: borderCircles 6s ease-in-out infinite;
+    top: -1px;
+    left: -1px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1; }
+
+    
+    
+    .circle:nth-of-type(1) {
+      top: -30%;
+      left: 89%;
+      width: 300px;
+      height: 300px;
+      background: -webkit-linear-gradient(215deg, rgba(255, 255, 255, 0) 30%, #5e4b24 70%);
+      background: -o-linear-gradient(215deg, rgba(255, 255, 255, 0) 30%, #2a2b1d 70%);
+      background: linear-gradient(-125deg, rgba(255, 255, 255, 0) 30%, rgb(8,28,34) 70%); }
+    
+    .circle:nth-of-type(2) {
+      top: 80%;
+      left:-90px;
+      width: 140px;
+      height: 140px;
+      background: -webkit-linear-gradient(40deg, rgba(255, 255, 255, 0) 30%, #5e4b24 70%);
+      background: -o-linear-gradient(40deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+      background: linear-gradient(50deg, rgba(255, 255, 255, 0) 30%, rgb(8,28,34)  70%); }
+    
+    
+     
+      
+      
+      
+      @-webkit-keyframes borderCircles {
+        0% {
+          opacity: 0;
+          -webkit-transform: scale(1);
+          transform: scale(1); }
+        50% {
+          opacity: 1; }
+        100% {
+          opacity: 0;
+          -webkit-transform: scale(1.1);
+          transform: scale(1.1); } }
+      
+      @keyframes borderCircles {
+        0% {
+          opacity: 0;
+          -webkit-transform: scale(1);
+          transform: scale(1); }
+        50% {
+          opacity: 1; }
+        100% {
+          opacity: 0;
+          -webkit-transform: scale(1.1);
+          transform: scale(1.1); } }
+      
+      @media screen and (max-width: 942px) {
+        
+        .circle:nth-of-type(1) {
+          top: -20%;
+          left: 75%;
+          width: 350px;
+          height: 350px;
+          background: -webkit-linear-gradient(215deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: -o-linear-gradient(215deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: linear-gradient(-125deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%); }
+        .circle:nth-of-type(2) {
+          top: 80%;
+          left: 15%;
+          width: 150px;
+          height: 150px;
+          background: -webkit-linear-gradient(40deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: -o-linear-gradient(40deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: linear-gradient(50deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%); }
+        
+        .stars img {
+          width: 80%; }
+        .container p {
+          font-size: 2.5rem; }
+        .container h1 {
+          font-size: 15rem; }
+        .container a {
+          font-size: 1rem; }
+        .container img {
+          width: 20%; } }
+      
+      @media screen and (max-width: 585px) {
+        
+        .circle:nth-of-type(1) {
+          top: -20%;
+          left: 65%;
+          width: 350px;
+          height: 350px;
+          background: -webkit-linear-gradient(215deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: -o-linear-gradient(215deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: linear-gradient(-125deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%); }
+        .circle:nth-of-type(2) {
+          top: 80%;
+          left: 15%;
+          width: 150px;
+          height: 150px;
+          background: -webkit-linear-gradient(40deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: -o-linear-gradient(40deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%);
+          background: linear-gradient(50deg, rgba(255, 255, 255, 0) 30%, #322a8f 70%); }
+       
+        .stars img {
+          width: 100%; }
+        .container p {
+          font-size: 1.5rem; }
+        .container h1 {
+          margin: 5% 0px 15% 0px;
+          font-size: 12rem; }
+        .container a {
+          font-size: 1rem; }
+        .container img {
+          width: 30%; } }
+     
+      

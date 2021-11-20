@@ -66,12 +66,13 @@ app.post("/historia",doctorController.historia_create_post);
 //PACIENTE
 app.get("/cita/create",pacienteController.cita_create_get);
 app.post("/cita/create",pacienteController.cita_create_post);
-app.post("/cita/cancel",pacienteController.cita_cancel_post);
 app.get("/cita",pacienteController.cita_get);
+
 
 app.get("/historia",pacienteController.historia_get);
 //ADMIN
 app.get("/admin",adminController.login_get);
+
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
 app.post("/verificardni",adminController.dni_valido_post);
@@ -83,13 +84,18 @@ app.post("/citapaciente",authController.citapaciente_post);
 app.get("/citapaciente",authController.citapaciente_get);
 
 app.post("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_post);
-app.get("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_get); 
+app.get("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_get);
+
+app.post("/index",authController.paginanoencontrada_post);
+app.get("/index",authController.paginanoencontrada_get);
+
 
 app.post("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_post);
 app.get("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_get);
  
 app.post("/loginadmin",authController.loginadministrador_post);
 app.get("/loginadmin",authController.loginadministrador_get);
+
 
 app.get("/vercitaspendientesdoctor",authController.citapendientedoctor_get); 
 

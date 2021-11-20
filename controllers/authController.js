@@ -152,3 +152,12 @@ module.exports.loginadministrador_get = (req, res, next) => {
   
     res.render("Administrador/loginadmin");
 };
+module.exports.paginanoencontrada_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.paginanoencontrada_get = (req, res, next) => {
+  
+    res.render("404/index");
+};
