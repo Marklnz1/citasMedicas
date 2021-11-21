@@ -1,0 +1,32 @@
+*{
+
+}
+body { 
+  
+    background: url(../imagenes/fondohojac.jpg) no-repeat center center fixed;
+     background-size: cover;
+    overflow-x: hidden;
+ 
+
+   }
+   
+      
+.tbl{
+  margin: 40px 10px;
+}
+    
+.t{
+  margin: 0px auto; 
+  
+}
+.table{
+  
+  text-align: center;
+  width: 100%;
+  border: 20px crimson;
+  background-color: #89a7a8a8;
+}
+
+.cabecera{
+  background-color: #746f37;
+}

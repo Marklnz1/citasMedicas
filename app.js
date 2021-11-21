@@ -103,4 +103,8 @@ app.post("/registro",adminController.registro_post);
 app.post("/hojaclinicaparadoctor",authController.hojaclinicaparadoc_post);
 app.get("/hojaclinicaparadoctor",authController.hojaclinicaparadoc_get);
 
+app.post("/listahojaclinicaparadoctor",authController.listahojaclinicaparadoc_post);
+app.get("/listahojaclinicaparadoctor",authController.listahojaclinicaparadoc_get);
+
+
 
