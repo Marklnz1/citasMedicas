@@ -61,7 +61,7 @@ app.get("/logout",authController.logout_get);
 app.get("/historia/create/:dniPaciente",doctorController.historia_create_get);
 app.get("/cita",doctorController.cita_get);
 app.get("/historia",doctorController.historia_all_get);
-
+app.get("/historia/:dniPaciente",doctorController.historia_get);
 app.post("/historia",doctorController.historia_create_post);
 //PACIENTE
 app.get("/cita/create",pacienteController.cita_create_get);

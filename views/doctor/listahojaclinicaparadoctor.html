@@ -15,7 +15,7 @@
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <!-- Nuestro css style="background-color: transparent;  border-primary -->
-    <link rel="stylesheet" type="text/css" href="listahojaclinicadoc.css" />
+    <link rel="stylesheet" type="text/css" href="/listahojaclinicadoc.css" />
     
     <link rel="stylesheet" href="/css/navegacion.css">
 </head>
@@ -34,50 +34,24 @@
                     <table class="table table-bordered t">
                         <thead class="table-dark cabecera ">
                             
-                                        <tr>
-                                            
-                                            <th>Numero</th>
-                                            <th>Nombre</th>
+                                        <tr> 
+                                            <th>Doctor</th>
                                             <th>Fecha</th>
-                                            <th>Descripcion</th>
-                                            <th>Opciones</th>
-
+                                            <th>Area medica</th>
+                                            <th>Medicamentos</th>
+                                            <th>indicaciones</th>
                                         </tr>
                         </thead>
                         <tbody >
                                                        
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                       
-                                          <div style="display:flex; flex-direction: row;">
-                                            <button type="button" class="btn btn-danger" style="margin-right: 8px" data-toggle="modal" data-target="#exampleModal">
-                                                ver hoja clinica
-                                              </button>
-                                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                  <div class="modal-content">
-                                                    <div class="modal-header">
-                                                      
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                    </div>
-                                                    
-                                                    
-                                                  </div>
-                                                </div>
-                                              </div>
-    
-                                              
-                                               
-                                        </div>
-  
-                                    </td>
-                                </tr>
+                                <%for(let hoja of hojasClinicas){%>
+                                  <tr>
+                                    <td><%=hoja.doctor.nombre+" "+hoja.doctor.apellido%></td>
+                                    <td><%=hoja.areaMedica.nombre%></td>
+                                    <td><%=hoja.receta.medicamentos%></td>
+                                    <td><%=hoja.receta.indicaciones%></td>
+                                  </tr>
+                                <%}%>
                            
                            
                         </tbody>

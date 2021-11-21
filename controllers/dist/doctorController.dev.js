@@ -9,7 +9,8 @@ var AreaMedica = require("../models/AreaMedica");
 var Cita = require("../models/Cita");
 
 module.exports.cita_get = function _callee(req, res, next) {
-  var idcitas, pagina, citasBD, respuesta;
+  var idcitas, _pagina, citasBD, respuesta;
+
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -20,14 +21,14 @@ module.exports.cita_get = function _callee(req, res, next) {
           }
 
           idcitas = res.locals.user.citas;
-          pagina = req.query.pag;
+          _pagina = req.query.pag;
           _context.next = 5;
           return regeneratorRuntime.awrap(Cita.find().where("_id")["in"](idcitas).populate("paciente").populate("areaMedica").lean().exec());
 
         case 5:
           citasBD = _context.sent;
           citasBD = citasBD.reverse();
-          respuesta = getItemsDePagina(citasBD, pagina, 7);
+          respuesta = getItemsDePagina(citasBD, _pagina, 7);
           res.locals.citas = respuesta.nuevaLista;
           res.locals.numPag = respuesta.numTotalPaginas;
           res.locals.actualPag = respuesta.pagina;
@@ -129,7 +130,7 @@ module.exports.historia_create_post = function _callee3(req, res) {
 };
 
 module.exports.historia_all_get = function _callee4(req, res, next) {
-  var pacientesBD, pacientes, pagina, tipoBusqueda, datoBusqueda, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step;
+  var pacientesBD, pacientes, _pagina2, tipoBusqueda, datoBusqueda, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step;
 
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
@@ -146,7 +147,7 @@ module.exports.historia_all_get = function _callee4(req, res, next) {
         case 3:
           pacientesBD = _context4.sent;
           pacientes = [];
-          pagina = req.query.pag;
+          _pagina2 = req.query.pag;
           tipoBusqueda = req.query.tipoBusqueda;
           datoBusqueda = req.query.datoBusqueda;
           if (tipoBusqueda == null) tipoBusqueda = "";
@@ -229,7 +230,7 @@ module.exports.historia_all_get = function _callee4(req, res, next) {
           return _context4.finish(36);
 
         case 44:
-          cargarPacientes(res.locals, pagina, pacientes);
+          cargarPacientes(res.locals, _pagina2, pacientes);
           res.render("doctor/busquedahistoriaclinica");
           _context4.next = 49;
           break;
@@ -243,6 +244,90 @@ module.exports.historia_all_get = function _callee4(req, res, next) {
       }
     }
   }, null, null, [[20, 32, 36, 44], [37,, 39, 43]]);
+};
+
+module.exports.historia_get = function _callee5(req, res, next) {
+  var dniPaciente, paciente, historiaClinica, hojasClinicas, resultado, hojasPorPagina, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, h;
+
+  return regeneratorRuntime.async(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          dniPaciente = req.body.dniPaciente;
+          _context5.next = 3;
+          return regeneratorRuntime.awrap(Paciente.findOne({
+            dni: dniPaciente
+          }));
+
+        case 3:
+          paciente = _context5.sent;
+          _context5.next = 6;
+          return regeneratorRuntime.awrap(HistoriaClinica.findById(paciente.historiaClinica).populate([{
+            path: "hojasClinicas.doctor"
+          }, {
+            path: "hojasClinicas.areaMedica"
+          }]).lean().exec());
+
+        case 6:
+          historiaClinica = _context5.sent;
+          hojasClinicas = historiaClinica.hojasClinicas.reverse();
+          resultado = getItemsDePagina(hojasClinicas, pagina, 10);
+          hojasPorPagina = resultado.nuevaLista;
+          _iteratorNormalCompletion2 = true;
+          _didIteratorError2 = false;
+          _iteratorError2 = undefined;
+          _context5.prev = 13;
+
+          for (_iterator2 = hojasPorPagina[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            h = _step2.value;
+            h.numero = hojasClinicas.indexOf(h) + 1;
+          }
+
+          _context5.next = 21;
+          break;
+
+        case 17:
+          _context5.prev = 17;
+          _context5.t0 = _context5["catch"](13);
+          _didIteratorError2 = true;
+          _iteratorError2 = _context5.t0;
+
+        case 21:
+          _context5.prev = 21;
+          _context5.prev = 22;
+
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+
+        case 24:
+          _context5.prev = 24;
+
+          if (!_didIteratorError2) {
+            _context5.next = 27;
+            break;
+          }
+
+          throw _iteratorError2;
+
+        case 27:
+          return _context5.finish(24);
+
+        case 28:
+          return _context5.finish(21);
+
+        case 29:
+          res.locals.hojasClinicas = hojasPorPagina;
+          res.locals.numPag = resultado.numTotalPaginas;
+          res.locals.actualPag = resultado.pagina;
+          res.render("doctor/listahojaclinicaparadoctor");
+
+        case 33:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[13, 17, 21, 29], [22,, 24, 28]]);
 };
 
 function cargarPacientes(locals, pagina, pacientesBD) {
@@ -285,27 +370,27 @@ function contienePalabra(pedazoTexto, texto) {
   texto = texto.toLowerCase().trim();
   pedazoTexto = " " + pedazoTexto.toLowerCase();
   var palabras = texto.split(" ");
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
+  var _iteratorNormalCompletion3 = true;
+  var _didIteratorError3 = false;
+  var _iteratorError3 = undefined;
 
   try {
-    for (var _iterator2 = palabras[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var p = _step2.value;
+    for (var _iterator3 = palabras[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+      var p = _step3.value;
       p = " " + p;
       if (p.split(pedazoTexto).length == 2) return true;
     }
   } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
+    _didIteratorError3 = true;
+    _iteratorError3 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-        _iterator2["return"]();
+      if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+        _iterator3["return"]();
       }
     } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
+      if (_didIteratorError3) {
+        throw _iteratorError3;
       }
     }
   }
