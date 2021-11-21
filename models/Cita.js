@@ -8,9 +8,9 @@ const arreglarString=(texto)=>{
     .join(' ');
 }
 const citaSchema = new Schema({
-  idAreaMedica: String,
-  idDoctor: String,
-  idPaciente: String,
+  areaMedica: {type:String,ref:'areasmedicas'},
+  doctor:{type: String,ref:'doctores'},
+  paciente: {type:String,ref:'pacientes'},
   fecha: String,
   hora:String,
   descripcion: String,

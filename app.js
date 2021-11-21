@@ -87,12 +87,8 @@ app.get("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicad
 app.post("/loginadmin",authController.loginadministrador_post);
 app.get("/loginadmin",authController.loginadministrador_get);
 
-app.post("/paciente/hojaclinica/hojaclinicaparadoctor",authController.hojaclinicapacientedoctor_post);
-app.get("/paciente/hojaclinica/hojaclinicaparadoctor",authController.hojaclinicapacientedoctor_get);
 
 app.get("/vercitaspendientesdoctor",authController.citapendientedoctor_get); 
-
-
 
 
 app.get("/citadoctor",authController.citadoctor_get);
@@ -102,6 +98,9 @@ app.get("/citadoctor",authController.citadoctor_get);
 app.get("/registro",adminController.registro_get);
 app.post("/registro",adminController.registro_post);
 
+//historia clinica
 
+app.post("/hojaclinicaparadoctor",authController.hojaclinicaparadoc_post);
+app.get("/hojaclinicaparadoctor",authController.hojaclinicaparadoc_get);
 
 

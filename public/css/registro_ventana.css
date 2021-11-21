@@ -1,0 +1,171 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-weight: bold; */
+    color: #5e5e5e;
+    image-rendering: crisp-edges;
+}
+.contenedor_ventana{
+    position:fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #42424267;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.ventana{
+    width: 460px;
+    height: 280px;
+    background-color: white;
+}
+.barra{
+    width: 100%;
+    display: inline-block;
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    background-color: #187078;
+    height: 50px;
+    
+}
+.barra span{
+    font-size: 18px;
+    color: white;
+    width: 200px;
+
+}
+
+.barra .cerrar{
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    margin-left: auto;
+    background-color: #f52a2a;
+    color:white
+}
+.barra .cerrar{
+    cursor: pointer;
+}
+
+.ventana .contenido{
+    padding: 20px;
+    height: 230px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: flex-start;
+    justify-content: center;
+    font-size: 19px;
+    text-align: center;
+    width: 100%;
+    font-weight: normal;
+}
+
+.contenido .descripcion{
+    width: 100%;
+    height: 100px;
+    border: 2px solid gray;
+    margin-bottom: 20px;
+}
+.contenido .receta{
+    width: 47%;
+    border: 2px solid gray;
+    height: 280px;
+}
+.contenido p{
+    width: 47%;
+    margin-bottom: 5px;
+    color: #0BB288;
+    font-weight: bold;
+}
+.contenido .titulo_receta{
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 2px solid gray;
+    padding-bottom: 5px;
+}
+.ocultar_inicial{
+    visibility: hidden;
+}
+.ocultar{
+    /* visibility: hidden; */
+    visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+}
+.mostrar{
+    animation-duration: 0.45s;
+    animation-name: mostrarVentana;
+}
+.contenido .cuadro{
+    padding: 7px;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    color: #838383
+}
+
+@keyframes mostrarVentana{
+    from{
+      opacity: 0;
+  
+    }
+  to{
+   opacity: 1;
+  }
+  }
+
+ 
+  .contenido .contenedor_botones{
+      width: 100%;
+  }
+  .contenido .titulo_dato{
+    text-align: right;
+    padding-right: 10px;
+    width: 30%;
+  }
+  .contenido .dato{
+      text-align: left;
+      width: 70%;
+  }
+
+  .contenedor_botones{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+  }
+  .contenido .pregunta{
+      margin-top: 20px;
+      margin-bottom: 20px;
+  }
+  .contenedor_botones .boton{
+      background-color: #1d848d ;
+      color: white;
+      width: 140px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  .contenedor_botones .boton:hover{
+      background-color: #134e53 ;
+  }
+  .contenedor_botones .boton:active{
+    border: 1.8px solid white;
+
+  }
+  .contenido .mensaje{
+      margin-bottom: 20px;
+  }
+
+ 

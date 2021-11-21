@@ -25,7 +25,7 @@ body {
  
  
  .user-img{
-   background-image: url("imagenes/foto_paciente.jpeg");
+   /* background-image: url("imagenes/foto_paciente.jpeg"); */
    background-size: cover;
    border: blue solid 0px;
    background-size: cover;
@@ -132,7 +132,7 @@ body {
    border: solid #6696dff1;
    /* margin-left: 166px; */
    height: 58px;
-   width: 550px;
+   width: 600px;
    /* margin-top: 7px; */
  }
  
@@ -157,7 +157,7 @@ body {
    }
  to{
    margin-left: 0%;
-   width: 550px;
+   width: 600px;
  }
  }
  

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const areaMedicaSchema = new Schema({
     nombre:String,
-    doctores:[String]
+    doctores:[{type:String,ref:'doctores'}]
     
 });
 
@@ -13,5 +13,5 @@ const areaMedicaSchema = new Schema({
 //   horarioAtencionSchema.virtual("fecha").get(function () {
 //     return this.fecha_iso.toISOString().substring(0, 10).replace(/-/g,"/");
 //   });
-const AreaMedica = mongoose.model('areasMedicas',areaMedicaSchema);
+const AreaMedica = mongoose.model('areasmedicas',areaMedicaSchema);
 module.exports = AreaMedica;

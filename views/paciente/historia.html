@@ -36,10 +36,11 @@
                         indiceFin+=4-numActualPag;
                     }
                     if(indiceFin>numPag) indiceFin = numPag;
-                    
                 %>
                 <%if(numActualPag!=1){%>
                     <a class="anterior" href="/historia?pag=<%=numActualPag-1%>" >Anterior </a>&nbsp;
+                <%}else{%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <%}%>
                 <a href="/historia?pag=1" id="1">1</a>&nbsp;<%if(numActualPag>=5&&numTotalPag>7){%>...&nbsp;<%}%>
                 
@@ -47,8 +48,9 @@
                     if(i==1 || i==numPag)continue;%>
                     
                     <a href="/historia?pag=<%=i%>" id="<%=i%>" ><%=i%></a>&nbsp;<%}%><%if(numActualPag<=numTotalPag-4&&numTotalPag>7){%>...&nbsp;<%}%>
-                
-                <a href="/historia?pag=<%=numTotalPag%>"id="<%=numTotalPag%>"><%=numTotalPag%></a>&nbsp;
+                <%if(numTotalPag>=2){%>
+                    <a href="/historia?pag=<%=numTotalPag%>"id="<%=numTotalPag%>"><%=numTotalPag%></a>&nbsp;
+                <%}%>
                 <%if(numActualPag!=numTotalPag){%>
                     <a class="siguiente" href="/historia?pag=<%=numActualPag+1%>" >Siguiente ></a>
                 <%}%>
@@ -79,7 +81,7 @@
         <div class="fila">
             <div class="item"> <%=hoja.numero%></div>
             <div class="item">
-                <%=hoja.doctor.nombreCompleto%>
+                <%=hoja.doctor.nombre+" "+hoja.doctor.apellido%>
             </div>
             <div class="item">
                 <%=hoja.doctor.email%>
@@ -88,7 +90,7 @@
                 <%=hoja.fecha%>
             </div>
             <div class="item">
-                <%=hoja.area.nombre%>
+                <%=hoja.areaMedica.nombre%>
             </div>
             <div onclick='mostrarHojaClinica(<%-JSON.stringify(hoja.descripcion)%>,<%-JSON.stringify(hoja.receta.medicamentos)%>, <%-JSON.stringify(hoja.receta.indicaciones)%>,"<%=hoja.numero%>")' class="item">
                 <img src="imagenes/ojo_1.png" width="25px"alt="">

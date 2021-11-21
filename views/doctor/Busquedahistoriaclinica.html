@@ -58,7 +58,7 @@
                                     
                                 </td>
                                 
-                                <td><%=p.nombreCompleto%></td>
+                                <td><%=p.nombre+" "+p.apellido%></td>
                                 <td><%=p.dni%></td>
                                 <td><%=p.email%></td>
                             </tr>       
@@ -86,7 +86,6 @@
                             indiceFin+=4-numActualPag;
                         }
                         if(indiceFin>numPag) indiceFin = numPag;
-                        console.log(numActualPag,numTotalPag,indiceIni,indiceFin);
                         %>
                         <%if(numActualPag!=1){%>
                             <li class="page-item"><a class="anterior page-link" href="/historia?pag=<%=numActualPag-1%>&tipoBusqueda=<%=tipoBusqueda%>&datoBusqueda=<%=datoBusqueda%>" >Anterior </a></li>&nbsp;

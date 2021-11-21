@@ -54,13 +54,13 @@
                                 <tr>
                                     
                                     <td><%=cita.areaMedica.nombre%></td>
-                                    <td><%=cita.doctor.nombreCompleto%></td>
+                                    <td><%=cita.doctor.nombre+" "+cita.doctor.apellido%></td>
                                     <td><%=cita.fecha%></td>
                                     <td><%=cita.hora%></td>
                                     <td><%=cita.descripcion%></td>
                                     <td><%=cita.estado%></td>
                                     <td>
-                                        <% if(cita.estado!="cancelado"){%>
+                                        <% if(cita.estado!="Cancelado"){%>
                                           <div style="display:flex; flex-direction: row;">
                                             <button type="button" class="btn btn-danger" style="margin-right: 8px" data-toggle="modal" data-target="#exampleModal">
                                                 Cancelar Cita
@@ -122,7 +122,30 @@
                             <%}%>
                            <!--  @endforeach-->
                         </tbody>
-                    </table>              
+                    </table>      
+                    
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+  
+                         
+                              <li class="page-item"><a class="anterior page-link" href="" >Anterior </a></li>&nbsp;
+                          
+                              
+                         
+                          <li class="page-item"><a href="" class="page-link" id="1">1</a></li>&nbsp;                          
+                         
+                              
+                              <li class="page-item"><a href="" class="page-link" id="2" >2</a></li>&nbsp;
+                          
+                              
+                                  <li class="page-item"><a href="" class="page-link" id="3">3</a></li>&nbsp;;
+                                  
+                          
+                          
+                              <li class="page-item"><a class="siguiente page-link" href="" >Siguiente ></a></li>
+                          
+                      </ul>
+                   </nav>
                 </div>           
                         
             

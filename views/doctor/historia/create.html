@@ -7,7 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="menu"></div>
+    <style>
+        :root{
+        --fondo-claro:#20a8d8;
+        --fondo-oscuro:#2088ad;
+        }
+    </style>
+    <%- include('../partials/menu_doctor.html') %>
     <form class="hoja_clinica" action="">
         
         <div class="contenedor_avance">
@@ -31,7 +37,7 @@
                 <div class="cuadro_info_personas">
                     <div class="info_persona info_paciente">
                         <p class="titulo_info">Paciente</p>
-                        <p>Nombre:</p><span><%= paciente.nombreCompleto%></span>
+                        <p>Nombre:</p><span><%= paciente.nombre+" "+paciente.apellido%></span>
                         <p>DNI:</p><span id="dniPaciente"><%= paciente.dni%></span>
                         <p>ID:</p><span><%= paciente._id%></span>
                     </div>
@@ -105,13 +111,13 @@
             e.preventDefault();
             const datos = {};
             datos.dniPaciente = document.getElementById("dniPaciente").innerHTML;
-            datos.idArea = form.area_medica.value;
+            datos.areaMedica = form.area_medica.value;
             datos.descripcion = form.descripcion.value;
             datos.receta = {};
             datos.receta.medicamentos = form.medicamentos.value;
             datos.receta.indicaciones = form.indicaciones.value;
             datos.fecha = fecha.innerHTML.trim();
-            console.log(fecha,fecha.innerText,datos.fecha)
+
             const res = await fetch("/historia", {
                     method: "POST",
                     body: JSON.stringify(datos),
