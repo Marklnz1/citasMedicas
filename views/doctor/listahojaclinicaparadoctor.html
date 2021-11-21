@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>LISTA HOJAS CLINICAS </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" />
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css style="background-color: transparent;  border-primary -->
+    <link rel="stylesheet" type="text/css" href="listahojaclinicadoc.css" />
+    
+    <link rel="stylesheet" href="/css/navegacion.css">
+</head>
+
+<body>
+  <style>
+    :root{
+    --fondo-claro:#239089;
+    --fondo-oscuro:#195c57;
+    }
+</style>
+   
+    <div class="row tbl">
+        <div class="col-12">
+                <div class="">
+                    <table class="table table-bordered t">
+                        <thead class="table-dark cabecera ">
+                            
+                                        <tr>
+                                            
+                                            <th>Numero</th>
+                                            <th>Nombre</th>
+                                            <th>Fecha</th>
+                                            <th>Descripcion</th>
+                                            <th>Opciones</th>
+
+                                        </tr>
+                        </thead>
+                        <tbody >
+                                                       
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                       
+                                          <div style="display:flex; flex-direction: row;">
+                                            <button type="button" class="btn btn-danger" style="margin-right: 8px" data-toggle="modal" data-target="#exampleModal">
+                                                ver hoja clinica
+                                              </button>
+                                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    
+                                                    
+                                                  </div>
+                                                </div>
+                                              </div>
+    
+                                              
+                                               
+                                        </div>
+  
+                                    </td>
+                                </tr>
+                           
+                           
+                        </tbody>
+                    </table>      
+                    
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+  
+                         
+                              <li class="page-item"><a class="anterior page-link" href="" >Anterior </a></li>&nbsp;
+                              <li class="page-item"><a href="" class="page-link" id="1">1</a></li>&nbsp;                          
+                              <li class="page-item"><a href="" class="page-link" id="2" >2</a></li>&nbsp;
+                              <li class="page-item"><a href="" class="page-link" id="3">3</a></li>&nbsp;;
+                              <li class="page-item"><a class="siguiente page-link" href="" >Siguiente ></a></li>
+                          
+                      </ul>
+                   </nav>
+                </div>           
+                        
+            
+        </div>
+    </div>
+    
+</body>
+
+</html>

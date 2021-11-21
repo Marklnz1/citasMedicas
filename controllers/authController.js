@@ -171,4 +171,11 @@ res.render("doctor/hojaclinicaparadoctor");
 module.exports.paginanoencontrada_get = (req, res, next) => {
   
     res.render("404/index");
+}
+module.exports.listahojaclinicaparadoc_post = async (req, res) => {
 };
+module.exports.listahojaclinicaparadoc_get = (req, res, next) => {
+  
+res.render("doctor/listahojaclinicaparadoctor");
+};
+
