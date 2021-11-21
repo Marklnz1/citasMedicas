@@ -16,7 +16,7 @@ async function iniciar() {
     useUnifiedTopology: true,
   });
   
-  app.listen(3000);
+  app.listen(5000);
   console.log("Servidor encendido");
 
 }
@@ -86,6 +86,9 @@ app.get("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicad
  
 app.post("/loginadmin",authController.loginadministrador_post);
 app.get("/loginadmin",authController.loginadministrador_get);
+
+app.post("/paciente/hojaclinica/hojaclinicaparadoctor",authController.hojaclinicapacientedoctor_post);
+app.get("/paciente/hojaclinica/hojaclinicaparadoctor",authController.hojaclinicapacientedoctor_get);
 
 app.get("/vercitaspendientesdoctor",authController.citapendientedoctor_get); 
 

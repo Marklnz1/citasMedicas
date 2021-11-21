@@ -152,3 +152,24 @@ module.exports.loginadministrador_get = (req, res, next) => {
   
     res.render("Administrador/loginadmin");
 };
+
+
+module.exports.hojaclinicapacientedoctor_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.hojaclinicapacientedoctor_get = (req, res, next) => {
+  
+    res.render("paciente/hojaclinica/hojaclinicaparadoctor");
+};
+
+module.exports.hojaclinicaparadoc_post = async (req, res) => {
+ 
+ 
+};
+
+module.exports.hojaclinicaparadoc_get = (req, res, next) => {
+  
+    res.render("paciente/hojaclinicaparadoctor");
+}
