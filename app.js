@@ -7,18 +7,21 @@ const extraerUsuario = require('./middleware/extraerUsuario');
 const adminController = require('./controllers/adminController');
 const doctorController = require("./controllers/doctorController");
 const pacienteController = require("./controllers/pacienteController");
+const generadorController = require("./tools/generadorController");
 const { render } = require("ejs");
 let dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
 iniciar();
+
+// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 async function iniciar() {
   await mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
   
-  app.listen(5000);
+  app.listen(3000);
   console.log("Servidor encendido");
-
+  // console.log(await (await fetch("https://frozen-hollows-68632.herokuapp.com/api/v1/dni/48004836?token=abcxyz")).json());
 }
 
 app.set("view engine", "ejs");
@@ -63,14 +66,16 @@ app.post("/historia",doctorController.historia_create_post);
 //PACIENTE
 app.get("/cita/create",pacienteController.cita_create_get);
 app.post("/cita/create",pacienteController.cita_create_post);
-app.post("/cita/cancel",pacienteController.cita_cancel_post);
 app.get("/cita",pacienteController.cita_get);
+
 
 app.get("/historia",pacienteController.historia_get);
 //ADMIN
 app.get("/admin",adminController.login_get);
+
 app.post("/informacion",authController.info_post);
 app.get("/informacion",authController.info_get);
+app.post("/verificardni",adminController.dni_valido_post);
 
 app.post("/informacionpaciente",authController.info_post);
 app.get("/informacionpaciente",authController.info_get);
@@ -79,7 +84,11 @@ app.post("/citapaciente",authController.citapaciente_post);
 app.get("/citapaciente",authController.citapaciente_get);
 
 app.post("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_post);
-app.get("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_get); 
+app.get("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_get);
+
+app.post("/index",authController.paginanoencontrada_post);
+app.get("/index",authController.paginanoencontrada_get);
+
 
 app.post("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_post);
 app.get("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_get);
@@ -91,6 +100,8 @@ app.get("/loginadmin",authController.loginadministrador_get);
 app.get("/vercitaspendientesdoctor",authController.citapendientedoctor_get); 
 
 
+
+
 app.get("/citadoctor",authController.citadoctor_get);
 
 
@@ -98,9 +109,11 @@ app.get("/citadoctor",authController.citadoctor_get);
 app.get("/registro",adminController.registro_get);
 app.post("/registro",adminController.registro_post);
 
-//historia clinica
 
-app.post("/hojaclinicaparadoctor",authController.hojaclinicaparadoc_post);
-app.get("/hojaclinicaparadoctor",authController.hojaclinicaparadoc_get);
+//============GENERADOR================
+app.get("/generar/areas",generadorController.genAreasMedicas);
+app.get("/generar/paciente",generadorController.genDatosPaciente);
 
-
+app.use("*",(req,res)=>{
+  res.render("404/index");
+});

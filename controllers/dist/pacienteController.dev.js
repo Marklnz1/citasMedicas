@@ -11,31 +11,36 @@ var Paciente = require("../models/Paciente");
 var HistoriaClinica = require("../models/HistoriaClinica");
 
 module.exports.cita_get = function _callee(req, res, next) {
-  var idCitas;
+  var idCitas, pagina, citasBD, respuesta;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           if (!(res.locals.user.tipoUsuario === "paciente")) {
-            _context.next = 9;
+            _context.next = 14;
             break;
           }
 
           idCitas = res.locals.user.citas;
-          _context.next = 4;
+          pagina = req.query.pag;
+          _context.next = 5;
           return regeneratorRuntime.awrap(Cita.find().where("_id")["in"](idCitas).populate("doctor").populate("areaMedica").lean().exec());
 
-        case 4:
-          res.locals.citas = _context.sent;
-          res.locals.citas = res.locals.citas.reverse();
+        case 5:
+          citasBD = _context.sent;
+          citasBD = citasBD.reverse();
+          respuesta = getItemsDePagina(citasBD, pagina, 7);
+          res.locals.citas = respuesta.nuevaLista;
+          res.locals.numPag = respuesta.numTotalPaginas;
+          res.locals.actualPag = respuesta.pagina;
           res.render("paciente/vercitaspendientespaciente");
-          _context.next = 10;
+          _context.next = 15;
           break;
 
-        case 9:
+        case 14:
           next();
 
-        case 10:
+        case 15:
         case "end":
           return _context.stop();
       }

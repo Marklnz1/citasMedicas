@@ -239,3 +239,24 @@ textarea:focus{
     color: #0BB288;
     border-radius: 5px;
 }
+
+.titulo_descripcion .error{
+    color: #bb0000;
+}
+.cuadro_error{
+    border: 2px solid #bb0000;
+}
+.ocultar{
+    display: none;
+}
+.advertencia{
+    background-image: url("../../../imagenes/advertencia.png");
+    /* background-size: cover; */
+    border: blue solid 0px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 30px;
+    margin-left: 5px;
+}

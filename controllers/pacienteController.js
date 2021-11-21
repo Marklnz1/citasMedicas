@@ -7,14 +7,20 @@ const HistoriaClinica = require("../models/HistoriaClinica");
 module.exports.cita_get = async (req, res, next) => {
   if (res.locals.user.tipoUsuario === "paciente") {
     const idCitas = res.locals.user.citas;
-    res.locals.citas = await Cita.find()
+    let pagina = req.query.pag;
+    let citasBD = await Cita.find()
       .where("_id")
       .in(idCitas)
       .populate("doctor")
       .populate("areaMedica")
       .lean()
       .exec();
-      res.locals.citas = res.locals.citas.reverse();
+      citasBD = citasBD.reverse();
+
+      let respuesta = getItemsDePagina(citasBD,pagina,7);
+      res.locals.citas = respuesta.nuevaLista;
+      res.locals.numPag = respuesta.numTotalPaginas;
+      res.locals.actualPag = respuesta.pagina;
     res.render("paciente/vercitaspendientespaciente");
   } else {
     next();

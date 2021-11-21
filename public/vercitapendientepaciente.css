@@ -30,3 +30,6 @@ body {
 .cabecera{
   background-color: #239089;
 }
+.activo{
+  background-color:  #C2CFD6 !important;
+}

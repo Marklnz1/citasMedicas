@@ -5,14 +5,20 @@ const Cita = require("../models/Cita");
 module.exports.cita_get = async (req, res, next) => {
   if (res.locals.user.tipoUsuario === "doctor") {
     const idcitas = res.locals.user.citas;
-    res.locals.citas = await Cita.find()
+    let pagina = req.query.pag;
+    let citasBD = await Cita.find()
       .where("_id")
       .in(idcitas)
       .populate("paciente")
       .populate("areaMedica")
       .lean()
       .exec();
-    res.locals.citas = res.locals.citas.reverse();
+
+      citasBD = citasBD.reverse();
+      let respuesta = getItemsDePagina(citasBD, pagina,7);
+      res.locals.citas = respuesta.nuevaLista;
+      res.locals.numPag = respuesta.numTotalPaginas;
+      res.locals.actualPag = respuesta.pagina;
     res.render("doctor/vercitaspendientesdoctor");
   } else {
     next();
@@ -24,6 +30,10 @@ module.exports.historia_create_get = async (req, res, next) => {
     res.locals.paciente = await Paciente.findOne({
       dni: req.params.dniPaciente,
     }).lean();
+    if(res.locals.paciente==null){
+      next();
+      return;
+    }
     res.locals.areasMedicas = await AreaMedica.find().lean();
     res.render("doctor/historia/create");
   } else {

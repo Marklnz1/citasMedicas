@@ -89,7 +89,7 @@
         <div class="ventana">
             <div class="barra">
                 <span>Mensaje</span>
-                <div class="cerrar">X</div>
+               
             </div>
             <div class="contenido">
               <div class="mensaje"> La cita ha sido creada correctamente</div>
@@ -202,7 +202,7 @@
         }
       </script>
       <script>
-         const cuadro_cerrar = document.querySelector(".cerrar");
+        
          const contenedor_ventana = document.querySelector(".contenedor_ventana");
 
           const ventana = document.querySelector(".ventana");
@@ -213,9 +213,12 @@
        
 
       })
-        cuadro_cerrar.addEventListener("click",()=>{
-          ocultarContenedor();
-      }); 
+        ventana.addEventListener("click",(e)=>{
+          e.stopPropagation();
+        });
+        contenedor_ventana.addEventListener("click",()=>{
+          window.location.href = window.location.href;
+        });
         function ocultarContenedor(){
             contenedor_ventana.classList.add("ocultar");
             contenedor_ventana.classList.remove("mostrar");

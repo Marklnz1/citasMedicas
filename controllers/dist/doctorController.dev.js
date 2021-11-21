@@ -9,31 +9,36 @@ var AreaMedica = require("../models/AreaMedica");
 var Cita = require("../models/Cita");
 
 module.exports.cita_get = function _callee(req, res, next) {
-  var idcitas;
+  var idcitas, pagina, citasBD, respuesta;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           if (!(res.locals.user.tipoUsuario === "doctor")) {
-            _context.next = 9;
+            _context.next = 14;
             break;
           }
 
           idcitas = res.locals.user.citas;
-          _context.next = 4;
+          pagina = req.query.pag;
+          _context.next = 5;
           return regeneratorRuntime.awrap(Cita.find().where("_id")["in"](idcitas).populate("paciente").populate("areaMedica").lean().exec());
 
-        case 4:
-          res.locals.citas = _context.sent;
-          res.locals.citas = res.locals.citas.reverse();
+        case 5:
+          citasBD = _context.sent;
+          citasBD = citasBD.reverse();
+          respuesta = getItemsDePagina(citasBD, pagina, 7);
+          res.locals.citas = respuesta.nuevaLista;
+          res.locals.numPag = respuesta.numTotalPaginas;
+          res.locals.actualPag = respuesta.pagina;
           res.render("doctor/vercitaspendientesdoctor");
-          _context.next = 10;
+          _context.next = 15;
           break;
 
-        case 9:
+        case 14:
           next();
 
-        case 10:
+        case 15:
         case "end":
           return _context.stop();
       }
@@ -47,7 +52,7 @@ module.exports.historia_create_get = function _callee2(req, res, next) {
       switch (_context2.prev = _context2.next) {
         case 0:
           if (!(res.locals.user.tipoUsuario === "doctor")) {
-            _context2.next = 10;
+            _context2.next = 13;
             break;
           }
 
@@ -58,19 +63,29 @@ module.exports.historia_create_get = function _callee2(req, res, next) {
 
         case 3:
           res.locals.paciente = _context2.sent;
-          _context2.next = 6;
+
+          if (!(res.locals.paciente == null)) {
+            _context2.next = 7;
+            break;
+          }
+
+          next();
+          return _context2.abrupt("return");
+
+        case 7:
+          _context2.next = 9;
           return regeneratorRuntime.awrap(AreaMedica.find().lean());
 
-        case 6:
+        case 9:
           res.locals.areasMedicas = _context2.sent;
           res.render("doctor/historia/create");
-          _context2.next = 11;
+          _context2.next = 14;
           break;
 
-        case 10:
+        case 13:
           next();
 
-        case 11:
+        case 14:
         case "end":
           return _context2.stop();
       }

@@ -56,7 +56,45 @@
                             <%}%>
                            <!--  @endforeach-->
                         </tbody>
-                    </table>              
+                    </table>     
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+    
+                            <%
+                            let numActualPag = parseInt(actualPag);
+                            let numTotalPag = parseInt(numPag);
+                            let indiceIni = numActualPag-2;
+                            if(numActualPag >numTotalPag-3){
+                                indiceIni -=(numActualPag-(numTotalPag-3));
+                            }
+                            if(indiceIni<1)indiceIni = 1;
+                            let indiceFin = numActualPag + 2;
+                            if(numActualPag<4){
+                                indiceFin+=4-numActualPag;
+                            }
+                            if(indiceFin>numPag) indiceFin = numPag;
+                            %>
+                            <%if(numActualPag!=1){%>
+                                <li class="page-item"><a class="anterior page-link" href="/cita?pag=<%=numActualPag-1%>" >Anterior </a></li>&nbsp;
+                            <%}else{%>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <%}%>
+                            <li class="page-item"></li><a href="/cita?pag=1" class="page-link" id="1">1</a></li>&nbsp;<%if(numActualPag>=5&&numTotalPag>7){%>...&nbsp;<%}%>
+                            
+                            <%for(let i = indiceIni; i <= indiceFin;i++){
+                                if(i==1 || i==numPag)continue;%>
+                                
+                                <li class="page-item"><a href="/cita?pag=<%=i%>" class="page-link" id="<%=i%>" ><%=i%></a></li>&nbsp;<%}%><%if(numActualPag<=numTotalPag-4&&numTotalPag>7){%>...&nbsp;<%}%>
+                            
+                                <%if(numTotalPag>=2){%>
+                                    <li class="page-item"><a href="/cita?pag=<%=numTotalPag%>" class="page-link" id="<%=numTotalPag%>"><%=numTotalPag%></a></li>&nbsp;
+                                    <%}%>
+                            
+                            <%if(numActualPag!=numTotalPag){%>
+                                <li class="page-item"><a class="siguiente page-link" href="/cita?pag=<%=numActualPag+1%>" >Siguiente </a></li>
+                            <%}%>
+                        </ul>
+                     </nav>         
                 </div>           
                         
             
@@ -65,6 +103,10 @@
     <script> 
         document.querySelector(".ver_citas").classList.add("enlace_activo");
       </script>
+      <script>
+       const navItemSeleccionado = document.getElementById("<%=actualPag%>");
+       navItemSeleccionado.classList.add("activo");
+    </script>
 </body>
 
 </html>

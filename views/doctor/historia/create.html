@@ -4,16 +4,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/doctor/historia_create.css">
+    <link rel="stylesheet" href="/css/navegacion.css">
+    <link rel="stylesheet" href=/css/registro_hoja_ventana.css>
+
     <title>Document</title>
 </head>
 <body>
     <style>
         :root{
-        --fondo-claro:#20a8d8;
-        --fondo-oscuro:#2088ad;
+        --fondo-claro:#0BB288;
+        --fondo-oscuro:#098E6C;
         }
     </style>
-    <%- include('../partials/menu_doctor.html') %>
+    <%- include('../../partials/menu_doctor.html') %>
     <form class="hoja_clinica" action="">
         
         <div class="contenedor_avance">
@@ -55,7 +58,7 @@
                     <%}%>
                     
                 </select>
-                <p class="titulo_descripcion">Descripcion:</p>
+                <p class="titulo_descripcion">Descripcion: <span class="error ocultar">La descripcion no puede estar vacia</span></p>
                 <textarea name="descripcion" id="" cols="30" rows="10" class="descripcion"></textarea>
                 <button class="boton_siguiente boton">Siguiente</button>
             </div>
@@ -71,7 +74,24 @@
                 </div>
             </div>
         </div>
+        
     </form>
+    <div class="contenedor_ventana ocultar_inicial">
+        <div class="ventana">
+            <div class="barra">
+                <span>Mensaje</span>
+                
+            </div>
+            <div class="contenido">
+              <div class="mensaje"> La hoja clinica ha sido creada correctamente</div>
+              
+              <div class="contenedor_botones"><div class="confirmar boton">Aceptar</div></div>
+            </div>    
+        </div>
+        
+      
+      </div>
+      
     <script>
         const fecha = document.getElementById("fecha");
         fecha.innerText = new Date().toLocaleDateString();
@@ -84,13 +104,22 @@
       const circulo_2 = document.querySelector(".circulo_2");
       const cuadro_1 = document.querySelector(".cuadro_1");
       const cuadro_2 = document.querySelector(".cuadro_2");
-
+      const error_descripcion = document.querySelector(".titulo_descripcion .error");
+      const descripcion = document.querySelector(".descripcion");
       boton_siguiente.addEventListener("click",(e)=>{
           e.preventDefault();
-          circulo_1.classList.remove('circulo_activo');
-          circulo_2.classList.add('circulo_activo');
-          cuadro_1.classList.remove('cuadro_activo');
-          cuadro_2.classList.add('cuadro_activo');
+          if(descripcion.value==null||descripcion.value.trim()==""){
+            descripcion.classList.add("cuadro_error");
+            error_descripcion.classList.remove("ocultar");
+          }else{
+              error_descripcion.classList.add("ocultar");
+            descripcion.classList.remove("cuadro_error");
+            circulo_1.classList.remove('circulo_activo');
+            circulo_2.classList.add('circulo_activo');
+            cuadro_1.classList.remove('cuadro_activo');
+            cuadro_2.classList.add('cuadro_activo');
+          }
+         
 
       });
       boton_regresar.addEventListener("click",(e)=>{
@@ -107,7 +136,11 @@
         
         
         const boton_finalizar = document.querySelector(".boton_finalizar");
+        let hoja_creada = false;
         boton_finalizar.addEventListener("click",async (e)=>{
+            contenedor_ventana.classList.remove("ocultar");
+            contenedor_ventana.classList.remove("ocultar_inicial");
+            contenedor_ventana.classList.add("mostrar");
             e.preventDefault();
             const datos = {};
             datos.dniPaciente = document.getElementById("dniPaciente").innerHTML;
@@ -118,15 +151,46 @@
             datos.receta.indicaciones = form.indicaciones.value;
             datos.fecha = fecha.innerHTML.trim();
 
-            const res = await fetch("/historia", {
+            const res =  fetch("/historia", {
                     method: "POST",
                     body: JSON.stringify(datos),
                     headers: { "Content-Type": "application/json" }
                 })
-            const data = await res.json();
-            console.log(data);
+                
+            // const data = await res.json();
+            // console.log(data);
         });
 
     </script>
+     <script> 
+        document.querySelector(".buscar_historia").classList.add("enlace_activo");
+      </script>
+      <script>
+        const contenedor_ventana = document.querySelector(".contenedor_ventana");
+
+         const ventana = document.querySelector(".ventana");
+       const aceptar = document.querySelector(".contenedor_botones .confirmar");
+        aceptar.addEventListener("click",()=>{
+            ocultarContenedor();
+         window.location.href = "/historia";
+         ocultarContenedor();
+       // ocultarContenedor();
+      
+
+     })
+     ventana.addEventListener("click",(e)=>{
+        e.stopPropagation();
+     })
+     contenedor_ventana.addEventListener("click",()=>{
+        ocultarContenedor();
+        window.location.href = "/historia";
+     })
+       
+       function ocultarContenedor(){
+           contenedor_ventana.classList.add("ocultar");
+           contenedor_ventana.classList.remove("mostrar");
+         
+       }
+     </script>
 </body>
 </html>

@@ -30,7 +30,7 @@ body {
    border: blue solid 0px;
    background-size: cover;
    background-position: center;
-  */
+  
  }
  .sombra{
  box-shadow: 0px 0px 1px 3px #6696dff1;
@@ -177,4 +177,7 @@ body {
    
   background-color: #375e5fa8;
   opacity: 1;
+}
+.activo{
+  background-color:  #C2CFD6 !important;
 }

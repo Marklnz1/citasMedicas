@@ -166,7 +166,7 @@ module.exports.hojaclinicaparadoc_post = async (req, res) => {
 };
 module.exports.hojaclinicaparadoc_get = (req, res, next) => {
   
-res.render("paciente/hojaclinicaparadoctor");
+res.render("doctor/hojaclinicaparadoctor");
 };
 module.exports.paginanoencontrada_get = (req, res, next) => {
   
