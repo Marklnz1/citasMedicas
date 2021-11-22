@@ -78,9 +78,6 @@ app.post("/verificardni",adminController.dni_valido_post);
 //============GENERADOR================
 app.get("/generar/areas",generadorController.genAreasMedicas);
 app.get("/generar/paciente",generadorController.genDatosPaciente);
-app.post("/listahojaclinicaparadoctor",authController.listahojaclinicaparadoc_post);
-app.get("/listahojaclinicaparadoctor",authController.listahojaclinicaparadoc_get);
-
 
 
 app.use("*",(req,res)=>{
