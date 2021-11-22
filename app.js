@@ -8,7 +8,6 @@ const adminController = require('./controllers/adminController');
 const doctorController = require("./controllers/doctorController");
 const pacienteController = require("./controllers/pacienteController");
 const generadorController = require("./tools/generadorController");
-const { render } = require("ejs");
 let dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
 iniciar();
 
@@ -67,6 +66,7 @@ app.get("/cita/create",pacienteController.cita_create_get);
 app.post("/cita/create",pacienteController.cita_create_post);
 app.get("/cita",pacienteController.cita_get);
 app.get("/historia",pacienteController.historia_get);
+app.post("/cita/cancel",pacienteController.cita_cancel_post)
 //ADMIN
 app.get("/admin",adminController.login_get);
 app.post("/admin",adminController.login_post);

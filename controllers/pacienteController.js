@@ -56,6 +56,7 @@ module.exports.cita_create_post = async (req, res) => {
   res.status(200).end();
 };
 
+
 module.exports.historia_get = async (req, res, next) => {
   if (res.locals.user.tipoUsuario === "paciente") {
     let pagina = req.query.pag;
@@ -70,11 +71,10 @@ module.exports.historia_get = async (req, res, next) => {
       .exec();
     let hojasClinicas = historiaClinica.hojasClinicas.reverse();
     let resultado = getItemsDePagina(hojasClinicas, pagina, 10);
-    const hojasPorPagina = resultado.nuevaLista;
-    for (let h of hojasPorPagina) {
-      h.numero = hojasClinicas.indexOf(h) + 1;
-    }
-    res.locals.hojasClinicas = hojasPorPagina;
+
+    for (let h of resultado.nuevaLista) h.numero = resultado.nuevaLista.indexOf(h) + 1;
+  
+    res.locals.hojasClinicas = resultado.nuevaLista;
     res.locals.numPag = resultado.numTotalPaginas;
     res.locals.actualPag = resultado.pagina;
     res.render("paciente/historia");

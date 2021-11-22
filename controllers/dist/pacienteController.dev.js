@@ -122,14 +122,14 @@ module.exports.cita_create_post = function _callee3(req, res) {
 };
 
 module.exports.historia_get = function _callee4(req, res, next) {
-  var pagina, historiaClinica, hojasClinicas, resultado, hojasPorPagina, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, h;
+  var pagina, historiaClinica, hojasClinicas, resultado, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, h;
 
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           if (!(res.locals.user.tipoUsuario === "paciente")) {
-            _context4.next = 33;
+            _context4.next = 32;
             break;
           }
 
@@ -145,67 +145,66 @@ module.exports.historia_get = function _callee4(req, res, next) {
           historiaClinica = _context4.sent;
           hojasClinicas = historiaClinica.hojasClinicas.reverse();
           resultado = getItemsDePagina(hojasClinicas, pagina, 10);
-          hojasPorPagina = resultado.nuevaLista;
           _iteratorNormalCompletion = true;
           _didIteratorError = false;
           _iteratorError = undefined;
-          _context4.prev = 11;
+          _context4.prev = 10;
 
-          for (_iterator = hojasPorPagina[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator = resultado.nuevaLista[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             h = _step.value;
-            h.numero = hojasClinicas.indexOf(h) + 1;
+            h.numero = resultado.nuevaLista.indexOf(h) + 1;
           }
 
-          _context4.next = 19;
+          _context4.next = 18;
           break;
 
-        case 15:
-          _context4.prev = 15;
-          _context4.t0 = _context4["catch"](11);
+        case 14:
+          _context4.prev = 14;
+          _context4.t0 = _context4["catch"](10);
           _didIteratorError = true;
           _iteratorError = _context4.t0;
 
-        case 19:
+        case 18:
+          _context4.prev = 18;
           _context4.prev = 19;
-          _context4.prev = 20;
 
           if (!_iteratorNormalCompletion && _iterator["return"] != null) {
             _iterator["return"]();
           }
 
-        case 22:
-          _context4.prev = 22;
+        case 21:
+          _context4.prev = 21;
 
           if (!_didIteratorError) {
-            _context4.next = 25;
+            _context4.next = 24;
             break;
           }
 
           throw _iteratorError;
 
+        case 24:
+          return _context4.finish(21);
+
         case 25:
-          return _context4.finish(22);
+          return _context4.finish(18);
 
         case 26:
-          return _context4.finish(19);
-
-        case 27:
-          res.locals.hojasClinicas = hojasPorPagina;
+          res.locals.hojasClinicas = resultado.nuevaLista;
           res.locals.numPag = resultado.numTotalPaginas;
           res.locals.actualPag = resultado.pagina;
           res.render("paciente/historia");
-          _context4.next = 34;
+          _context4.next = 33;
           break;
 
-        case 33:
+        case 32:
           next();
 
-        case 34:
+        case 33:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[11, 15, 19, 27], [20,, 22, 26]]);
+  }, null, null, [[10, 14, 18, 26], [19,, 21, 25]]);
 };
 
 module.exports.cita_cancel_post = function _callee5(req, res) {

@@ -20,9 +20,6 @@ var pacienteController = require("./controllers/pacienteController");
 
 var generadorController = require("./tools/generadorController");
 
-var _require = require("ejs"),
-    render = _require.render;
-
 var dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
 iniciar(); // const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
@@ -83,7 +80,8 @@ app.post("/historia", doctorController.historia_create_post); //PACIENTE
 app.get("/cita/create", pacienteController.cita_create_get);
 app.post("/cita/create", pacienteController.cita_create_post);
 app.get("/cita", pacienteController.cita_get);
-app.get("/historia", pacienteController.historia_get); //ADMIN
+app.get("/historia", pacienteController.historia_get);
+app.post("/cita/cancel", pacienteController.cita_cancel_post); //ADMIN
 
 app.get("/admin", adminController.login_get);
 app.post("/admin", adminController.login_post);
