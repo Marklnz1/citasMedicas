@@ -6,7 +6,7 @@ body {
     background: url(../imagenes/fondocitapaciente.jpg) no-repeat center center fixed;
      background-size: cover;
     overflow-x: hidden;
- 
+    overflow-y: hidden;
 
    }
    
@@ -31,5 +31,5 @@ body {
   background-color: #239089;
 }
 .activo{
-  background-color:  #C2CFD6 !important;
+    background-color:  #C2CFD6 !important;
 }

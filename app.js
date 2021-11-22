@@ -39,18 +39,17 @@ app.use("*",extraerUsuario);
 
 app.get("/",(req, res, next)=>{
   let user = res.locals.user;
-
-  if(user){
     if(user.tipoUsuario=="doctor"){
       res.render("doctor/informacion");
     }else if(user.tipoUsuario=="paciente"){
       res.render("paciente/informacionpaciente");
+    }else if(user.tipoUsuario =="admin"){
+      res.render("registro/registro");
+    }else{
+      res.render('home');
     }
-  }else{
-    res.render('home');
-  }
+ 
   
-
 });
 
 app.get("/login",authController.login_get);
@@ -67,47 +66,13 @@ app.post("/historia",doctorController.historia_create_post);
 app.get("/cita/create",pacienteController.cita_create_get);
 app.post("/cita/create",pacienteController.cita_create_post);
 app.get("/cita",pacienteController.cita_get);
-
-
 app.get("/historia",pacienteController.historia_get);
 //ADMIN
 app.get("/admin",adminController.login_get);
-
-app.post("/informacion",authController.info_post);
-app.get("/informacion",authController.info_get);
+app.post("/admin",adminController.login_post);
+app.post("/registro",adminController.registro_post);
 app.post("/verificardni",adminController.dni_valido_post);
 
-app.post("/informacionpaciente",authController.info_post);
-app.get("/informacionpaciente",authController.info_get);
-
-app.post("/citapaciente",authController.citapaciente_post);
-app.get("/citapaciente",authController.citapaciente_get);
-
-app.post("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_post);
-app.get("/busquedahistoriaclinica",authController.busquedahistoriaclinicapaciente_get);
-
-app.post("/index",authController.paginanoencontrada_post);
-app.get("/index",authController.paginanoencontrada_get);
-
-
-app.post("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_post);
-app.get("/busquedahistoriaclinicadoctor",authController.busquedahistoriaclinicadoctor_get);
- 
-app.post("/loginadmin",authController.loginadministrador_post);
-app.get("/loginadmin",authController.loginadministrador_get);
-
-
-app.get("/vercitaspendientesdoctor",authController.citapendientedoctor_get); 
-
-
-
-
-app.get("/citadoctor",authController.citadoctor_get);
-
-
-
-app.get("/registro",adminController.registro_get);
-app.post("/registro",adminController.registro_post);
 
 
 //============GENERADOR================

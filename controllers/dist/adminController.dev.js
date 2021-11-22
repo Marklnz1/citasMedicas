@@ -31,49 +31,44 @@ var fetch = function fetch() {
 
 var generadorController = require("../tools/generadorController");
 
-module.exports.registro_get = function (req, res, next) {
-  res.render("registro/registro");
-};
+var jwt = require("jsonwebtoken");
 
 module.exports.login_get = function (req, res, next) {
-  res.render("autenticacion/login");
+  res.render("Administrador/loginadmin");
 };
 
 module.exports.login_post = function _callee(req, res) {
-  var usuario, password, tipoUsuario, passwordBD, mensaje, logeado, token;
+  var usuario, password, admin, usuarioBD, passwordBD, mensaje, token;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           usuario = req.body.usuario;
           password = req.body.password;
-          tipoUsuario = req.body.tipoUsuario;
-          _context.next = 5;
+          _context.next = 4;
           return regeneratorRuntime.awrap(Admin.find());
 
-        case 5:
-          passwordBD = _context.sent[0].password;
-          // const passwordBD = await getPasswordBD(tipoUsuario,dni);
-          mensaje = "DNI no registrado o contraseña incorrecta";
+        case 4:
+          admin = _context.sent[0];
+          usuarioBD = admin.usuario;
+          passwordBD = admin.password; // const passwordBD = await getPasswordBD(tipoUsuario,dni);
 
-          if (passwordBD) {
-            logeado = password == passwordBD;
+          mensaje = "Usuario o contraseña incorrecta";
 
-            if (logeado) {
-              token = crearToken(usuario, tipoUsuario);
-              res.cookie("jwt", token, {
-                httpOnly: true,
-                maxAge: tiempoMaximo * 1000
-              });
-              mensaje = "";
-            }
+          if (usuario == usuarioBD && password == passwordBD) {
+            token = crearToken(usuario, "admin");
+            res.cookie("jwt", token, {
+              httpOnly: true,
+              maxAge: tiempoMaximo * 1000
+            });
+            mensaje = "";
           }
 
           res.status(201).json({
             mensaje: mensaje
           });
 
-        case 9:
+        case 10:
         case "end":
           return _context.stop();
       }
@@ -343,39 +338,34 @@ module.exports.registro_post = function _callee3(req, res, next) {
   }, null, null, [[23, 33]]);
 };
 
-module.exports.login_post = function _callee4(req, res) {
-  return regeneratorRuntime.async(function _callee4$(_context4) {
+function getPasswordBcrypt(password) {
+  var salt;
+  return regeneratorRuntime.async(function getPasswordBcrypt$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+          _context4.next = 2;
+          return regeneratorRuntime.awrap(bcrypt.genSalt());
+
+        case 2:
+          salt = _context4.sent;
+          return _context4.abrupt("return", bcrypt.hash(password, salt));
+
+        case 4:
         case "end":
           return _context4.stop();
       }
     }
   });
-};
-
-module.exports.login_get = function (req, res, next) {
-  res.render("Administrador/loginadmin");
-};
-
-function getPasswordBcrypt(password) {
-  var salt;
-  return regeneratorRuntime.async(function getPasswordBcrypt$(_context5) {
-    while (1) {
-      switch (_context5.prev = _context5.next) {
-        case 0:
-          _context5.next = 2;
-          return regeneratorRuntime.awrap(bcrypt.genSalt());
-
-        case 2:
-          salt = _context5.sent;
-          return _context5.abrupt("return", bcrypt.hash(password, salt));
-
-        case 4:
-        case "end":
-          return _context5.stop();
-      }
-    }
-  });
 }
+
+var tiempoMaximo = 30000;
+
+var crearToken = function crearToken(id, tipoUsuario) {
+  return jwt.sign({
+    id: id,
+    tipoUsuario: tipoUsuario
+  }, "efe", {
+    expiresIn: tiempoMaximo
+  });
+};

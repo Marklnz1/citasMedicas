@@ -25,7 +25,7 @@ body {
  
  
  .user-img{
-   /* background-image: url("imagenes/foto_paciente.jpeg"); */
+   background-image: url("imagenes/usuario.png");
    background-size: cover;
    border: blue solid 0px;
    background-size: cover;

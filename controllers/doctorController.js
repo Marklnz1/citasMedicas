@@ -82,27 +82,36 @@ module.exports.historia_all_get = async (req, res, next) => {
   }
 };
 module.exports.historia_get = async (req, res, next) => {
-  let dniPaciente = req.body.dniPaciente;
-  let paciente = await Paciente.findOne({dni:dniPaciente});
-  let historiaClinica = await HistoriaClinica.findById(paciente.historiaClinica).populate([
-    { path: "hojasClinicas.doctor" },
-    { path: "hojasClinicas.areaMedica" },
-  ])
-  .lean()
-  .exec();
-  let hojasClinicas = historiaClinica.hojasClinicas.reverse();
-  let resultado = getItemsDePagina(hojasClinicas, pagina, 10);
-  const hojasPorPagina = resultado.nuevaLista;
-  for (let h of hojasPorPagina) {
-    h.numero = hojasClinicas.indexOf(h) + 1;
-  }
-  
-  res.locals.hojasClinicas = hojasPorPagina;
-  res.locals.numPag = resultado.numTotalPaginas;
-  res.locals.actualPag = resultado.pagina;
+ 
+    if (res.locals.user.tipoUsuario === "doctor") {
+      let dniPaciente = req.params.dniPaciente;
+      let paciente = await Paciente.findOne({dni:dniPaciente});
+      let pagina = req.query.pag;
+    
+      let historiaClinica = await HistoriaClinica.findById(paciente.historiaClinica).populate([
+        { path: "hojasClinicas.doctor" },
+        { path: "hojasClinicas.areaMedica" },
+      ])
+      .lean()
+      .exec();
+      let hojasClinicas = historiaClinica.hojasClinicas.reverse();
+      let resultado = getItemsDePagina(hojasClinicas, pagina, 3);
+      const hojasPorPagina = resultado.nuevaLista;
+      for (let h of hojasPorPagina) {
+        h.numero = hojasClinicas.indexOf(h) + 1;
+      }
+      res.locals.paciente = paciente;
+      res.locals.dniPaciente = dniPaciente;
+      res.locals.hojasClinicas = hojasPorPagina;
+      res.locals.numPag = resultado.numTotalPaginas;
+      res.locals.actualPag = resultado.pagina;
+    
+      res.render("doctor/listahojaclinicaparadoctor");
+    }else{
+      next();
+    }
 
-  res.render("doctor/listahojaclinicaparadoctor");
-  };
+}
   
 function cargarPacientes(locals, pagina, pacientesBD) {
   let pacientesPag = [];

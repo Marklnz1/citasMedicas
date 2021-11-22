@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 const adminSchema = new Schema({
     usuario:String,
-    passwowrd:String,
-    tipoUsuario:String
+    password:String
     
 });
-const Admin = mongoose.model('admin',adminSchema);
+const Admin = mongoose.model('admin',adminSchema,"admin");
 module.exports = Admin;

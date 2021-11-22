@@ -5,30 +5,29 @@ const HistoriaClinica = require("../models/HistoriaClinica");
 const Admin = require("../models/Admin");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const generadorController = require("../tools/generadorController");
-module.exports.registro_get = (req, res, next) => {
-  res.render("registro/registro");
-};
+const jwt = require("jsonwebtoken");
 
 module.exports.login_get = (req, res, next) => {
-  res.render("autenticacion/login");
+  
+  res.render("Administrador/loginadmin");
 };
 module.exports.login_post = async (req, res) => {
+ 
   const usuario = req.body.usuario;
   const password = req.body.password;
-  const tipoUsuario = req.body.tipoUsuario;
-  const passwordBD = (await Admin.find())[0].password;
+  const admin = (await Admin.find())[0];
+  let usuarioBD =  admin.usuario;
+  let passwordBD = admin.password;
+
   // const passwordBD = await getPasswordBD(tipoUsuario,dni);
-  let mensaje ="DNI no registrado o contraseña incorrecta";
-
-  if(passwordBD){
-    const logeado = password == passwordBD;
-
-    if(logeado){
-      const token = crearToken(usuario, tipoUsuario);
-      res.cookie("jwt", token, { httpOnly: true, maxAge: tiempoMaximo * 1000 }); 
-      mensaje= "";
-    }
+  let mensaje ="Usuario o contraseña incorrecta";
+ 
+  if(usuario==usuarioBD&&password == passwordBD){
+    const token = crearToken(usuario, "admin");
+    res.cookie("jwt", token, { httpOnly: true, maxAge: tiempoMaximo * 1000 }); 
+    mensaje= "";
   }
+
   res.status(201).json({ mensaje });
 };
 module.exports.dni_valido_post = async (req, res, next)=>{
@@ -121,17 +120,15 @@ module.exports.registro_post = async (req, res, next) => {
   res.status(201).json({ data: req.body });
 };
 
-module.exports.login_post = async (req, res) => {
- 
- 
-};
 
-module.exports.login_get = (req, res, next) => {
-  
-    res.render("Administrador/loginadmin");
-};
 
 async function getPasswordBcrypt(password){
     const salt = await bcrypt.genSalt();
     return bcrypt.hash(password,salt);
 }
+const tiempoMaximo = 30000;
+const crearToken = (id, tipoUsuario) => {
+  return jwt.sign({ id, tipoUsuario }, "efe", {
+    expiresIn: tiempoMaximo,
+  });
+};

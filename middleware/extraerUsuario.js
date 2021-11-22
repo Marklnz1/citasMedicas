@@ -20,8 +20,12 @@ const extraerUsuario = async (res, token) => {
     usuario = await Doctor.findOne({dni:id});
   }else if(tipoUsuario == "paciente"){
     usuario = await Paciente.findOne({dni:id});
+  }else{
+    usuario = {id,tipoUsuario};
   }
     res.locals.user = usuario;
+  }else{
+    res.locals.user = {};
   }
 };
 

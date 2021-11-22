@@ -9,8 +9,7 @@ var AreaMedica = require("../models/AreaMedica");
 var Cita = require("../models/Cita");
 
 module.exports.cita_get = function _callee(req, res, next) {
-  var idcitas, _pagina, citasBD, respuesta;
-
+  var idcitas, pagina, citasBD, respuesta;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -21,14 +20,14 @@ module.exports.cita_get = function _callee(req, res, next) {
           }
 
           idcitas = res.locals.user.citas;
-          _pagina = req.query.pag;
+          pagina = req.query.pag;
           _context.next = 5;
           return regeneratorRuntime.awrap(Cita.find().where("_id")["in"](idcitas).populate("paciente").populate("areaMedica").lean().exec());
 
         case 5:
           citasBD = _context.sent;
           citasBD = citasBD.reverse();
-          respuesta = getItemsDePagina(citasBD, _pagina, 7);
+          respuesta = getItemsDePagina(citasBD, pagina, 7);
           res.locals.citas = respuesta.nuevaLista;
           res.locals.numPag = respuesta.numTotalPaginas;
           res.locals.actualPag = respuesta.pagina;
@@ -130,7 +129,7 @@ module.exports.historia_create_post = function _callee3(req, res) {
 };
 
 module.exports.historia_all_get = function _callee4(req, res, next) {
-  var pacientesBD, pacientes, _pagina2, tipoBusqueda, datoBusqueda, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step;
+  var pacientesBD, pacientes, pagina, tipoBusqueda, datoBusqueda, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step;
 
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
@@ -147,7 +146,7 @@ module.exports.historia_all_get = function _callee4(req, res, next) {
         case 3:
           pacientesBD = _context4.sent;
           pacientes = [];
-          _pagina2 = req.query.pag;
+          pagina = req.query.pag;
           tipoBusqueda = req.query.tipoBusqueda;
           datoBusqueda = req.query.datoBusqueda;
           if (tipoBusqueda == null) tipoBusqueda = "";
@@ -230,7 +229,7 @@ module.exports.historia_all_get = function _callee4(req, res, next) {
           return _context4.finish(36);
 
         case 44:
-          cargarPacientes(res.locals, _pagina2, pacientes);
+          cargarPacientes(res.locals, pagina, pacientes);
           res.render("doctor/busquedahistoriaclinica");
           _context4.next = 49;
           break;
@@ -247,87 +246,100 @@ module.exports.historia_all_get = function _callee4(req, res, next) {
 };
 
 module.exports.historia_get = function _callee5(req, res, next) {
-  var dniPaciente, paciente, historiaClinica, hojasClinicas, resultado, hojasPorPagina, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, h;
+  var dniPaciente, paciente, pagina, historiaClinica, hojasClinicas, resultado, hojasPorPagina, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, h;
 
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          dniPaciente = req.body.dniPaciente;
-          _context5.next = 3;
+          if (!(res.locals.user.tipoUsuario === "doctor")) {
+            _context5.next = 39;
+            break;
+          }
+
+          dniPaciente = req.params.dniPaciente;
+          _context5.next = 4;
           return regeneratorRuntime.awrap(Paciente.findOne({
             dni: dniPaciente
           }));
 
-        case 3:
+        case 4:
           paciente = _context5.sent;
-          _context5.next = 6;
+          pagina = req.query.pag;
+          _context5.next = 8;
           return regeneratorRuntime.awrap(HistoriaClinica.findById(paciente.historiaClinica).populate([{
             path: "hojasClinicas.doctor"
           }, {
             path: "hojasClinicas.areaMedica"
           }]).lean().exec());
 
-        case 6:
+        case 8:
           historiaClinica = _context5.sent;
           hojasClinicas = historiaClinica.hojasClinicas.reverse();
-          resultado = getItemsDePagina(hojasClinicas, pagina, 10);
+          resultado = getItemsDePagina(hojasClinicas, pagina, 3);
           hojasPorPagina = resultado.nuevaLista;
           _iteratorNormalCompletion2 = true;
           _didIteratorError2 = false;
           _iteratorError2 = undefined;
-          _context5.prev = 13;
+          _context5.prev = 15;
 
           for (_iterator2 = hojasPorPagina[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             h = _step2.value;
             h.numero = hojasClinicas.indexOf(h) + 1;
           }
 
-          _context5.next = 21;
+          _context5.next = 23;
           break;
 
-        case 17:
-          _context5.prev = 17;
-          _context5.t0 = _context5["catch"](13);
+        case 19:
+          _context5.prev = 19;
+          _context5.t0 = _context5["catch"](15);
           _didIteratorError2 = true;
           _iteratorError2 = _context5.t0;
 
-        case 21:
-          _context5.prev = 21;
-          _context5.prev = 22;
+        case 23:
+          _context5.prev = 23;
+          _context5.prev = 24;
 
           if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
             _iterator2["return"]();
           }
 
-        case 24:
-          _context5.prev = 24;
+        case 26:
+          _context5.prev = 26;
 
           if (!_didIteratorError2) {
-            _context5.next = 27;
+            _context5.next = 29;
             break;
           }
 
           throw _iteratorError2;
 
-        case 27:
-          return _context5.finish(24);
-
-        case 28:
-          return _context5.finish(21);
-
         case 29:
+          return _context5.finish(26);
+
+        case 30:
+          return _context5.finish(23);
+
+        case 31:
+          res.locals.paciente = paciente;
+          res.locals.dniPaciente = dniPaciente;
           res.locals.hojasClinicas = hojasPorPagina;
           res.locals.numPag = resultado.numTotalPaginas;
           res.locals.actualPag = resultado.pagina;
           res.render("doctor/listahojaclinicaparadoctor");
+          _context5.next = 40;
+          break;
 
-        case 33:
+        case 39:
+          next();
+
+        case 40:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[13, 17, 21, 29], [22,, 24, 28]]);
+  }, null, null, [[15, 19, 23, 31], [24,, 26, 30]]);
 };
 
 function cargarPacientes(locals, pagina, pacientesBD) {

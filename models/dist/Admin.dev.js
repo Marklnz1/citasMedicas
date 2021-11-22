@@ -5,8 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var adminSchema = new Schema({
   usuario: String,
-  passwowrd: String,
-  tipoUsuario: String
+  password: String
 });
-var Admin = mongoose.model('admin', adminSchema);
+var Admin = mongoose.model('admin', adminSchema, "admin");
 module.exports = Admin;

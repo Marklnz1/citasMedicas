@@ -1,6 +1,5 @@
 const Paciente = require("../models/Paciente");
 const Doctor = require("../models/Doctor");
-const Cita = require("../models/Cita");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 

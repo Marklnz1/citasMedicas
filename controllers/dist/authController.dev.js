@@ -4,8 +4,6 @@ var Paciente = require("../models/Paciente");
 
 var Doctor = require("../models/Doctor");
 
-var Cita = require("../models/Cita");
-
 var jwt = require("jsonwebtoken");
 
 var bcrypt = require("bcrypt");
@@ -328,4 +326,20 @@ module.exports.hojaclinicaparadoc_get = function (req, res, next) {
 
 module.exports.paginanoencontrada_get = function (req, res, next) {
   res.render("404/index");
+};
+
+module.exports.listahojaclinicaparadoc_post = function _callee14(req, res) {
+  return regeneratorRuntime.async(function _callee14$(_context15) {
+    while (1) {
+      switch (_context15.prev = _context15.next) {
+        case 0:
+        case "end":
+          return _context15.stop();
+      }
+    }
+  });
+};
+
+module.exports.listahojaclinicaparadoc_get = function (req, res, next) {
+  res.render("doctor/listahojaclinicaparadoctor");
 };

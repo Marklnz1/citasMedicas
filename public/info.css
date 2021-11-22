@@ -25,10 +25,11 @@ overflow-x: hidden;
 
 
 .user-img{
-  /* background-image: url("imagenes/doctor2.png"); */
+  background-image: url("imagenes/usuario.png");
   background-size: cover;
   border: blue solid 0px;
-  
+  background-size: cover;
+  background-position: center;
 }
 .sombra{
 

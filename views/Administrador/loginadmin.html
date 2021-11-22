@@ -14,24 +14,17 @@
       <img src="/imagenes/avatar2.png" alt="">
     </div>
     
-    <label for="dni">Usuario:</label>
-    <input type="text" name="dni" id="dni" >
+    <label for="usuario">Usuario:</label>
+    <input type="text" name="usuario" id="usuario" >
     <label for="password">Contraseña:</label>
     <div class="input_ojo">
       <input type="password" name="password" id="password">
       <img id="ojo_imagen"src="/imagenes/ojo.png" alt="">
     </div>
-    <p class="mensaje" >DNI no registrado o contraseña incorrecta</p>
+    <p class="mensaje" >Usuario o contraseña incorrecta</p>
     <div class="div_iniciar_sesion">
       <div class="iniciar_sesion">INICIAR SESION</div>
     </div>
-    <div class="div_recuperar_contraseña">
-      <img src="/imagenes/candado.png" alt="candado">
-      <p>¿Has olvidado tu contraseña?</p>
-    </div>
-    <p class="crear_cuenta_texto">¿Aún no tienes una cuenta?</p>
-    <a class="crear_cuenta_link" href="#">Regístrate Ahora</a>
-   
   </form>
 
   <script>
@@ -50,6 +43,29 @@
       }
       
     })
+  </script>
+  <script>
+    const boton_login = document.querySelector(".iniciar_sesion");
+    const form = document.querySelector('form');
+    const mensaje = document.querySelector('.mensaje');
+
+    boton_login.addEventListener("click",async ()=>{
+      const usuario = form.usuario.value;
+      const password = form.password.value;
+      console.log("envio");
+      const res = await fetch('/admin', {
+        method: 'POST',
+        body: JSON.stringify({usuario,password}),
+        headers: {'Content-Type': 'application/json'}
+      });
+
+      const data = await res.json();
+      if(data.mensaje){
+        mensaje.style.visibility = "visible";
+      }else{
+        location.assign('/');
+      }
+    });
   </script>
 </body>
 
