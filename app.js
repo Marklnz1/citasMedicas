@@ -11,7 +11,7 @@ const generadorController = require("./tools/generadorController");
 let dbURI = "mongodb+srv://user:1234@cluster0.nybh2.mongodb.net/BD?retryWrites=true&w=majority";
 iniciar();
 
-// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 async function iniciar() {
   await mongoose.connect(dbURI, {
     useNewUrlParser: true,
@@ -20,7 +20,7 @@ async function iniciar() {
   
   app.listen(3000);
   console.log("Servidor encendido");
-  // console.log(await (await fetch("https://frozen-hollows-68632.herokuapp.com/api/v1/dni/48004836?token=abcxyz")).json());
+  
 }
 
 app.set("view engine", "ejs");
